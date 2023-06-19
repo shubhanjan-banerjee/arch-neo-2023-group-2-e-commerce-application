@@ -1,0 +1,41 @@
+workspace {
+
+    model {
+        user = person "Customer" "End Users who interact with the system , browse and purchase products."
+        softwareSystem = softwareSystem "E-Commerce Platform System" "Represents the main system , which would provide the ecommerce functionality."
+        notificationSystem = softwareSystem "Notification System" "Internal Microsoft Exchange Email System, Twillo SMS System"
+        notificationSystem = softwareSystem "Notification System" "Internal Microsoft Exchange Email System, Twillo SMS System"
+        paymentSystem = softwareSystem "Payment System" "BillDesk Payment system"
+        deliverySystem = softwareSystem "Delivery System" "Xpressbess delivery to deliver the shipment"
+        inventorySystem = softwareSystem "Mainframe Inventory System" "Stores the all the product inventory"
+
+        user -> softwareSystem "Search and select products from a list of products under catagory, add products in cart, capturing delivery address and payment details."
+        softwareSystem -> notificationSystem "Sends the required email or sms to send to the customer"
+        softwareSystem -> deliverySystem "Places shipment order to delivery"
+        softwareSystem -> inventorySystem "Get the product details and their quantity details."
+        softwareSystem -> paymentSystem "Process for the payment"
+        notificationSystem -> user "Sends the email or sms to the customer"
+        deliverySystem -> user "Shipping the products from the warehouse to customer address"
+        paymentSystem -> user "Chooses different payment methods and pay the amount"
+    }
+
+    views {
+        systemContext softwareSystem "SystemContext" {
+            include *
+            autoLayout
+        }
+
+        styles {
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Person" {
+                shape person
+                background #08427b
+                color #ffffff
+            }
+        }
+    }
+    
+}
