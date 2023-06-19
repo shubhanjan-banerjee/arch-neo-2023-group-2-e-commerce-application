@@ -1,41 +1,141 @@
 workspace {
 
     model {
-        user = person "Customer" "End Users who interact with the system , browse and purchase products."
-        softwareSystem = softwareSystem "E-Commerce Platform System" "Represents the main system , which would provide the ecommerce functionality."
-        notificationSystem = softwareSystem "Notification System" "Internal Microsoft Exchange Email System, Twillo SMS System"
-        notificationSystem = softwareSystem "Notification System" "Internal Microsoft Exchange Email System, Twillo SMS System"
-        paymentSystem = softwareSystem "Payment System" "BillDesk Payment system"
-        deliverySystem = softwareSystem "Delivery System" "Xpressbess delivery to deliver the shipment"
-        inventorySystem = softwareSystem "Mainframe Inventory System" "Stores the all the product inventory"
-
-        user -> softwareSystem "Search and select products from a list of products under catagory, add products in cart, capturing delivery address and payment details."
-        softwareSystem -> notificationSystem "Sends the required email or sms to send to the customer"
-        softwareSystem -> deliverySystem "Places shipment order to delivery"
-        softwareSystem -> inventorySystem "Get the product details and their quantity details."
-        softwareSystem -> paymentSystem "Process for the payment"
+        user = person "Customer" "End Users who interact with the system , browse and purchase products." "Customer"
+        
+        group "E-Commerce Application" {
+            backoffice = person "Back Office Staff" "Administration and support staff within the e-commerce application." "Internal"
+            notificationSystem = softwareSystem "Notification System" "Internal Microsoft Exchange Email System, Twillo SMS System" "External"
+            authSystem = softwareSystem "Authentication Notification System" "External Authentication System like SAML" "External"
+            paymentSystem = softwareSystem "Payment System" "BillDesk Payment system" "External"
+            deliverySystem = softwareSystem "Delivery System" "Xpressbess delivery to deliver the shipment" "External"
+            inventorySystem = softwareSystem "Mainframe Inventory System" "Stores the all the product inventory" "External"
+            ecommerceApplication = softwareSystem "E-Commerce System" "Represents the main system , which would provide the ecommerce functionality." {
+                singlePageApplication = container "Single-Page Application" "Provides all of the e-commerce functionality to customers via their web browser." "Angular 15" "Web Browser"
+                apiApplication = container "API Application" "Provides E-Commerce functionality via a JSON/HTTPS API." ".Net Core 6" {
+                    signinController = component "Sign In Controller" "Allows users to sign in to the E-Commerce System." ".Net Core Controller"
+                    searchProductController = component "Search Product Controller" "Allows users to search any product." ".Net Core Controller"
+                    categoryController = component "Cart Controller" "Allows users to search by category." ".Net Core Controller"
+                    paymentController = component "Payment Controller" "Allows users for the payment." ".Net Core Controller"
+                    userController = component "User Controller" "Allows users to store the shipment address." ".Net Core Controller"
+                    cartController = component "Category Controller" "Allows users to add a product into their cart." ".Net Core Controller"
+                    notificationController = component "Notification Controller" "It will help to notify an user for any process." ".Net Core Controller"
+                    inventoryController = component "Inventory Controller" "It will help to get the inventory list from an external warehouse application." ".Net Core Controller"
+                    orderController = component "Order Controller" "It will help to place an order and process for shipment." ".Net Core Controller"
+                }
+                database = container "Database" "Stores user's information, product details, inventory, authentication credentials, access logs, etc." "Microsoft SQL Server" "Database"
+            }
+        }
+        
+        user -> ecommerceApplication "Search and select products from a list of products under catagory, add products in cart, capturing delivery address and payment details."
+        user -> authSystem "Customer authorized throug an external authentication."
+        ecommerceApplication -> notificationSystem "Sends the required email or sms to send to the customer"
+        ecommerceApplication -> deliverySystem "Places shipment order to delivery"
+        ecommerceApplication -> inventorySystem "Get the product details and their quantity details."
+        ecommerceApplication -> paymentSystem "Process for the payment"
+        ecommerceApplication -> authSystem "Authorized a customer"
         notificationSystem -> user "Sends the email or sms to the customer"
         deliverySystem -> user "Shipping the products from the warehouse to customer address"
         paymentSystem -> user "Chooses different payment methods and pay the amount"
+        backoffice -> inventorySystem "Uses"
+        singlePageApplication -> signinController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> searchProductController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> categoryController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> paymentController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> userController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> cartController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> notificationController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> inventoryController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> orderController "Makes API calls to" "JSON/HTTPS"
+        user -> singlePageApplication "Search products, add to cart, place order"
+        signinController -> database "Reads from and writes to" "SQL/TCP"
+        
+        deploymentEnvironment "Production" {
+            deploymentNode "Developer Laptop" "" "Microsoft Windows 10 or Apple macOS" {
+                deploymentNode "Web Browser" "" "Chrome, Firefox, Safari, or Edge" {
+                    developerSinglePageApplicationInstance = containerInstance singlePageApplication
+                }
+                deploymentNode "Docker Container - Web Server" "" "Docker" {
+                    deploymentNode "IIS" "" "Microsoft IIS" {
+                        developerApiApplicationInstance = containerInstance apiApplication
+                    }
+                }
+                deploymentNode "Docker Container - Database Server" "" "Docker" {
+                    deploymentNode "Database Server" "" "Microsoft SQL Server 2019" {
+                        developerDatabaseInstance = containerInstance database
+                    }
+                }
+            }
+
+        }
     }
 
     views {
-        systemContext softwareSystem "SystemContext" {
+        systemlandscape "SystemLandscape" {
             include *
             autoLayout
         }
+        systemContext ecommerceApplication "SystemContext" {
+            include *
+            autoLayout
+            description "The system context diagram for the E-Commerce Application System."
+            properties {
+                structurizr.groups false
+            }
+        }
+        container ecommerceApplication "Containers" {
+            include *
+            autoLayout
+            description "The container diagram for the E-Commerce Application System."
+        }
+        component apiApplication "Components" {
+            include *
+            autoLayout
+            description "The component diagram for the API Application."
+        }
+        deployment ecommerceApplication "Production" "ProductionDeployment" {
+            include *
+            autoLayout
+            description "An example production deployment scenario for the E-Commerce Application System."
+        }
 
         styles {
+            element "Person" {
+                color #ffffff
+                fontSize 22
+                shape Person
+            }
+            element "Customer" {
+                background #08427b
+            }
             element "Software System" {
                 background #1168bd
                 color #ffffff
             }
-            element "Person" {
-                shape person
-                background #08427b
+            element "External" {
+                background #999999
                 color #ffffff
+            }
+            element "Internal" {
+                background #999999
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape Cylinder
+            }
+            element "Component" {
+                background #85bbf0
+                color #000000
+            }
+            element "Failover" {
+                opacity 25
             }
         }
     }
+    
     
 }
