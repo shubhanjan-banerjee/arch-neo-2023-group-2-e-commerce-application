@@ -1,0 +1,80 @@
+classDiagram
+    class EcommerceSystem {
+        +userSubsystem
+        +inventorySubsystem
+        +browseProducts()
+        +searchProducts()
+        +purchaseProducts()
+    }
+    class UserSubsystem {
+        +registerUser()
+        +login()
+        +browseProducts()
+        +searchProducts()
+        +addToCart()
+        +checkout()
+        +trackOrder()
+        +manageAccount()
+    }
+    class InventorySubsystem {
+        +updateInventory()
+    }
+    class ProductCatalogueManagement {
+        +createProductCatalogue()
+        +addProduct()
+        +removeProduct()
+    }
+    class Shopping {
+        +addToCart()
+        +modifyQuantity()
+        +proceedToCheckout()
+    }
+    class Checkout {
+        +makePayment()
+        +provideDeliveryAddress()
+    }
+    class OrderTracking {
+        +getOrderStatus()
+        +getDeliveryDate()
+    }
+    class AccountManagement {
+        +manageProfile()
+        +viewOrderHistory()
+        +accessInvoices()
+    }
+    class NotificationSystem {
+        +sendOrderConfirmation()
+        +sendPaymentNotification()
+        +sendDeliveryStatusUpdate()
+    }
+    class SupplyChainIntegration {
+        +integrateWithDeliverySystem()
+        +updateInventoryToPlatform()
+    }
+    class PerformanceAndScalability {
+        +designOptimizedArchitecture()
+        +handleConcurrentTraffic()
+        +deliverResponsiveUserExperience()
+    }
+    class SecurityAndPrivacy {
+        +implementSecurePayment()
+        +protectUserData()
+        +complyWithPrivacyRegulations()
+    }
+    class Localization {
+        +supportMultipleLanguages()
+        +caterToRegionalPreferences()
+    }
+
+    EcommerceSystem --|> UserSubsystem
+    EcommerceSystem --|> InventorySubsystem
+    UserSubsystem --|> ProductCatalogueManagement
+    UserSubsystem --|> Shopping
+    UserSubsystem --|> Checkout
+    UserSubsystem --|> OrderTracking
+    UserSubsystem --|> AccountManagement
+    UserSubsystem --|> NotificationSystem
+    InventorySubsystem --|> SupplyChainIntegration
+    EcommerceSystem --|> PerformanceAndScalability
+    EcommerceSystem --|> SecurityAndPrivacy
+    EcommerceSystem --|> Localization

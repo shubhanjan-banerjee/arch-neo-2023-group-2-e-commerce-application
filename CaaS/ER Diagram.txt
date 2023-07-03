@@ -1,0 +1,165 @@
+Table Account {
+  id int [pk]
+  userId int [ref: > Users.id]
+  password varchar
+}
+
+Table Authentication {
+  id int [pk]
+  userId int [ref: > Users.id]
+  passwordHash varchar
+  lastLogin datetime
+}
+
+Table Brands {
+  id int [pk]
+  name varchar
+}
+
+Table Categories {
+  id int [pk]
+  name varchar
+}
+
+Table Users {
+  id int [pk]
+  firstName varchar
+  lastName varchar
+  address varchar
+  email varchar
+  created_at timestamp
+}
+
+Table Reviews {
+  id int [pk]
+  rating int
+  comment text
+  product_id int [ref: < Products.id]
+  user_id int [ref: < Users.id]
+}
+
+Table OrderItems {
+  id int [pk]
+  order_id int [ref: < Orders.id]
+  product_id int [ref: < Products.id]
+  product_name VARCHAR
+  quantity int
+  price DECIMAL
+}
+
+Table InventoryManagers {
+  id int [pk]
+  name varchar
+  email varchar
+  password varchar
+}
+
+Table UserRoles {
+  user_id int [ref: < Users.id]
+  role_id int [ref: < Roles.id]
+}
+
+Table Roles {
+  id int [pk]
+  name varchar
+}
+
+Table ShoppingCart {
+  id int [pk]
+  user_id int [ref: > Users.id]
+  created_at timestamp
+}
+
+Table CartItems {
+  id int [pk]
+  shopping_cart_id int [ref: > ShoppingCart.id]
+  product_id int [ref: > Products.id]
+  quantity int
+}
+
+Table Payments {
+  id int [pk]
+  order_id int [ref: > Orders.id]
+  payment_type varchar
+  amount decimal
+  payment_status varchar
+  payment_method varchar
+  created_at datetime
+}
+
+Table Orders {
+  id int [pk]
+  order_date date
+  user_id int [ref: > Users.id]
+  total_amount decimal
+  payment_method varchar
+  status varchar
+  delivery_date DATE
+}
+
+Table Delivery {
+  delivery_id INT [pk]
+  order_id INT [ref: > Orders.id]
+  courier_name VARCHAR
+  tracking_number VARCHAR
+  estimated_delivery_date DATE
+}
+
+Table Profiles {
+  id int [pk]
+  user_id int [ref: > Users.id]
+  address varchar
+  phone varchar
+  date_of_birth date
+}
+
+Table Invoices {
+  id int [pk]
+  order_id int [ref: > Orders.id]
+  invoice_number varchar
+  amount decimal
+  issued_date date
+}
+
+Table notifications {
+  id int [pk]
+  user_id int [ref: > Users.id]
+  message text
+  created_at datetime
+}
+
+Table Inventory {
+  id int [pk]
+  product_id int [ref: > Products.id]
+  quantity int
+}
+
+Table Languages {
+  id int [pk]
+  code varchar
+  name varchar
+}
+
+Table Translations {
+  id int [pk]
+  language_id int [ref: > Languages.id]
+  key varchar
+  value varchar
+}
+
+Table DeliveryStatus {
+  id int [pk]
+  order_id int [ref: > Orders.id]
+  status varchar
+  updated_at datetime
+}
+
+Table Products {
+  id int [pk]
+  name varchar
+  description text
+  price decimal
+  brand_id int [ref: < Brands.id]
+  inventory int
+  category_id int [ref: < Categories.id]
+}
