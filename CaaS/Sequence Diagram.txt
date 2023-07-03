@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant User
+    participant InventoryManager
+    participant EcommercePlatform
+    participant UserSubsystem
+    participant InventorySubsystem
+    participant NotificationSystem
+    participant SupplyChainSystem
+
+    User ->> EcommercePlatform: Browse and search products
+    EcommercePlatform ->> UserSubsystem: Authenticate user
+    UserSubsystem -->> EcommercePlatform: User authenticated
+    EcommercePlatform ->> InventorySubsystem: Retrieve product catalog
+    InventorySubsystem -->> EcommercePlatform: Product catalog retrieved
+    EcommercePlatform ->> EcommercePlatform: Display product catalog to user
+    User ->> EcommercePlatform: Add product to cart
+    EcommercePlatform ->> UserSubsystem: Verify user cart
+    UserSubsystem -->> EcommercePlatform: User cart verified
+    EcommercePlatform ->> InventorySubsystem: Update inventory
+    InventorySubsystem -->> EcommercePlatform: Inventory updated
+    EcommercePlatform ->> User: Display updated cart
+    User ->> EcommercePlatform: Proceed to checkout
+    EcommercePlatform ->> UserSubsystem: Retrieve user information
+    UserSubsystem -->> EcommercePlatform: User information retrieved
+    EcommercePlatform ->> UserSubsystem: Process payment
+    UserSubsystem -->> EcommercePlatform: Payment processed
+    EcommercePlatform ->> SupplyChainSystem: Initiate order processing
+    SupplyChainSystem -->> EcommercePlatform: Order processed
+    EcommercePlatform ->> NotificationSystem: Send order confirmation
+    NotificationSystem -->> EcommercePlatform: Order confirmation sent
+    EcommercePlatform ->> User: Display order confirmation
+    EcommercePlatform ->> SupplyChainSystem: Track order status
+    SupplyChainSystem -->> EcommercePlatform: Order status tracked
+    EcommercePlatform ->> User: Display order status
+
