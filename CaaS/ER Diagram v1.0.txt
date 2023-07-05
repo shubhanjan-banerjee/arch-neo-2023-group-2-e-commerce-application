@@ -1,0 +1,81 @@
+// Use DBML to define your database structure
+
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+
+
+Table product_category {
+id integer [primary key]
+name varchar
+desc varchar
+created_at timestamp
+modified_at timestamp
+}
+
+Table product_invetory{
+id integer [primary key]
+quantity integer
+created_at timestamp
+modified_at timestamp
+}
+
+Table product{
+id integer [primary key]
+name varchar
+desc text
+SKU varchar
+category_id integer [ref: > product_category.id]
+inventory_id integer [ref: > product_invetory.id]
+price decimal
+created_at timestamp
+modified_at timestamp
+}
+
+Table user {
+id integer [primary key]
+username varchar
+password text
+first_name varchar
+last_name varchar
+telephone integer
+created_at timestamp
+modified_at timestamp
+}
+
+Table user_address{
+id integer [primary key]
+user_id integer [ref: > user.id]
+address_line1 varchar
+address_line2 varchar
+city varchar
+postal_code varchar
+country varchar
+telephone varchar
+mobile varchar
+}
+
+Table order_items{
+id integer [primary key]
+order_id integer [ref: > order_details.id]
+product_id integer [ref: > product.id]
+quantity integer
+created_at timestamp
+modified_at timestamp
+}
+
+Table order_details{
+id integer [primary key]
+user_id varchar [ref: > user.id]
+total decimal
+created_at timestamp
+modified_at timestamp
+}
+
+Table cart_item{
+id integer [primary key]
+product_id integer [ref: > product.id]
+quantity integer
+created_at timestamp
+modified_at timestamp
+}
