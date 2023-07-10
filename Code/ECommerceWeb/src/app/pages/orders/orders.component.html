@@ -1,0 +1,28 @@
+<div class="container mx-auto">
+  <h2 class="text-2xl font-bold my-4">Your Orders</h2>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul class="divide-y divide-gray-200">
+      <li *ngFor="let order of orders" class="px-4 py-4 sm:px-6">
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-medium text-indigo-600">{{ order.orderNumber }}</p>
+          <p class="text-sm font-medium text-gray-500">{{ order.date | date }}</p>
+        </div>
+        <div class="mt-2">
+          <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li *ngFor="let product of order.products"
+              class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+              <div class="w-full flex items-center justify-center">
+                <img src="{{ product.imageUrl }}" alt="{{ product.name }}" class="h-32 object-contain">
+              </div>
+              <div class="px-4 py-3">
+                <h3 class="text-lg font-medium text-indigo-600">{{ product.name }}</h3>
+                <p class="text-sm text-gray-500">{{ product.price | currency }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
