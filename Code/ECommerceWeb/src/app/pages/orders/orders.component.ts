@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
 })
-export class OrdersComponent {}
+export class OrdersComponent {
+  orders: any[] = []
+}

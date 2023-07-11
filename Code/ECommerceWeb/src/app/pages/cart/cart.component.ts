@@ -12,6 +12,7 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
+  cartItems: any[] = []
   constructor(private notificationService: NotificationService) { }
 
   showSuccessNotification(): void {
@@ -24,5 +25,17 @@ export class CartComponent {
 
   showInfoNotification(): void {
     this.notificationService.showInfo('Here is some information.');
+  }
+
+  removeFromCart(item: any) {
+    console.log('item', item);
+  }
+
+  getTotalPrice(): number {
+    return 0;
+  }
+
+  checkout() {
+    console.log('item');
   }
 }

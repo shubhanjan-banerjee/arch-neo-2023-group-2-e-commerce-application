@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductService {
   private apiUrl = 'http://your-api-url/products'; // Replace with your actual API URL
 

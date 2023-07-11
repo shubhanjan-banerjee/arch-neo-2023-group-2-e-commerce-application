@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
   private apiUrl = 'http://your-api-url/users'; // Replace with your actual API URL
 

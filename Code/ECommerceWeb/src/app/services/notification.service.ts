@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NotificationService {
   showSuccess(message: string): void {
     // Implement your logic to display a success notification

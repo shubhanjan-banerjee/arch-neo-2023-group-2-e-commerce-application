@@ -4,9 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private apiUrl = 'http://your-api-url/auth'; // Replace with your actual API URL
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
