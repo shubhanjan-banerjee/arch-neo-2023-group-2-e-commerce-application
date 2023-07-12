@@ -1,0 +1,32 @@
+<div class="max-w-xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Payment Information</h2>
+  <form>
+    <div class="mb-4">
+      <label for="cardNumber" class="block text-gray-700 font-medium mb-2">Card Number</label>
+      <input id="cardNumber" type="text"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+        placeholder="Enter card number">
+    </div>
+    <div class="mb-4">
+      <label for="expirationDate" class="block text-gray-700 font-medium mb-2">Expiration Date</label>
+      <div class="flex">
+        <input id="expirationDate" type="text"
+          class="w-1/2 border border-gray-300 rounded px-3 py-2 mr-2 focus:outline-none focus:border-blue-500"
+          placeholder="MM/YY">
+        <input id="cvv" type="text"
+          class="w-1/2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+          placeholder="CVV">
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="cardHolder" class="block text-gray-700 font-medium mb-2">Card Holder</label>
+      <input id="cardHolder" type="text"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+        placeholder="Enter card holder name">
+    </div>
+    <div class="flex justify-end">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-600">Pay
+        Now</button>
+    </div>
+  </form>
+</div>
