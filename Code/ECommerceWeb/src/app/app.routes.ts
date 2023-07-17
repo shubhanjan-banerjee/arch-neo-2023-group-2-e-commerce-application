@@ -39,7 +39,8 @@ URL: /register
 Description: These pages handle user authentication and registration processes.
  */
 export const appRoutes: Route[] = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:id', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
