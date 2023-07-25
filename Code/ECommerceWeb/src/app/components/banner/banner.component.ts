@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 @Component({
   standalone: true,
   imports: [CommonModule],
-  selector: 'ecommerce-footer',
-  templateUrl: './footer.component.html',
+  selector: 'ecommerce-banner',
+  templateUrl: './banner.component.html',
 })
-export class FooterComponent implements OnInit {
+export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
