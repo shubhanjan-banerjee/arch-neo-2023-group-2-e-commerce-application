@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
@@ -12,10 +11,12 @@ import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { RestService } from './services/rest.service';
 import { UserService } from './services/user.service';
+import { HeaderNavbarComponent } from './components/header-navbar/header-navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, HttpClientModule],
+  imports: [RouterModule, HttpClientModule, HeaderNavbarComponent, FooterComponent],
   providers: [
     AuthService,
     CartService,
