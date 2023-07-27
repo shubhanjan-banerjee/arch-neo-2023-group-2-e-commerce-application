@@ -13,10 +13,11 @@ import { RestService } from './services/rest.service';
 import { UserService } from './services/user.service';
 import { HeaderNavbarComponent } from './components/header-navbar/header-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, HttpClientModule, HeaderNavbarComponent, FooterComponent],
+  imports: [RouterModule, FontAwesomeModule, HttpClientModule, HeaderNavbarComponent, FooterComponent],
   providers: [
     AuthService,
     CartService,

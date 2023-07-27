@@ -8,4 +8,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header-navbar.component.html',
   styleUrls: ['./header-navbar.component.scss'],
 })
-export class HeaderNavbarComponent { }
+export class HeaderNavbarComponent {
+  showMenu = false;
+  toggleNavbar () {
+    this.showMenu = !this.showMenu;
+  }
+}
