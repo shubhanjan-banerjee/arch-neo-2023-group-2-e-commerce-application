@@ -1,5 +1,5 @@
 package com.ecom.productservice.service;
 
-public class ProductServiceImpl implements OrderService {
+public class ProductServiceImpl implements ProductService {
 
 }
