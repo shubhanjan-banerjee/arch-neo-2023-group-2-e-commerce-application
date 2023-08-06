@@ -1,0 +1,203 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table CUSTOMERS {
+  customer_id int [pk, increment]
+  username varchar
+  password text
+  first_name varchar
+  last_name varchar
+  email_id varchar [unique]
+  contact_number varchar [unique]
+  preferred_payment_type_id int [null, ref: > PAYMENT_TYPES.payment_type_id]
+  preferred_payment_address_id int [null, ref: > CUSTOMER_ADDRESSES.address_id]
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table CUSTOMER_ADDRESSES {
+  address_id int [pk, increment]
+  customer_id int [not null, ref: > CUSTOMERS.customer_id]
+  address_line1 varchar
+  address_line2 varchar
+  city varchar
+  state varchar
+  postal_code varchar
+  country varchar
+  phone varchar
+  is_default bool
+  created_at datetime
+  modified_at datetime
+}
+
+Table PRODUCTS {
+  product_id int [pk, increment]
+  product_name varchar
+  description text
+  category_id int [not null, ref: > CATEGORIES.category_id]
+  brand varchar
+  discount varchar
+  price decimal
+  stock_quantity varchar
+  image_url varchar
+  sku int [Note: 'Stock Keeping Unit, A unique identifier used for inventory management.']
+  weight varchar
+  is_active varchar
+  rating varchar
+  reviews_count varchar
+  manufacturer_part_number varchar
+  product_url varchar
+  tax_rate varchar
+  additional_attributes varchar
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table CATEGORIES {
+  category_id int [pk, increment]
+  category_name varchar [unique]
+  parent_category_id int [null, ref: > CATEGORIES.category_id]
+  description varchar
+  image_url varchar [unique]
+  is_active boolean 
+  display_order int [Note: 'A numeric value indicating the order in which categories should be displayed on the website or application.']
+  slug varchar [Note: 'A URL-friendly version of the category name, useful for creating clean and SEO-friendly URLs.']
+  meta_title varchar [Note: 'A title tag used for SEO purposes.']
+  meta_description varchar [Note: 'A meta description used for SEO purposes.']
+  meta_keywords varchar [Note: 'Meta keywords used for SEO purposes.']
+  custom_attributes varchar [Note: 'JSON or other structured data to store additional category attributes, if needed.']
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table INVETORY {
+  inventory_id int [pk, increment]
+  product_id int [ref: > PRODUCTS.product_id]
+  quantity int
+  location varchar
+  stock_in_date timestamp [Note: 'The date when the product was added or restocked in the inventory.']
+  stock_out_date timestamp [Note: 'The date when the product was sold or removed from the inventory.']
+  stock_in_by int
+  stock_out_by int
+  unit_cost decimal
+  expiry_date timestamp
+  batch_number int
+  supplier_id int [not null, ref: > SUPPLIERS.supplier_id]
+  remarks varchar  
+  reserved_quantity int
+  damaged_quantity int
+  is_active boolean
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table SUPPLIERS {
+  supplier_id int [pk, increment]
+  supplier_name varchar
+  contact_name varchar
+  email varchar
+  phone varchar
+  address varchar
+  city varchar
+  state varchar
+  postal_code varchar
+  country varchar
+  website varchar
+  created_at datetime
+  modified_at datetime
+  payment_terms varchar
+  preferred_shipping_method varchar
+  tax_id varchar
+  notes text
+  is_active bool
+  rating float
+  supplier_type varchar
+}
+
+Table ORDERS{
+  order_id int [pk, increment]
+  customer_id int [ref: > CUSTOMERS.customer_id]
+  order_date datetime
+  total_amount decimal
+  shipping_address_id int [not null, ref: > CUSTOMER_ADDRESSES.address_id]
+  billing_address int [not null, ref: > CUSTOMER_ADDRESSES.address_id] 
+  is_paid bool
+  payment_id int [unique, not null, ref: > PAYMENTS.payment_id]
+  delivery_id int [unique, not null, ref: > DELIVERIES.delivery_id]
+  total decimal
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table INVOICES {
+  invoice_id int [pk, increment]
+  customer_id int [not null, ref: > CUSTOMERS.customer_id]
+  invoice_date datetime
+  due_date datetime
+  total_amount decimal
+  is_paid bool
+  payment_date datetime
+  created_at datetime
+  modified_at datetime
+}
+
+Table ORDER_ITEMS {
+  order_item_id int [pk, increment]
+  order_id int [not null, ref: > ORDERS.order_id]
+  product_id int [not null, ref: > PRODUCTS.product_id]
+  quantity int
+  unit_price decimal(10, 2)
+  total_price decimal(10, 2)
+  created_at datetime
+  modified_at datetime
+}
+
+Table DELIVERIES {
+  delivery_id int [pk, increment]
+  delivery_date datetime
+  customer_id int [not null, ref: > CUSTOMERS.customer_id]
+  customer_address_id int [not null, ref: > CUSTOMER_ADDRESSES.address_id]
+  tracking_id int [not null, ref: > TRACKING.tracking_id]
+  delivery_notes text
+  created_at datetime
+  modified_at datetime
+}
+
+Table TRACKING {
+  tracking_id int [pk, increment]
+  status varchar [Note: 'Initiated, In Transit, Delivered, Canceled']
+  modified_at datetime
+  created_at datetime
+}
+
+
+Table CARTS{
+  cart_id int [pk, increment]
+  customer_id int [not null, ref: > CUSTOMERS.customer_id]
+  product_id int [unique, not null, ref: > PRODUCTS.product_id]
+  status varchar [Note: 'Open, Closed']
+  quantity int
+  created_at timestamp
+  modified_at timestamp
+}
+
+Table PAYMENT_TYPES{
+  payment_type_id int [pk, increment]
+  payment_type_name varchar [Note: 'COD, Netbanking, Cards Payment, UPI Payment']
+  description varchar
+  is_active bool
+  created_at datetime
+  modified_at datetime
+}
+
+Table PAYMENTS{
+  payment_id int [pk, increment]
+  payment_type_id int [not null, ref: > PAYMENT_TYPES.payment_type_id]
+  customer_id int [not null, ref: > CUSTOMERS.customer_id]
+  cart_id int [not null, ref: > CARTS.cart_id]
+  payment_date datetime
+  amount decimal
+  status varchar [Note: 'Accepted, Rejected, Pending']
+  created_at timestamp
+  modified_at timestamp
+}
