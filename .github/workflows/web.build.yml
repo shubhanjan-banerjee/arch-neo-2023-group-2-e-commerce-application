@@ -44,5 +44,5 @@ jobs:
           context: ${{ env.working-directory }}
           dockerfile: ${{ env.working-directory }}/Dockerfile
           push: true
-          tags: user/app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
         
