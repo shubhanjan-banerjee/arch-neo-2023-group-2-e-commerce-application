@@ -6,7 +6,7 @@
 
 ## Start the app
 
-To start the development server run `nx serve ecommerce`. Open your browser and navigate to http://localhost:4200/. Happy coding!
+To start the development server run `nx serve ecommerce`. Open your browser and navigate to http://localhost:4200/. Happy coding!@
 
 ## Generate code
 
@@ -60,4 +60,4 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
 
-## Some test comments
+## New line 12

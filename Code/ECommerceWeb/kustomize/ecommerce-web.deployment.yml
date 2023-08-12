@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-web-deployment
+  namespace: default
+  labels:
+    name: ecommerce-web-deployment
+    app: ecommerce-app
+spec:
+  selector:
+    matchLabels:
+      name: ecommerce-web-pod
+  replicas: 1
+  template:
+    metadata:
+      name: ecommerce-web-pod
+      labels:
+        name: ecommerce-web-pod
+        app: ecommerce-app
+    spec:
+      containers:
+      - name: ecommerce-web-container
+        image: shubhanjanweb/ecommerce-web-image:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

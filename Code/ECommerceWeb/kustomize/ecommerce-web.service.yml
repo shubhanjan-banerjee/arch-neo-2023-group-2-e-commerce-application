@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-web-service
+  namespace: default
+  labels:
+    name: ecommerce-web-service
+    app: ecommerce-app
+spec:
+  type: NodePort
+  selector:
+    name: ecommerce-web-pod
+    app: ecommerce-app
+  ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 30008
