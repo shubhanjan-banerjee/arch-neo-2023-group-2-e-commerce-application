@@ -27,24 +27,68 @@ public class PaymentType {
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
-    // Constructors, getters, setters, and other methods
+	public int getPaymentTypeId() {
+		return paymentTypeId;
+	}
 
-    // Default constructor
-    public PaymentType() {
-    }
+	public void setPaymentTypeId(int paymentTypeId) {
+		this.paymentTypeId = paymentTypeId;
+	}
 
-    // Parameterized constructor
-    public PaymentType(String paymentTypeName, String description, boolean isActive, LocalDateTime createdAt, LocalDateTime modifiedAt) {
-        this.paymentTypeName = paymentTypeName;
-        this.description = description;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
-    }
+	public String getPaymentTypeName() {
+		return paymentTypeName;
+	}
 
-    // Getters and setters
-    // ...
+	public void setPaymentTypeName(String paymentTypeName) {
+		this.paymentTypeName = paymentTypeName;
+	}
 
-    // Other methods
-    // ...
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(LocalDateTime modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public PaymentType() {
+		super();
+	}
+
+	public PaymentType(int paymentTypeId, String paymentTypeName, String description, boolean isActive,
+			LocalDateTime createdAt, LocalDateTime modifiedAt) {
+		super();
+		this.paymentTypeId = paymentTypeId;
+		this.paymentTypeName = paymentTypeName;
+		this.description = description;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+	}
+
+    
 }

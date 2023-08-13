@@ -68,10 +68,4 @@ public class Tracking {
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-
-    // Constructors, getters, setters, and other methods
-    
-    
-
-    
 }

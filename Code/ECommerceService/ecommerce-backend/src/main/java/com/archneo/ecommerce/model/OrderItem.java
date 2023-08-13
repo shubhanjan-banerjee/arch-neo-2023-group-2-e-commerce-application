@@ -35,69 +35,86 @@ public class OrderItem {
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
-    // Getters and setters
+	public int getOrderItemId() {
+		return orderItemId;
+	}
 
-    public int getOrderItemId() {
-        return orderItemId;
-    }
+	public void setOrderItemId(int orderItemId) {
+		this.orderItemId = orderItemId;
+	}
 
-    public void setOrderItemId(int orderItemId) {
-        this.orderItemId = orderItemId;
-    }
+	public Order getOrder() {
+		return order;
+	}
 
-    public Order getOrder() {
-        return order;
-    }
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
+	}
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+	public void setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice = unitPrice;
+	}
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public LocalDateTime getModifiedAt() {
+		return modifiedAt;
+	}
 
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
+	public void setModifiedAt(LocalDateTime modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
 
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
+	public OrderItem() {
+		super();
+	}
+
+	public OrderItem(int orderItemId, Order order, Product product, int quantity, BigDecimal unitPrice,
+			BigDecimal totalPrice, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+		super();
+		this.orderItemId = orderItemId;
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.totalPrice = totalPrice;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+	}
+
+    
 }

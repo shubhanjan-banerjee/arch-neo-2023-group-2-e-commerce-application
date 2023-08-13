@@ -38,78 +38,96 @@ public class Invoice {
     @Column(name = "modified_at")
     private Date modifiedAt;
 
-    // Getters and setters
+	public int getInvoiceId() {
+		return invoiceId;
+	}
 
-    public int getInvoiceId() {
-        return invoiceId;
-    }
+	public void setInvoiceId(int invoiceId) {
+		this.invoiceId = invoiceId;
+	}
 
-    public void setInvoiceId(int invoiceId) {
-        this.invoiceId = invoiceId;
-    }
+	public Customer getCustomer() {
+		return customer;
+	}
 
-    public Customer getCustomer() {
-        return customer;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+	public Date getInvoiceDate() {
+		return invoiceDate;
+	}
 
-    public Date getInvoiceDate() {
-        return invoiceDate;
-    }
+	public void setInvoiceDate(Date invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
 
-    public void setInvoiceDate(Date invoiceDate) {
-        this.invoiceDate = invoiceDate;
-    }
+	public Date getDueDate() {
+		return dueDate;
+	}
 
-    public Date getDueDate() {
-        return dueDate;
-    }
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public boolean isPaid() {
+		return paid;
+	}
 
-    public boolean isPaid() {
-        return paid;
-    }
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
+	public Date getPaymentDate() {
+		return paymentDate;
+	}
 
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
 
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
 
-    public Date getModifiedAt() {
-        return modifiedAt;
-    }
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
 
-    public void setModifiedAt(Date modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
+	public Invoice() {
+		super();
+	}
+
+	public Invoice(int invoiceId, Customer customer, Date invoiceDate, Date dueDate, BigDecimal totalAmount,
+			boolean paid, Date paymentDate, Date createdAt, Date modifiedAt) {
+		super();
+		this.invoiceId = invoiceId;
+		this.customer = customer;
+		this.invoiceDate = invoiceDate;
+		this.dueDate = dueDate;
+		this.totalAmount = totalAmount;
+		this.paid = paid;
+		this.paymentDate = paymentDate;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+	}
+
+    
 }
 

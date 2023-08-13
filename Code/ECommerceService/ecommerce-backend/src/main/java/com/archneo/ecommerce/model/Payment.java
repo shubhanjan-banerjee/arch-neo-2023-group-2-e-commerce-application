@@ -39,7 +39,95 @@ public class Payment {
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
-    // Constructors, getters, setters, and other methods
+	public int getPaymentId() {
+		return paymentId;
+	}
 
-    // Constructors, getters, setters, and other methods
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public PaymentType getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(PaymentType paymentType) {
+		this.paymentType = paymentType;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public LocalDateTime getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(LocalDateTime paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(LocalDateTime modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public Payment() {
+		super();
+	}
+
+	public Payment(int paymentId, PaymentType paymentType, Customer customer, Cart cart, LocalDateTime paymentDate,
+			BigDecimal amount, String status, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+		super();
+		this.paymentId = paymentId;
+		this.paymentType = paymentType;
+		this.customer = customer;
+		this.cart = cart;
+		this.paymentDate = paymentDate;
+		this.amount = amount;
+		this.status = status;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+	}
+
+    
 }
