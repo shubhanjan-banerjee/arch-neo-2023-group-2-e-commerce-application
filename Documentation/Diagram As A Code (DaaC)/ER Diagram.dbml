@@ -170,7 +170,6 @@ Table TRACKING {
   created_at datetime
 }
 
-
 Table CARTS{
   cart_id int [pk, increment]
   customer_id int [not null, ref: > CUSTOMERS.customer_id]
