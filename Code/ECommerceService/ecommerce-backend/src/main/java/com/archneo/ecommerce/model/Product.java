@@ -261,6 +261,30 @@ public class Product {
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
 	}
+	
+	public Product(Product product) {
+	    super();
+	    this.productId = product.getProductId();
+	    this.productName = product.getProductName();
+	    this.description = product.getDescription();
+	    this.category = product.getCategory();
+	    this.brand = product.getBrand();
+	    this.discount = product.getDiscount();
+	    this.price = product.getPrice();
+	    this.stockQuantity = product.getStockQuantity();
+	    this.imageUrl = product.getImageUrl();
+	    this.sku = product.getSku();
+	    this.weight = product.getWeight();
+	    this.isActive = product.getIsActive();
+	    this.rating = product.getRating();
+	    this.reviewsCount = product.getReviewsCount();
+	    this.manufacturerPartNumber = product.getManufacturerPartNumber();
+	    this.productUrl = product.getProductUrl();
+	    this.taxRate = product.getTaxRate();
+	    this.additionalAttributes = product.getAdditionalAttributes();
+	    this.createdAt = product.getCreatedAt();
+	    this.modifiedAt = product.getModifiedAt();
+	}
 
     
 }
