@@ -9,8 +9,8 @@ import com.archneo.ecommerce.model.Product;
 //@Repository --- Not required, as JpaRepository already have
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Page<Product> findByProductNameContainingIgnoreCase(String keyword, Pageable pageable);
-    Page<Product> findByCategoryId(int categoryId, Pageable pageable);
+    Page<Product> findByCategoryCategoryId(int categoryId, Pageable pageable);
     Page<Product> findByBrandIgnoreCase(String brand, Pageable pageable);
-    Page<Product> findByCategoryIdAndBrandContainingIgnoreCaseAndProductNameContainingIgnoreCase(
+    Page<Product> findByCategoryCategoryIdAndBrandContainingIgnoreCaseAndProductNameContainingIgnoreCase(
             int categoryId, String brand, String keyword, Pageable pageable);
 }

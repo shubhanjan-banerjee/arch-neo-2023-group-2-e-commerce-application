@@ -234,33 +234,6 @@ public class Product {
 	public Product() {
 		super();
 	}
-
-	public Product(int productId, String productName, String description, Category category, String brand,
-			String discount, BigDecimal price, String stockQuantity, String imageUrl, int sku, String weight,
-			String isActive, String rating, String reviewsCount, String manufacturerPartNumber, String productUrl,
-			String taxRate, String additionalAttributes, Timestamp createdAt, Timestamp modifiedAt) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.description = description;
-		this.category = category;
-		this.brand = brand;
-		this.discount = discount;
-		this.price = price;
-		this.stockQuantity = stockQuantity;
-		this.imageUrl = imageUrl;
-		this.sku = sku;
-		this.weight = weight;
-		this.isActive = isActive;
-		this.rating = rating;
-		this.reviewsCount = reviewsCount;
-		this.manufacturerPartNumber = manufacturerPartNumber;
-		this.productUrl = productUrl;
-		this.taxRate = taxRate;
-		this.additionalAttributes = additionalAttributes;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-	}
 	
 	public Product(Product product) {
 	    super();

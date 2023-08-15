@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> filterProductsByCategory(int categoryId, Pageable pageable) {
-        return productRepository.findByCategoryId(categoryId, pageable);
+        return productRepository.findByCategoryCategoryId(categoryId, pageable);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> filterAndSearchProducts(int categoryId, String brand, String keyword, Pageable pageable) {
-        return productRepository.findByCategoryIdAndBrandContainingIgnoreCaseAndProductNameContainingIgnoreCase(
+        return productRepository.findByCategoryCategoryIdAndBrandContainingIgnoreCaseAndProductNameContainingIgnoreCase(
                 categoryId, brand, keyword, pageable);
     }
     
