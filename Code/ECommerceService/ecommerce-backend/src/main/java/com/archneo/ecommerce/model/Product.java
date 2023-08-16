@@ -71,9 +71,193 @@ public class Product {
     @Column(name = "modified_at")
     private Timestamp modifiedAt;
 
-    // Getters and setters
+	public int getProductId() {
+		return productId;
+	}
 
-    // Constructors
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 
-    // Other methods if needed
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public String getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(String stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public int getSku() {
+		return sku;
+	}
+
+	public void setSku(int sku) {
+		this.sku = sku;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getReviewsCount() {
+		return reviewsCount;
+	}
+
+	public void setReviewsCount(String reviewsCount) {
+		this.reviewsCount = reviewsCount;
+	}
+
+	public String getManufacturerPartNumber() {
+		return manufacturerPartNumber;
+	}
+
+	public void setManufacturerPartNumber(String manufacturerPartNumber) {
+		this.manufacturerPartNumber = manufacturerPartNumber;
+	}
+
+	public String getProductUrl() {
+		return productUrl;
+	}
+
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
+	}
+
+	public String getTaxRate() {
+		return taxRate;
+	}
+
+	public void setTaxRate(String taxRate) {
+		this.taxRate = taxRate;
+	}
+
+	public String getAdditionalAttributes() {
+		return additionalAttributes;
+	}
+
+	public void setAdditionalAttributes(String additionalAttributes) {
+		this.additionalAttributes = additionalAttributes;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Timestamp modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public Product() {
+		super();
+	}
+	
+	public Product(Product product) {
+	    super();
+	    this.productId = product.getProductId();
+	    this.productName = product.getProductName();
+	    this.description = product.getDescription();
+	    this.category = product.getCategory();
+	    this.brand = product.getBrand();
+	    this.discount = product.getDiscount();
+	    this.price = product.getPrice();
+	    this.stockQuantity = product.getStockQuantity();
+	    this.imageUrl = product.getImageUrl();
+	    this.sku = product.getSku();
+	    this.weight = product.getWeight();
+	    this.isActive = product.getIsActive();
+	    this.rating = product.getRating();
+	    this.reviewsCount = product.getReviewsCount();
+	    this.manufacturerPartNumber = product.getManufacturerPartNumber();
+	    this.productUrl = product.getProductUrl();
+	    this.taxRate = product.getTaxRate();
+	    this.additionalAttributes = product.getAdditionalAttributes();
+	    this.createdAt = product.getCreatedAt();
+	    this.modifiedAt = product.getModifiedAt();
+	}
+
+    
 }

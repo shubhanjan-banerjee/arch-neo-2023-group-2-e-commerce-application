@@ -42,29 +42,114 @@ public class Customer {
     @Column(name = "modified_at")
     private Timestamp modifiedAt;
 
-    // Constructors, getters, setters, and other methods
+	public Integer getCustomerId() {
+		return customerId;
+	}
 
-    // Default constructor
-    public Customer() {
-    }
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 
-    // Getters and setters...
+	public String getUsername() {
+		return username;
+	}
 
-    public Integer getCustomerId() {
-        return customerId;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    // Other getters and setters...
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public Integer getPreferredPaymentTypeId() {
+		return preferredPaymentTypeId;
+	}
+
+	public void setPreferredPaymentTypeId(Integer preferredPaymentTypeId) {
+		this.preferredPaymentTypeId = preferredPaymentTypeId;
+	}
+
+	public Integer getPreferredPaymentAddressId() {
+		return preferredPaymentAddressId;
+	}
+
+	public void setPreferredPaymentAddressId(Integer preferredPaymentAddressId) {
+		this.preferredPaymentAddressId = preferredPaymentAddressId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Timestamp modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public Customer() {
+		super();
+	}
+
+	public Customer(Integer customerId, String username, String password, String firstName, String lastName,
+			String emailId, String contactNumber, Integer preferredPaymentTypeId, Integer preferredPaymentAddressId,
+			Timestamp createdAt, Timestamp modifiedAt) {
+		super();
+		this.customerId = customerId;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.contactNumber = contactNumber;
+		this.preferredPaymentTypeId = preferredPaymentTypeId;
+		this.preferredPaymentAddressId = preferredPaymentAddressId;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+	}
+
+   
 }
