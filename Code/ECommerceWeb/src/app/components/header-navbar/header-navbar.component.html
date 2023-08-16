@@ -12,7 +12,7 @@
       </button>
     </div>
     <div [ngClass]="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow items-center">
-      <ul class="flex flex-col lg:flex-row list-none ml-auto">
+      <ul class="flex flex-col lg:flex-row list-none ml-auto items-center">
         <li class="nav-item">
           <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
             href="#pablo">
@@ -29,6 +29,7 @@
           <input type="text" placeholder="Search"
             class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring w-full" />
         </li>
+        <li class="text-white ps-2" routerLink="cart">Cart (0)</li>
       </ul>
     </div>
   </div>
