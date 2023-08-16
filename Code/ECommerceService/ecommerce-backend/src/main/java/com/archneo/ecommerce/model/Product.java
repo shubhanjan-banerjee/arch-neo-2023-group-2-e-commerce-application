@@ -234,32 +234,29 @@ public class Product {
 	public Product() {
 		super();
 	}
-
-	public Product(int productId, String productName, String description, Category category, String brand,
-			String discount, BigDecimal price, String stockQuantity, String imageUrl, int sku, String weight,
-			String isActive, String rating, String reviewsCount, String manufacturerPartNumber, String productUrl,
-			String taxRate, String additionalAttributes, Timestamp createdAt, Timestamp modifiedAt) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.description = description;
-		this.category = category;
-		this.brand = brand;
-		this.discount = discount;
-		this.price = price;
-		this.stockQuantity = stockQuantity;
-		this.imageUrl = imageUrl;
-		this.sku = sku;
-		this.weight = weight;
-		this.isActive = isActive;
-		this.rating = rating;
-		this.reviewsCount = reviewsCount;
-		this.manufacturerPartNumber = manufacturerPartNumber;
-		this.productUrl = productUrl;
-		this.taxRate = taxRate;
-		this.additionalAttributes = additionalAttributes;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
+	
+	public Product(Product product) {
+	    super();
+	    this.productId = product.getProductId();
+	    this.productName = product.getProductName();
+	    this.description = product.getDescription();
+	    this.category = product.getCategory();
+	    this.brand = product.getBrand();
+	    this.discount = product.getDiscount();
+	    this.price = product.getPrice();
+	    this.stockQuantity = product.getStockQuantity();
+	    this.imageUrl = product.getImageUrl();
+	    this.sku = product.getSku();
+	    this.weight = product.getWeight();
+	    this.isActive = product.getIsActive();
+	    this.rating = product.getRating();
+	    this.reviewsCount = product.getReviewsCount();
+	    this.manufacturerPartNumber = product.getManufacturerPartNumber();
+	    this.productUrl = product.getProductUrl();
+	    this.taxRate = product.getTaxRate();
+	    this.additionalAttributes = product.getAdditionalAttributes();
+	    this.createdAt = product.getCreatedAt();
+	    this.modifiedAt = product.getModifiedAt();
 	}
 
     
