@@ -1,7 +1,6 @@
 package com.archneo.ecommerce.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity

@@ -1,7 +1,6 @@
 package com.archneo.ecommerce.model;
 
-import jakarta.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
