@@ -19,7 +19,6 @@ import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.co
 
 export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:id', component: ProductsComponent },
