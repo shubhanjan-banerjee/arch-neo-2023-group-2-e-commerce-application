@@ -2,6 +2,9 @@ package com.archneo.ecommerce.controller;
 
 import com.archneo.ecommerce.model.Product;
 import com.archneo.ecommerce.service.ProductService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +21,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
+    @Operation(summary = "Find all the products")
     public ResponseEntity<Page<Product>> getAllProducts(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,

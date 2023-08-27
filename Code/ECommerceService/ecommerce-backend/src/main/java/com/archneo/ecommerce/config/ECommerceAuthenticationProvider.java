@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class EazyBankUsernamePwdAuthenticationProvider implements AuthenticationProvider {
+public class ECommerceAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private CustomerRepository customerRepository;

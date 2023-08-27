@@ -10,7 +10,8 @@ public class Authority {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
     @GenericGenerator(name = "native",strategy = "native")
-    private Long id;
+    @Column(name = "authority_id")
+    private Long authority_id;
 
     private String name;
 
@@ -18,28 +19,39 @@ public class Authority {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getAuthority_id() {
+		return authority_id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setAuthority_id(Long authority_id) {
+		this.authority_id = authority_id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Customer getCustomer() {
-        return customer;
-    }
+	public Customer getCustomer() {
+		return customer;
+	}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Authority() {
+		super();
+	}
+
+	public Authority(Long authority_id, String name, Customer customer) {
+		super();
+		this.authority_id = authority_id;
+		this.name = name;
+		this.customer = customer;
+	}
 
 }
