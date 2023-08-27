@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from './pages/shop/home/home.component';
-import { ProductsComponent } from './pages/shop/products/products.component';
 import { CartComponent } from './pages/shop/cart/cart.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { CheckoutComponent } from './pages/shop/checkout/checkout.component';
@@ -16,12 +15,12 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
 import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
+import { ProductDetailsComponent } from './pages/shop/product-details/product-details.component';
 
 export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'products/:id', component: ProductsComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'orders', component: OrdersComponent },
@@ -29,9 +28,9 @@ export const appRoutes: Route[] = [
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'contactus', component: ContactUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'wishlist', component: WishListComponent },
+  { path: 'wish-list', component: WishListComponent },
   { path: 'error-page', component: ErrorPageComponent },
   {
     path: 'admin',

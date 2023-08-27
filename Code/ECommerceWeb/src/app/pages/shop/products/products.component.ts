@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from 'src/app/models/product.interface';
 import { ProductService } from 'src/app/services/product.service';
@@ -8,7 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'ecommerce-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })

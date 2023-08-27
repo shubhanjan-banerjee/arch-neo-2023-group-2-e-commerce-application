@@ -1,30 +1,26 @@
 <nav class="fixed top-0 w-full z-20 shadow-lg lg:shadow-none bg-white">
   <div class="m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-3">
-    <div class="lg:block col-span-1 flex text-gray-600 mt-1">
-      <span
+    <div class="hidden lg:block col-span-1 flex text-gray-600 mt-1">
+      <span routerLink="/home"
         class="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer">
         Shop
       </span>
-      <span
-        class="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer">
-        Blog
-      </span>
-      <span
+      <span routerLink="/contact-us"
         class="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer">
         Contact us
       </span>
     </div>
     <div class="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
-      <svg class="col-span-1 lg:hidden w-8 h-8 cursor-pointer text-gray-600" fill="none" stroke="currentColor"
-        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg (click)="toggleNavbar()" class="col-span-1 lg:hidden w-8 h-8 cursor-pointer text-gray-600" fill="none"
+        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-      <span style="letter-spacing: 0.10rem" class="flex items-left font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2
+      <span routerLink="/home" style="letter-spacing: 0.10rem" class="flex items-left font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2
         text-center">
         ECommerce
       </span>
     </div>
-    <div style="letter-spacing: 0.70rem" class="lg:block flex items-left col-span-1 text-center text-gray-800 font-bold tracking-widest
+    <div style="letter-spacing: 0.70rem" class="hidden lg:block flex items-left col-span-1 text-center text-gray-800 font-bold tracking-widest
       uppercase text-2xl cursor-pointer">
       ECommerce
     </div>
@@ -44,7 +40,6 @@
             d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div class="hidden userDropdown absolute right-0 mt-1 bg-gray-200 rounded">
-
           <li class="flex flex-col text-gray-700 w-48 shadow-lg">
             <span class="flex space-x-2 py-2 px-8 hover:bg-gray-400 cursor-pointer">
               <span>
@@ -145,18 +140,14 @@
       </div>
     </div>
   </div>
-  <div class="px-1 pb-2 md:pb-0 md:px-10 lg:hidden">
+  <div *ngIf="showMenu" class="px-1 pb-2 md:pb-0 md:px-10 lg:hidden">
     <div class="col-span-1 flex flex-col text-gray-600">
-      <span
+      <span routerLink="/home"
         class="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer">
         Shop
       </span>
-      <span
-        class="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer">
-        Blog
-      </span>
-      <span
-        class="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer">
+      <span routerLink="/contact-us"
+        class="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 mb-3 px-3 py-2 rounded-lg cursor-pointer">
         Contact us
       </span>
     </div>

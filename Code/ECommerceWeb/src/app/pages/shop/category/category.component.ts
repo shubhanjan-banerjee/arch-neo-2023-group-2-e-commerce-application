@@ -8,4 +8,17 @@ import { CommonModule } from '@angular/common';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent {}
+export class CategoryComponent {
+  showCategory = false;
+  showFilter = false;
+  showSearch = false;
+  toggleCategory() {
+    this.showCategory = !this.showCategory;
+  }
+  toggleFilter() {
+    this.showFilter = !this.showFilter;
+  }
+  toggleSearch() {
+    this.showSearch = !this.showSearch;
+  }
+}
