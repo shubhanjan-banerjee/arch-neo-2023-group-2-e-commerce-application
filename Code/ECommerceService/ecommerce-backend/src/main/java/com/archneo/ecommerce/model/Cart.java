@@ -1,7 +1,9 @@
 package com.archneo.ecommerce.model;
 
-import jakarta.persistence.*;
+
 import java.sql.Timestamp;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CARTS")

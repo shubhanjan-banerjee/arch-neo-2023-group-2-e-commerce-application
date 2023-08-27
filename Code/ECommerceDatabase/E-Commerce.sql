@@ -19,9 +19,18 @@ CREATE TABLE `CUSTOMERS` (
   `last_name` varchar(255),
   `email_id` varchar(255) UNIQUE,
   `contact_number` varchar(255) UNIQUE,
+  `role` varchar(255) DEFAULT "USER",
   `preferred_payment_type_id` int,
   `preferred_payment_address_id` int,
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
+);
+
+CREATE TABLE `AUTHORITIES` (
+  `authority_id` int PRIMARY KEY AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -36,8 +45,8 @@ CREATE TABLE `CUSTOMER_ADDRESSES` (
   `country` varchar(255),
   `phone` varchar(255),
   `is_default` bool,
-  `created_at` datetime,
-  `updated_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `PRODUCTS` (
@@ -59,7 +68,7 @@ CREATE TABLE `PRODUCTS` (
   `product_url` varchar(255),
   `tax_rate` varchar(255),
   `additional_attributes` varchar(255),
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -76,7 +85,7 @@ CREATE TABLE `CATEGORIES` (
   `meta_description` varchar(255) COMMENT 'A meta description used for SEO purposes.',
   `meta_keywords` varchar(255) COMMENT 'Meta keywords used for SEO purposes.',
   `custom_attributes` varchar(255) COMMENT 'JSON or other structured data to store additional category attributes, if needed.',
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -97,7 +106,7 @@ CREATE TABLE `INVETORY` (
   `reserved_quantity` int,
   `damaged_quantity` int,
   `is_active` boolean,
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -113,15 +122,15 @@ CREATE TABLE `SUPPLIERS` (
   `postal_code` varchar(255),
   `country` varchar(255),
   `website` varchar(255),
-  `created_at` datetime,
-  `updated_at` datetime,
   `payment_terms` varchar(255),
   `preferred_shipping_method` varchar(255),
   `tax_id` varchar(255),
   `notes` text,
   `is_active` bool,
   `rating` float,
-  `supplier_type` varchar(255)
+  `supplier_type` varchar(255),
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `ORDERS` (
@@ -135,7 +144,7 @@ CREATE TABLE `ORDERS` (
   `payment_id` int UNIQUE NOT NULL,
   `delivery_id` int UNIQUE NOT NULL,
   `total` decimal,
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -147,8 +156,8 @@ CREATE TABLE `INVOICES` (
   `total_amount` decimal,
   `is_paid` bool,
   `payment_date` datetime,
-  `created_at` datetime,
-  `updated_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `ORDER_ITEMS` (
@@ -158,8 +167,8 @@ CREATE TABLE `ORDER_ITEMS` (
   `quantity` int,
   `unit_price` decimal(10, 2),
   `total_price` decimal(10, 2),
-  `created_at` datetime,
-  `updated_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `DELIVERIES` (
@@ -169,15 +178,15 @@ CREATE TABLE `DELIVERIES` (
   `customer_address_id` int NOT NULL,
   `tracking_id` int NOT NULL,
   `delivery_notes` text,
-  `created_at` datetime,
-  `updated_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `TRACKING` (
   `tracking_id` int PRIMARY KEY AUTO_INCREMENT,
   `status` varchar(255) COMMENT 'Initiated, In Transit, Delivered, Canceled',
-  `updated_at` datetime,
-  `created_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `CARTS` (
@@ -186,7 +195,7 @@ CREATE TABLE `CARTS` (
   `product_id` int UNIQUE NOT NULL,
   `status` varchar(255) COMMENT 'Open, Closed',
   `quantity` int,
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
@@ -195,8 +204,8 @@ CREATE TABLE `PAYMENT_TYPES` (
   `payment_type_name` varchar(255) COMMENT 'COD, Netbanking, Cards Payment, UPI Payment',
   `description` varchar(255),
   `is_active` bool,
-  `created_at` datetime,
-  `updated_at` datetime
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp
 );
 
 CREATE TABLE `PAYMENTS` (
@@ -207,12 +216,13 @@ CREATE TABLE `PAYMENTS` (
   `payment_date` datetime,
   `amount` decimal,
   `status` varchar(255) COMMENT 'Accepted, Rejected, Pending',
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `modified_at` timestamp
 );
 
 ALTER TABLE `CUSTOMERS` ADD FOREIGN KEY (`preferred_payment_type_id`) REFERENCES `PAYMENT_TYPES` (`payment_type_id`);
 ALTER TABLE `CUSTOMERS` ADD FOREIGN KEY (`preferred_payment_address_id`) REFERENCES `CUSTOMER_ADDRESSES` (`address_id`);
+ALTER TABLE `AUTHORITIES` ADD FOREIGN KEY (`customer_id`) REFERENCES `CUSTOMERS` (`customer_id`);
 ALTER TABLE `CUSTOMER_ADDRESSES` ADD FOREIGN KEY (`customer_id`) REFERENCES `CUSTOMERS` (`customer_id`);
 ALTER TABLE `PRODUCTS` ADD FOREIGN KEY (`category_id`) REFERENCES `CATEGORIES` (`category_id`);
 ALTER TABLE `CATEGORIES` ADD FOREIGN KEY (`parent_category_id`) REFERENCES `CATEGORIES` (`category_id`);
@@ -244,15 +254,15 @@ TRUNCATE TABLE `ecommerce`.`products`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO `ecommerce`.`customers` 
-(`username`,`password`,`first_name`,`last_name`,`email_id`,`contact_number`,`preferred_payment_type_id`,
-`preferred_payment_address_id`,`created_at`,`modified_at`)
+(`username`,`password`,`first_name`,`last_name`,`email_id`,`contact_number`,`role`,
+`preferred_payment_type_id`,`preferred_payment_address_id`,`created_at`,`modified_at`)
 VALUES 
-('admin','password','Admin','Breganza','admin@ecommerce.com','987643210',null,null,now(),now()),
-('test','password','Test','Desuza','test@ecommerce.com','955643210',null,null,now(),now());
+('admin','$2a$12$n2ed/MViZplirBfZss8KFOjhkLt1kRxeIF9UDLinIq6yL1oemt4/S','Admin','Breganza','admin@ecommerce.com','987643210','ADMIN',null,null,now(),now()),
+('test','$2a$12$n2ed/MViZplirBfZss8KFOjhkLt1kRxeIF9UDLinIq6yL1oemt4/S','Test','Desuza','test@ecommerce.com','955643210','USER',null,null,now(),now());
 
 INSERT INTO `ecommerce`.`suppliers`
 (`supplier_name`,`contact_name`,`email`,`phone`,`address`,`city`,`state`,`postal_code`,
-`country`,`website`,`created_at`,`updated_at`,`payment_terms`,`preferred_shipping_method`,
+`country`,`website`,`created_at`,`modified_at`,`payment_terms`,`preferred_shipping_method`,
 `tax_id`,`notes`,`is_active`,`rating`,`supplier_type`)
 VALUES
 ('Damodar Supplier','Ashish Dubey','ashish@dubey.com','4578546958','Nimtala Ghat','Jamshedpur','West Bengal','700001','India','https://alekeja.com',now(),now(),null,null,null,null,true,null,null);
@@ -269,3 +279,9 @@ INSERT INTO `ecommerce`.`products`
 `product_url`,`tax_rate`,`additional_attributes`,`created_at`,`modified_at`)
 VALUES
 ('Easy Chair','It is an easy chair',1,'Segun',null,100.00,10,'easy_char.jpg',null,'500 kg',true,3,23,null,null,null,null,now(),now());
+
+INSERT INTO `authorities` (`customer_id`, `name`)
+VALUES (1, 'ROLE_USER');
+
+INSERT INTO `authorities` (`customer_id`, `name`)
+VALUES (1, 'ROLE_ADMIN');

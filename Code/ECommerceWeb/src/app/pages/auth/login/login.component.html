@@ -1,0 +1,97 @@
+<section class="fixed z-40 inset-0 my-8 md:my-20 flex items-start justify-center overflow-auto">
+  <div class="w-11/12 md:w-3/5 lg:w-2/4 relative space-y-4 bg-white p-6 md:px-12 md:py-6">
+
+    <div class="text-center text-2xl mb-6">Login</div>
+
+    <div class="bg-red-200 py-2 px-4 rounded">
+      You need to login for checkout. Haven't accont? Create new one.
+    </div>
+
+    <form class="space-y-4">
+      <div class="flex flex-col">
+        <label htmlFor="name">
+          Username or email address
+          <span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="text" id="name" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col">
+        <label htmlFor="password">
+          Password<span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="password" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col space-y-2 md:flex-row md:justify-between md:items-center">
+        <div>
+          <input type="checkbox" id="rememberMe" class="px-4 py-2 focus:outline-none border mr-1" />
+          <label htmlFor="rememberMe">
+            Remember me<span class="text-sm text-gray-600">*</span>
+          </label>
+        </div>
+        <a class="block text-gray-600" href="/">
+          Lost your password?
+        </a>
+      </div>
+      <div style="background: #303031" class="font-medium px-4 py-2 text-white text-center cursor-pointer">Login
+      </div>
+    </form>
+
+    <div class="text-center text-2xl mb-6">Register</div>
+    <form class="space-y-4">
+      <div class="flex flex-col">
+        <label htmlFor="name">
+          Name<span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="text" id="name" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col">
+        <label htmlFor="email">
+          Email address<span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="email" id="email" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col">
+        <label htmlFor="password">
+          Password<span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="password" id="password" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col">
+        <label htmlFor="cPassword">
+          Confirm password
+          <span class="text-sm text-gray-600 ml-1">*</span>
+        </label>
+        <input value="" type="password" class="border-red-500 px-4 py-2 focus:outline-none border" />
+      </div>
+      <div class="flex flex-col space-y-2 md:flex-row md:justify-between md:items-center">
+        <div>
+          <input type="checkbox" id="rememberMe" class="px-4 py-2 focus:outline-none border mr-1" />
+          <label htmlFor="rememberMe">
+            Remember me<span class="text-sm text-gray-600">*</span>
+          </label>
+        </div>
+        <a class="block text-gray-600" href="/">
+          Lost your password?
+        </a>
+      </div>
+      <div style="background: #303031" class="px-4 py-2 text-white text-center cursor-pointer font-medium">
+        Create an account
+      </div>
+    </form>
+    <div class="flex items-center space-x-2">
+      <span class="border-b border-gray-500 w-full"></span>
+      <span class="font-medium">or</span>
+      <span class="border-b border-gray-500 w-full"></span>
+    </div>
+    <div style="color: #303031; border: 1px solid #303031" class="px-4 py-2 font-medium text-center cursor-pointer">
+      loginValue
+    </div>
+    <div class="absolute top-0 right-0 mx-4">
+      <svg class="w-6 h-6 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clipRule="evenodd" />
+      </svg>
+    </div>
+  </div>
+</section>
