@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 @Table(name = "PRODUCTS")
+@Schema(description = "All details about the product. ")
 public class Product {
 
     @Id
