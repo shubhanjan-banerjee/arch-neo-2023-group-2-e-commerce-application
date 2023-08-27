@@ -1,6 +1,7 @@
 package com.archneo.ecommerce.repository;
 
 import com.archneo.ecommerce.model.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

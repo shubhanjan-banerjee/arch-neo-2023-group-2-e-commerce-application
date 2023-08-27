@@ -3,7 +3,7 @@ package com.archneo.ecommerce.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CARTS")

@@ -1,6 +1,6 @@
 package com.archneo.ecommerce.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 

@@ -7,7 +7,7 @@ import com.archneo.ecommerce.service.CartService;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

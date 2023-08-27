@@ -1,7 +1,10 @@
 package com.archneo.ecommerce.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CUSTOMERS")
@@ -35,6 +38,10 @@ public class Customer {
 
     @Column(name = "preferred_payment_address_id")
     private Integer preferredPaymentAddressId;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
+    private Set<Authority> authorities;
 
     @Column(name = "created_at")
     private Timestamp createdAt;
@@ -130,13 +137,21 @@ public class Customer {
 		this.modifiedAt = modifiedAt;
 	}
 
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
 	public Customer() {
 		super();
 	}
 
 	public Customer(Integer customerId, String username, String password, String firstName, String lastName,
 			String emailId, String contactNumber, Integer preferredPaymentTypeId, Integer preferredPaymentAddressId,
-			Timestamp createdAt, Timestamp modifiedAt) {
+			Set<Authority> authorities, Timestamp createdAt, Timestamp modifiedAt) {
 		super();
 		this.customerId = customerId;
 		this.username = username;
@@ -147,9 +162,9 @@ public class Customer {
 		this.contactNumber = contactNumber;
 		this.preferredPaymentTypeId = preferredPaymentTypeId;
 		this.preferredPaymentAddressId = preferredPaymentAddressId;
+		this.authorities = authorities;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
 	}
 
-   
 }

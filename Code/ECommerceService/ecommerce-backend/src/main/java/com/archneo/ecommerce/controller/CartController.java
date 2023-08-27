@@ -2,7 +2,6 @@ package com.archneo.ecommerce.controller;
 
 import com.archneo.ecommerce.model.Cart;
 import com.archneo.ecommerce.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,6 @@ public class CartController {
 
     private final CartService cartService;
 
-    @Autowired
     public CartController(CartService cartService) {
         this.cartService = cartService;
     }
