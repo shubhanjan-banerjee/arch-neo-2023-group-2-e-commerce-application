@@ -19,50 +19,55 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Arrays;
 import java.util.Collections;
 
-
 @Configuration
 public class ProjectSecurityConfig {
 
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
-        requestHandler.setCsrfRequestAttributeName("_csrf");
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-                config.setAllowedMethods(Collections.singletonList("*"));
-                config.setAllowCredentials(true);
-                config.setAllowedHeaders(Collections.singletonList("*"));
-                config.setExposedHeaders(Arrays.asList("Authorization"));
-                config.setMaxAge(3600L);
-                return config;
-            }
-        })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact","/register")
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-                .addFilterAt(new AuthoritiesLoggingAtFilter(),BasicAuthenticationFilter.class)
-                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
-                .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/products").hasRole("USER")
-                        .requestMatchers("/categories").hasAnyRole("USER","ADMIN")
-                        .requestMatchers("/cart").authenticated()
-                        .requestMatchers("/payment").hasRole("USER")
-                        .requestMatchers("/user").authenticated()
-                        .requestMatchers("/notices","/contact","/register").permitAll())
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
+	@Bean
+	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+		CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
+		requestHandler.setCsrfRequestAttributeName("_csrf");
+		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+					@Override
+					public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+						CorsConfiguration config = new CorsConfiguration();
+						config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+						config.setAllowedMethods(Collections.singletonList("*"));
+						config.setAllowCredentials(true);
+						config.setAllowedHeaders(Collections.singletonList("*"));
+						config.setExposedHeaders(Arrays.asList("Authorization"));
+						config.setMaxAge(3600L);
+						return config;
+					}
+				}))
+				.csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler)
+						.ignoringRequestMatchers("/**")
+//						.ignoringRequestMatchers("/contact", "/register","/swagger-ui/**")
+//						.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+				)
+//				.addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+//				.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+//				.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
+//				.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+//				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+//				.addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+//				.authorizeHttpRequests((requests) -> requests
+//					.requestMatchers("/**").permitAll()
+//					.requestMatchers("/notices","/register","/swagger-ui/**").permitAll()
+//                  .requestMatchers("/products").hasRole("USER")
+//                  .requestMatchers("/categories").hasAnyRole("USER","ADMIN")
+//                  .requestMatchers("/cart").authenticated()
+//                  .requestMatchers("/payment").hasRole("USER")
+//                  .requestMatchers("/user").authenticated()
+//				)
+//				.formLogin(Customizer.withDefaults())
+				.httpBasic(Customizer.withDefaults());
+		return http.build();
+	}
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

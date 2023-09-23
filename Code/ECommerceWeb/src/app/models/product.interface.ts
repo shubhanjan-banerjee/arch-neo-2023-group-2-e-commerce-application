@@ -1,7 +1,22 @@
+import { Category } from "./category.interface";
+
 export interface Product {
-  id: string;
-  name: string;
-  price: number;
+  productId: number;
+  productName: string;
   description: string;
-  // Add any other properties specific to your product
+  category: Category;
+  brand: string;
+  discount: string;
+  price: number;
+  stockQuantity: string;
+  imageUrl: string;
+  sku: number;
+  weight: string;
+  isActive: string;
+  rating: string;
+  reviewsCount: string;
+  manufacturerPartNumber: string;
+  productUrl: string;
+  taxRate: string;
+  additionalAttributes: string;
 }

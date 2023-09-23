@@ -1,105 +1,37 @@
-<section class="m-4 md:mx-8 md:my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-  <div routerLink="/product/asdasdasd" class="relative col-span-1 m-2"><img
-      class="w-full object-cover object-center cursor-pointer"
-      src="https://loremflickr.com/g/320/240/furniture?random=1" alt="">
-    <div class="flex items-center justify-between mt-2">
-      <div class="text-gray-600 font-light truncate">Easy Chair</div>
-      <div class="flex items-center space-x-1"><span><svg class="w-4 h-4 fill-current text-yellow-700" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-            </path>
-          </svg></span><span class="text-gray-700">1</span></div>
+<section *ngIf="products$ | async as products"
+  class="m-4 md:mx-8 md:my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <ng-container *ngIf="products.length">
+    <div *ngFor="let product of products" [routerLink]="['/product/'+product.productId]"
+      class="relative col-span-1 m-2">
+      <img class="w-full object-cover object-center cursor-pointer" [src]="getPath(product.imageUrl)" alt="" />
+      <div class="flex items-center justify-between mt-2">
+        <div class="text-gray-600 font-light truncate">{{product.productName}}</div>
+        <div class="flex items-center space-x-1">
+          <span><svg class="w-4 h-4 fill-current text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+              </path>
+            </svg></span><span class="text-gray-700">1</span>
+        </div>
+      </div>
+      <div>{{product.price|currency}}</div>
+      <div class="absolute top-0 right-0 mx-2 my-2 md:mx-4"><svg
+          class="false w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
+          fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+          </path>
+        </svg><svg
+          class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
+          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+            clip-rule="evenodd"></path>
+        </svg></div>
     </div>
-    <div>$45.00</div>
-    <div class="absolute top-0 right-0 mx-2 my-2 md:mx-4"><svg
-        class="false w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-        </path>
-      </svg><svg class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          clip-rule="evenodd"></path>
-      </svg></div>
-  </div>
-  <div class="relative col-span-1 m-2"><img class="w-full object-cover object-center cursor-pointer"
-      src="https://loremflickr.com/g/320/240/furniture?random=1" alt="">
-    <div class="flex items-center justify-between mt-2">
-      <div class="text-gray-600 font-light truncate">Easy Chair</div>
-      <div class="flex items-center space-x-1"><span><svg class="w-4 h-4 fill-current text-yellow-700" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-            </path>
-          </svg></span><span class="text-gray-700">1</span></div>
-    </div>
-    <div>$45.00</div>
-    <div class="absolute top-0 right-0 mx-2 my-2 md:mx-4"><svg
-        class="false w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-        </path>
-      </svg><svg class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          clip-rule="evenodd"></path>
-      </svg></div>
-  </div>
-  <div class="relative col-span-1 m-2"><img class="w-full object-cover object-center cursor-pointer"
-      src="https://loremflickr.com/g/320/240/furniture?random=1" alt="">
-    <div class="flex items-center justify-between mt-2">
-      <div class="text-gray-600 font-light truncate">Easy Chair</div>
-      <div class="flex items-center space-x-1"><span><svg class="w-4 h-4 fill-current text-yellow-700" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-            </path>
-          </svg></span><span class="text-gray-700">1</span></div>
-    </div>
-    <div>$45.00</div>
-    <div class="absolute top-0 right-0 mx-2 my-2 md:mx-4"><svg
-        class="false w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-        </path>
-      </svg><svg class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          clip-rule="evenodd"></path>
-      </svg></div>
-  </div>
-  <div class="relative col-span-1 m-2"><img class="w-full object-cover object-center cursor-pointer"
-      src="https://loremflickr.com/g/320/240/furniture?random=1" alt="">
-    <div class="flex items-center justify-between mt-2">
-      <div class="text-gray-600 font-light truncate">Easy Chair</div>
-      <div class="flex items-center space-x-1"><span><svg class="w-4 h-4 fill-current text-yellow-700" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-            </path>
-          </svg></span><span class="text-gray-700">1</span></div>
-    </div>
-    <div>$45.00</div>
-    <div class="absolute top-0 right-0 mx-2 my-2 md:mx-4"><svg
-        class="false w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-        </path>
-      </svg><svg class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700 transition-all duration-300 ease-in"
-        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          clip-rule="evenodd"></path>
-      </svg></div>
-  </div>
+  </ng-container>
+
   <!-- 
 <div class="relative col-span-1 m-2">
   <img class="w-full object-cover object-center cursor-pointer"
@@ -136,8 +68,8 @@
     </svg>
   </div>
 </div> -->
-  <div class="hidden col-span-2 md:col-span-3 lg:col-span-4 flex items-center justify-center py-24 text-2xl">
+  <div *ngIf="products.length === 0"
+    class="col-span-2 md:col-span-3 lg:col-span-4 flex items-center justify-center py-24 text-2xl">
     No product found
   </div>
-
 </section>

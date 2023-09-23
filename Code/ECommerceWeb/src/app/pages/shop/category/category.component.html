@@ -39,24 +39,15 @@
   </div>
   <div class="my-4" *ngIf="showCategory">
     <hr />
-    <div class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
-        <img src="https://loremflickr.com/g/320/240/furniture?random=1" alt="pic" />
-        <div class="font-medium">item.cName</div>
-      </div>
-      <div class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
-        <img src="https://loremflickr.com/g/320/240/furniture?random=1" alt="pic" />
-        <div class="font-medium">item.cName</div>
-      </div>
-      <div class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
-        <img src="https://loremflickr.com/g/320/240/furniture?random=1" alt="pic" />
-        <div class="font-medium">item.cName</div>
-      </div>
-      <div class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
-        <img src="https://loremflickr.com/g/320/240/furniture?random=1" alt="pic" />
-        <div class="font-medium">item.cName</div>
-      </div>
-      <div class="hidden text-xl text-center my-4">No Category</div>
+    <div *ngIf="categories$ | async as categories" class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <ng-container *ngIf="categories.length">
+        <div *ngFor="let category of categories"
+          class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
+          <img [src]="getPath(category.imageUrl)" alt="pic" />
+          <div class="font-medium">{{category.categoryName}}</div>
+        </div>
+      </ng-container>
+      <div *ngIf="categories.length === 0" class="text-xl text-center my-4">No Category</div>
     </div>
   </div>
   <div class="my-4" *ngIf="showFilter">
