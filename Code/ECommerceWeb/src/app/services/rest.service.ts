@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../app.config';
 
 @Injectable()
 export class RestService {
-  private apiUrl = 'http://your-api-url'; // Replace with your actual API URL
+  private apiUrl = environment.apiBaseUrl; // Replace with your actual API URL
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   get<T>(url: string, params?: HttpParams): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}/${url}`, { params });

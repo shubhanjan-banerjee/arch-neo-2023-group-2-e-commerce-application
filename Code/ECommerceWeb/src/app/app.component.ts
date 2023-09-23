@@ -13,11 +13,13 @@ import { RestService } from './services/rest.service';
 import { UserService } from './services/user.service';
 import { HeaderNavbarComponent } from './components/header-navbar/header-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CategoryService } from './services/category.service';
 
 @Component({
   standalone: true,
   imports: [RouterModule, HttpClientModule, HeaderNavbarComponent, FooterComponent],
   providers: [
+    RestService,
     AuthService,
     CartService,
     ImageUploadService,
@@ -26,7 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
     NotificationService,
     OrderService,
     ProductService,
-    RestService,
+    CategoryService,
     UserService
   ],
   selector: 'ecommerce-root',
