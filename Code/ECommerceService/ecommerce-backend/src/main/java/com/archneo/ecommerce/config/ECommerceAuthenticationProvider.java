@@ -29,11 +29,11 @@ public class ECommerceAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
+        String emailid = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        Customer customer = customerRepository.findByEmailId(username);
-        if (passwordEncoder.matches(pwd, customer.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(customer.getAuthorities()));
+        Customer customer = customerRepository.findByEmailId(emailid);
+        if (passwordEncoder.matches(pwd, customer.getPassword())) {      	
+            return new UsernamePasswordAuthenticationToken(emailid, pwd, getGrantedAuthorities(customer.getAuthorities()));
         } else {
             throw new BadCredentialsException("Invalid password!");
         }

@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.interface';
+import { RestService } from './rest.service';
+import { ResponseModel } from '../models/response.model';
 
 @Injectable()
 export class ProductService {
-  private apiUrl = 'http://your-api-url/products'; // Replace with your actual API URL
+  private apiUrl = 'products'; // Replace with your actual API URL
 
-  constructor(private http: HttpClient) { }
+  constructor(private rest: RestService) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+  getProducts(): Observable<ResponseModel<Product>> {
+    return this.rest.get<ResponseModel<Product>>(this.apiUrl);
   }
 
   getProductById(productId: string): Observable<Product> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.get<Product>(url);
+    return this.rest.get<Product>(url);
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+    return this.rest.post<Product>(this.apiUrl, product);
   }
 
   updateProduct(productId: string, product: Product): Observable<Product> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.put<Product>(url, product);
+    return this.rest.put<Product>(url, product);
   }
 
   deleteProduct(productId: string): Observable<void> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.delete<void>(url);
+    return this.rest.delete<void>(url);
   }
 }
