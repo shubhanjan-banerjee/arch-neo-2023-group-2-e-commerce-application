@@ -1175,3 +1175,104 @@ The typical flow of work in the Gitflow branching strategy is as follows:
 
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/314db286-aac7-4932-ab9a-f7bdfddeb297)
 
+## DevOps Deployment strategy
+
+We will be following the Ramped deployment strategy while deploying our code in production release.
+
+### Ramped Deployment
+
+Ramped deployment is a deployment strategy that focuses on gradually rolling out new releases or updates to a software system, rather than deploying them to all users at once. This strategy is also known as a phased or incremental deployment. The goal of ramped deployment is to minimize risks and disruptions associated with large-scale deployments by incrementally introducing changes and monitoring their impact on the system and users.
+
+**Key Steps in Ramped Deployment Strategy:**
+
+**Deployment Planning:**
+
+The first step is to plan the deployment process. This involves defining the phases of deployment, determining the criteria for progressing to the next phase, and setting up monitoring and rollback mechanisms.
+
+**Phases of Deployment:**
+
+In a ramped deployment strategy, the deployment process is divided into multiple phases. Each phase includes a subset of users or systems to receive the new release.
+
+**Initial Deployment:**
+
+The initial phase involves deploying the new release to a small subset of users or systems. These users are often internal team members or a limited group of early adopters.
+
+**Monitoring and Validation:**
+
+During each phase of deployment, the system's performance, stability, and user feedback are closely monitored. This helps to identify any issues or unexpected behavior early on.
+
+**Incremental Expansion:**
+
+If the initial phase is successful and no critical issues are detected, the deployment is expanded to a larger subset of users or systems. This expansion continues gradually, increasing the number of users with each subsequent phase.
+
+**Rollback Plan:**
+
+It's crucial to have a rollback plan in place in case any severe issues arise during deployment. If problems are detected, the deployment can be rolled back to a previous version to minimize the impact on users.
+
+**Steady State and Completion:**
+
+The ramped deployment process continues until the new release is deployed to all users or systems. Once the deployment is complete, the system reaches a steady state, and further monitoring ensures that everything is functioning as expected.
+
+**Benefits of Ramped Deployment:**
+
+**Risk Mitigation:**
+
+Ramped deployment reduces the risk associated with large-scale deployments. By gradually introducing changes, issues can be detected and resolved early, minimizing the impact on users.
+
+**Continuous Monitoring:**
+
+The deployment strategy allows for continuous monitoring of system performance and user feedback, ensuring that any issues are addressed promptly.
+
+**User Feedback:**
+
+Early deployment to a limited user group allows for valuable feedback, which can be used to make improvements before rolling out the update to a broader audience.
+
+**Flexibility:**
+
+The phased approach provides flexibility to adjust the deployment plan based on real-time feedback and observations during each phase.
+
+**Improved User Experience:**
+
+By monitoring and addressing issues early, ramped deployment aims to provide a smoother and more seamless user experience during the update process.
+
+**Rollback Capability:**
+
+Having a rollback plan ensures that if critical issues are encountered, the deployment can be quickly reverted to a previous stable version.
+
+Ramped deployment is particularly useful for large, complex systems with a significant user base, as it helps ensure a smooth and successful update process while minimizing disruptions. It is a popular deployment strategy in scenarios where system reliability and user experience are critical considerations.
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/5321603a-819d-4ab6-899a-32ff4e7110d7)
+
+
+This strategy gives zero downtime and also enables performance monitoring. Nevertheless, the rollback duration is long in case there is an unexpected event. This is because the downgrading process to the initial version follows the same cycle, one instance at a time.
+
+## C4 View:
+### System Landscape View:
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/edf245a5-d37f-45f2-8b76-bc570b6c31dc)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/9ea2e85c-f076-482e-b5d1-06cb7fe72a63)
+
+### Context View
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/af4e4428-0fac-4ff5-9a0c-4dfca62c4246)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/f51c51be-ba83-4528-8d5d-984f2aa93b3f)
+
+### Container View
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d6a63cfe-f49c-4914-bdb5-6cab475f3741)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/42b79d63-a956-4755-9211-280a40d34d60)
+
+### Component View
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/aafe073d-ea51-4d7c-8197-875c60bbe855)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cd34e0c0-e924-431b-b253-d194fc7e6887)
+
+### Deployment View (Development)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/061c0e76-64df-44ef-885d-c406e6c0015a)
+
+### Deployment View (Production)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/5ecaa56d-b721-469c-bad2-f5d3233e36c0)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/6a7ace29-80be-41df-ab4d-7bb6c2c7d15f)
+
+## ER Diagram:
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/07308b66-5744-4cc2-9e69-b1d055bab089)
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/51ace646-8c87-44e8-9950-c7190c2a2eaf)
+
+
