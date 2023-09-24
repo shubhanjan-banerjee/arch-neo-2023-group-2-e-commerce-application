@@ -1134,3 +1134,44 @@ To ensure that all payments and user data are securely stored and accessed, you 
 	  
 
 By incorporating these security measures, you can establish a robust security posture for your web application, safeguarding user data and ensuring secure payment processing for your customers. It's crucial to continually review and update your security practices to stay ahead of emerging threats and maintain a secure environment for your users.
+
+## Repository branching strategy:
+
+### Gitflow Branching Strategy:
+
+Gitflow is a branching model that provides a structured approach to managing branches and releases.
+
+**Main Branch:**
+
+The main branch contains the production-ready code. It is always in a stable state and represents the latest released version of the software.
+
+**Develop Branch:**
+
+The develop branch is used as the integration branch for ongoing development work. Developers create feature branches from the develop branch and merge their changes back into it once the feature is complete.
+
+**Feature Branches:**
+
+Feature branches are created by developers from the develop branch. Each feature branch represents a single new feature or improvement. Once the feature is complete and tested, it is merged back into the develop branch.
+
+**Release Branches:**
+
+Release branches are created from the develop branch when the team is preparing for a new release. The release branch is used for final testing, bug fixing, and preparing the release. Once the release is ready, it is merged into both the main and develop branches.
+
+**Hotfix Branches:**
+
+Hotfix branches are used to address critical issues in the production code. They are created from the main branch and, once the fix is applied, merged back into both the main and develop branches.
+
+The typical flow of work in the Gitflow branching strategy is as follows:
+
+1. Developers create feature branches from the develop branch to work on new features or changes.
+
+2. Once a feature is complete, it is merged back into the develop branch for integration testing.
+
+3. When the team is preparing for a new release, a release branch is created from the develop branch.
+
+4. The release branch undergoes final testing and bug fixing, and once it's ready, it is merged into both the main and develop branches.
+
+5. If critical issues are discovered in the main branch, hotfix branches are created to address them. Once fixed, hotfixes are merged back into both the main and develop branches.
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/314db286-aac7-4932-ab9a-f7bdfddeb297)
+
