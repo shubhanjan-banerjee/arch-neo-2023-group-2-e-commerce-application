@@ -1263,6 +1263,135 @@ This strategy gives zero downtime and also enables performance monitoring. Never
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/aafe073d-ea51-4d7c-8197-875c60bbe855)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cd34e0c0-e924-431b-b253-d194fc7e6887)
 
+### Code View
+**Class Diagram**
+
+```mermaid
+classDiagram
+    class EcommerceSystem {
+        +userSubsystem
+        +inventorySubsystem
+        +browseProducts()
+        +searchProducts()
+        +purchaseProducts()
+    }
+    class UserSubsystem {
+        +registerUser()
+        +login()
+        +browseProducts()
+        +searchProducts()
+        +addToCart()
+        +checkout()
+        +trackOrder()
+        +manageAccount()
+    }
+    class InventorySubsystem {
+        +updateInventory()
+    }
+    class ProductCatalogueManagement {
+        +createProductCatalogue()
+        +addProduct()
+        +removeProduct()
+    }
+    class Shopping {
+        +addToCart()
+        +modifyQuantity()
+        +proceedToCheckout()
+    }
+    class Checkout {
+        +makePayment()
+        +provideDeliveryAddress()
+    }
+    class OrderTracking {
+        +getOrderStatus()
+        +getDeliveryDate()
+    }
+    class AccountManagement {
+        +manageProfile()
+        +viewOrderHistory()
+        +accessInvoices()
+    }
+    class NotificationSystem {
+        +sendOrderConfirmation()
+        +sendPaymentNotification()
+        +sendDeliveryStatusUpdate()
+    }
+    class SupplyChainIntegration {
+        +integrateWithDeliverySystem()
+        +updateInventoryToPlatform()
+    }
+    class PerformanceAndScalability {
+        +designOptimizedArchitecture()
+        +handleConcurrentTraffic()
+        +deliverResponsiveUserExperience()
+    }
+    class SecurityAndPrivacy {
+        +implementSecurePayment()
+        +protectUserData()
+        +complyWithPrivacyRegulations()
+    }
+    class Localization {
+        +supportMultipleLanguages()
+        +caterToRegionalPreferences()
+    }
+
+    EcommerceSystem --|> UserSubsystem
+    EcommerceSystem --|> InventorySubsystem
+    UserSubsystem --|> ProductCatalogueManagement
+    UserSubsystem --|> Shopping
+    UserSubsystem --|> Checkout
+    UserSubsystem --|> OrderTracking
+    UserSubsystem --|> AccountManagement
+    UserSubsystem --|> NotificationSystem
+    InventorySubsystem --|> SupplyChainIntegration
+    EcommerceSystem --|> PerformanceAndScalability
+    EcommerceSystem --|> SecurityAndPrivacy
+    EcommerceSystem --|> Localization
+
+```
+
+## Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant InventoryManager
+    participant EcommercePlatform
+    participant UserSubsystem
+    participant InventorySubsystem
+    participant NotificationSystem
+    participant SupplyChainSystem
+
+    User ->> EcommercePlatform: Browse and search products
+    EcommercePlatform ->> UserSubsystem: Authenticate user
+    UserSubsystem -->> EcommercePlatform: User authenticated
+    EcommercePlatform ->> InventorySubsystem: Retrieve product catalog
+    InventorySubsystem -->> EcommercePlatform: Product catalog retrieved
+    EcommercePlatform ->> EcommercePlatform: Display product catalog to user
+    User ->> EcommercePlatform: Add product to cart
+    EcommercePlatform ->> UserSubsystem: Verify user cart
+    UserSubsystem -->> EcommercePlatform: User cart verified
+    EcommercePlatform ->> InventorySubsystem: Update inventory
+    InventorySubsystem -->> EcommercePlatform: Inventory updated
+    EcommercePlatform ->> User: Display updated cart
+    User ->> EcommercePlatform: Proceed to checkout
+    EcommercePlatform ->> UserSubsystem: Retrieve user information
+    UserSubsystem -->> EcommercePlatform: User information retrieved
+    EcommercePlatform ->> UserSubsystem: Process payment
+    UserSubsystem -->> EcommercePlatform: Payment processed
+    EcommercePlatform ->> SupplyChainSystem: Initiate order processing
+    SupplyChainSystem -->> EcommercePlatform: Order processed
+    EcommercePlatform ->> NotificationSystem: Send order confirmation
+    NotificationSystem -->> EcommercePlatform: Order confirmation sent
+    EcommercePlatform ->> User: Display order confirmation
+    EcommercePlatform ->> SupplyChainSystem: Track order status
+    SupplyChainSystem -->> EcommercePlatform: Order status tracked
+    EcommercePlatform ->> User: Display order status
+
+
+```
+
+
 ### Deployment View (Development)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/061c0e76-64df-44ef-885d-c406e6c0015a)
