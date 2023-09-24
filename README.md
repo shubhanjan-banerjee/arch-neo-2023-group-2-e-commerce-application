@@ -1276,3 +1276,682 @@ This strategy gives zero downtime and also enables performance monitoring. Never
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/51ace646-8c87-44e8-9950-c7190c2a2eaf)
 
 
+## Use Case
+
+ 
+
+### User Registration
+
+ 
+
+#### Scenario of Registration Process
+
+·     User can enter FirstName, Middle Name, Last Name, Email Id, Phone Number, Password.
+
+·     User can click on registration Button.
+
+·     Validation can be done at front end and backend code.
+
+·     If validation successfully done, then user can see registration success and login page link/button.
+
+·     If validation failed, then user can see validation error message on registration page.
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b5c720b7-f82a-4a9f-9dde-939abd447ae0)
+      
+
+ 
+
+### User Login
+
+ 
+
+#### Scenario of Login Process
+
+·     User can enter Username and password, username can be email Id or Phone Number.
+
+·     If user enter valid details, then he can see home page of ecommerce application.
+
+·     If validation failed, user could see login failed error on Login page.
+
+ 
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/704bc7be-0963-4a9e-8fca-e697cbc04598)
+
+
+
+### User searches for products
+
+ 
+
+#### Scenario: Successful product search
+
+·     Given that the customer is on the home page
+
+·     When the customer enters a valid search query for a product
+
+·     Then the system should display a list of products that match the search query
+
+·     And the displayed products should include the product name, image, price, and relevant details
+
+·     And the displayed products should be relevant and accurately match the search query
+
+ 
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/3a2722a3-f89d-4c66-8133-84eb607254a0)
+
+
+
+#### Scenario: No matching results for the search query
+
+·     Given that the customer is on the home page
+
+·     When the customer enters a search query for a product that does not exist in the system
+
+·     Then the system should display a message indicating that no matching products were found
+
+·     And the system should not display any products in the search results
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/1b48c069-7770-4a24-bf77-3f4effb0ab9b)
+
+
+#### Scenario: Handling empty search query
+
+·     Given that the customer is on the home page
+
+·     When the customer performs a search without entering any search query
+
+·     Then the system should display a message indicating that a search query is required
+
+·     And the system should not perform a search or display any products in the search results
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/611e10f8-b89a-4c52-bf79-4179c884f0b8)
+
+
+####  Scenario: Search results pagination
+
+·     Given that the customer is on the home page
+
+·     When the customer performs a search that returns a large number of results
+
+·     Then the system should display the search results in a paginated manner, showing a limited number of products per page
+
+·     And the system should provide navigation options for the customer to view additional pages of search results
+
+ 
+
+#### Scenario: Search performance and response time
+
+·     Given that the customer is on the home page
+
+·     When the customer performs a search
+
+·     Then the system should provide search results within an acceptable response time, typically within a few seconds
+
+·     And the system should be able to handle concurrent searches and maintain performance under expected load
+
+ 
+
+### User adds products to the cart
+
+ 
+
+#### Scenario: Successful addition of a product to the cart
+
+·     Given that the customer is viewing a product
+
+·     When the customer selects the option to add the product to the cart
+
+·     Then the system should update the cart to include the selected product
+
+·     And the system should display a confirmation message indicating that the product has been successfully added to the cart
+
+#### Scenario: Incrementing the quantity of an existing product in the cart
+
+·     Given that the customer has already added a product to the cart
+
+·     When the customer adds the same product again
+
+·     Then the system should increment the quantity of the product in the cart
+
+·     And the system should update the total price in the cart to reflect the increased quantity
+
+#### Scenario: Displaying the updated cart summary
+
+·     Given that the customer has added one or more products to the cart
+
+·     When the customer views the cart summary
+
+·     Then the system should display the list of products in the cart
+
+·     And the system should show the individual prices, quantities, and total price for each product in the cart
+
+·     And the system should provide options for the customer to modify or remove items from the cart
+
+#### Scenario: Handling out-of-stock products
+
+·     Given that the customer tries to add a product that is currently out of stock
+
+·     When the customer attempts to add the out-of-stock product to the cart
+
+·     Then the system should display a message indicating that the product is currently unavailable
+
+·     And the system should not add the out-of-stock product to the cart
+
+#### Scenario: Persisting the cart across sessions
+
+·     Given that the customer has added products to the cart
+
+·     When the customer logs out and logs back in
+
+·     Then the system should retain the products in the cart and restore the cart contents for the logged-in customer
+
+ 
+
+
+
+·     
+
+### User checks out and places an order
+
+#### Scenario: Successful checkout and order placement
+
+·     Given that the customer has products in the cart
+
+·     When the customer proceeds to the checkout process
+
+·     Then the system should prompt the customer to provide the required delivery address
+
+·     And the system should provide options for the customer to select a preferred payment method
+
+·     And the system should validate and process the payment successfully
+
+·     And the system should generate a unique order ID for the placed order
+
+·     And the system should display a confirmation message indicating that the order has been successfully placed
+
+#### Scenario: Handling empty cart during checkout
+
+·     Given that the customer has not added any products to the cart
+
+·     When the customer proceeds to the checkout process
+
+·     Then the system should display a message indicating that the cart is empty
+
+·     And the system should not allow the customer to proceed with the checkout process
+
+#### Scenario: Required delivery address validation
+
+·     Given that the customer is on the checkout page
+
+·     When the customer provides the required delivery address information
+
+·     Then the system should validate the provided address for completeness and correctness
+
+·     And the system should display error messages or warnings if the address is incomplete or invalid
+
+·     And the system should not allow the customer to proceed with the checkout process until a valid address is provided
+
+#### Scenario: Payment processing and confirmation
+
+·     Given that the customer has provided the required delivery address
+
+·     When the customer selects a payment method and initiates the payment process
+
+·     Then the system should securely process the payment transaction
+
+·     And the system should display a payment confirmation message or receipt to the customer
+
+·     And the system should send a notification to the customer regarding the payment status
+
+#### Scenario: Order confirmation and tracking
+
+·     Given that the customer has successfully placed an order
+
+·     When the order is confirmed by the system
+
+·     Then the system should display the order details, including the order ID, items purchased, total amount, and delivery information
+
+·     And the system should send a confirmation email or notification to the customer with the order details and estimated delivery date
+
+·     And the system should provide a tracking mechanism for the customer to track the status of the placed order
+
+
+
+ 
+
+### User tracks an order
+
+#### Scenario: Successful order tracking
+
+·     Given that the customer has placed an order and received an order ID or tracking number
+
+·     When the customer navigates to the order tracking page
+
+·     Then the system should provide a field for the customer to enter the order ID or tracking number
+
+·     And the system should display the current status and location of the order
+
+·     And the system should provide estimated delivery dates or timeframes for each stage of the delivery process
+
+·     And the system should update the tracking information in real-time or with a reasonable delay
+
+#### Scenario: Invalid or non-existent order tracking
+
+·     Given that the customer enters an invalid or non-existent order ID or tracking number
+
+·     When the customer submits the tracking request
+
+·     Then the system should display a message indicating that the entered order ID or tracking number is not valid or does not exist
+
+·     And the system should not display any tracking information for the invalid order
+
+#### Scenario: Tracking information availability
+
+·     Given that the customer has placed an order recently
+
+·     When the customer tries to track the order immediately after placing it
+
+·     Then the system should display a message indicating that the tracking information is not available yet
+
+·     And the system should provide an estimated timeframe or expected time for the tracking information to become available
+
+#### Scenario: Detailed order status and history
+
+·     Given that the customer is tracking an order
+
+·     When the customer views the order tracking details
+
+·     Then the system should display a comprehensive view of the order status, including the current location, transit history, and expected delivery date
+
+·     And the system should provide any relevant updates or notifications regarding the order, such as delays or changes in the delivery schedule
+
+#### Scenario: Multiple order tracking
+
+·     Given that the customer has placed multiple orders
+
+·     When the customer wants to track multiple orders simultaneously
+
+·     Then the system should provide a mechanism for the customer to enter multiple order IDs or tracking numbers at once
+
+·     And the system should display the tracking information for all the entered orders in a consolidated view
+
+ 
+
+
+
+### User views order history
+
+#### Scenario: Successful access to order history
+
+·     Given that the customer is logged into their account
+
+·     When the customer navigates to the order history page
+
+·     Then the system should display a list of previous orders placed by the customer
+
+·     And the system should show the order details, including the order ID, items purchased, total amount, and delivery information
+
+·     And the system should display the orders in reverse chronological order, with the most recent order appearing at the top
+
+#### Scenario: Filtering or sorting order history
+
+·     Given that the customer is viewing the order history page
+
+·     When the customer wants to filter or sort the order history
+
+·     Then the system should provide options for the customer to filter or sort the orders based on criteria such as date, status, or product category
+
+·     And the system should update the order history view accordingly, displaying only the orders that match the selected filter or sorting criteria
+
+#### Scenario: Order details and receipts
+
+·     Given that the customer is viewing the order history
+
+·     When the customer selects a specific order from the order history list
+
+·     Then the system should display the detailed order information, including the order ID, items purchased, individual prices, quantities, and total amount
+
+·     And the system should provide the option to view or download an order receipt or invoice in a printable format
+
+#### Scenario: Order status and tracking from history
+
+·     Given that the customer is viewing the order history
+
+·     When the customer selects a specific order from the order history list
+
+·     Then the system should display the current status of the order, such as "Processing," "Shipped," or "Delivered"
+
+·     And the system should provide a link or button for the customer to track the order or access the order tracking details directly from the order history page
+
+#### Scenario: Pagination and navigation of order history
+
+·     Given that the customer has a large number of orders in their order history
+
+·     When the customer views the order history page
+
+·     Then the system should display the orders in a paginated manner, showing a limited number of orders per page
+
+·     And the system should provide navigation options for the customer to move between pages of the order history
+
+ 
+
+### User views invoice
+
+#### Scenario: Successful access to invoice
+
+·     Given that the customer is logged into their account
+
+·     When the customer navigates to the invoice page or selects a specific order
+
+·     Then the system should display the invoice for the selected order
+
+·     And the system should show the invoice details, including the order ID, items purchased, individual prices, quantities, and total amount
+
+·     And the system should include relevant information such as customer details, billing address, payment method, and any applicable taxes or discounts
+
+#### Scenario: Printable and downloadable invoice
+
+·     Given that the customer is viewing the invoice
+
+·     When the customer wants to print or download the invoice
+
+·     Then the system should provide a printable or downloadable version of the invoice in a suitable format (such as PDF or HTML)
+
+·     And the system should ensure that the printable or downloadable invoice accurately represents the information displayed on the screen
+
+#### Scenario: Invoice layout and formatting
+
+·     Given that the customer is viewing the invoice
+
+·     When the customer reviews the invoice layout and formatting
+
+·     Then the system should present the invoice in a clear and organized manner
+
+·     And the system should use appropriate formatting, such as headings, subtotals, and a total amount, to facilitate easy comprehension of the invoice details
+
+#### Scenario: Handling invoice errors or discrepancies
+
+·     Given that the customer notices errors or discrepancies in the displayed invoice
+
+·     When the customer raises a concern or contacts customer support
+
+·     Then the system should promptly investigate and resolve the issue
+
+·     And the system should provide clear communication to the customer regarding the resolution and any necessary adjustments to the invoice
+
+#### Scenario: Accessing historical invoices
+
+·     Given that the customer wants to view previous invoices
+
+·     When the customer navigates to the invoice history or order history page
+
+·     Then the system should provide a list of previous orders with links to access the respective invoices
+
+·     And the system should ensure that the invoices remain accessible even after a certain period of time or order completion
+
+
+
+ 
+
+### Administrator manages products
+
+#### Scenario: Adding a new product
+
+·     Given that the Administrator is logged into their account
+
+·     When the Administrator navigates to the product management section
+
+·     Then the system should provide a form or interface to add a new product
+
+·     And the system should validate and require essential information such as product name, description, price, and category
+
+·     And the system should save the product details and assign a unique identifier or SKU
+
+#### Scenario: Updating an existing product
+
+·     Given that the Administrator is logged into their account
+
+·     When the Administrator selects a specific product from the product list
+
+·     Then the system should display the product details for editing
+
+·     And the system should allow the Administrator to modify the product information, such as name, description, price, and category
+
+·     And the system should save the updated product details and reflect the changes in the product list
+
+#### Scenario: Removing a product
+
+·     Given that the Administrator is logged into their account
+
+·     When the Administrator selects a specific product from the product list
+
+·     Then the system should provide an option or button to remove the product
+
+·     And the system should prompt the Administrator for confirmation before permanently deleting the product
+
+·     And the system should remove the product from the product list and any associated data or references
+
+#### Scenario: Managing product categories
+
+·     Given that the Administrator is logged into their account
+
+·     When the Administrator navigates to the product category management section
+
+·     Then the system should display the list of existing categories
+
+·     And the system should allow the Administrator to add new categories or modify existing ones
+
+·     And the system should ensure that categories are properly organized and associated with the relevant products
+
+#### Scenario: Handling product images
+
+·     Given that the Administrator is managing a product
+
+·     When the Administrator uploads or modifies product images
+
+·     Then the system should accept image files of specified formats and sizes
+
+·     And the system should store and associate the images with the respective product
+
+·     And the system should display the product images appropriately in the product listing and details pages
+
+
+
+### Administrator manages orders
+
+#### Scenario: Viewing order list
+
+·     Given that the Administrator is logged into their account
+
+·     When the Administrator navigates to the order management section
+
+·     Then the system should display a list of orders, including relevant details such as order ID, customer name, order status, and total amount
+
+·     And the system should provide pagination or scrolling functionality if the order list is extensive
+
+#### Scenario: Filtering and sorting orders
+
+·     Given that the Administrator is viewing the order list
+
+·     When the Administrator wants to filter or sort the orders
+
+·     Then the system should provide options to filter or sort the orders based on criteria such as order status, customer name, order date, or total amount
+
+·     And the system should update the order list according to the selected filter or sorting criteria
+
+#### Scenario: Updating order status
+
+·     Given that the Administrator is viewing an order in the order list
+
+·     When the Administrator wants to update the order status
+
+·     Then the system should provide options to change the order status, such as marking it as "Processing," "Shipped," or "Delivered"
+
+·     And the system should save and reflect the updated order status in the order list and order details
+
+#### Scenario: Viewing order details
+
+·     Given that the Administrator is viewing an order in the order list
+
+·     When the Administrator selects a specific order
+
+·     Then the system should display the order details, including customer information, product details, quantities, prices, and any applied discounts or taxes
+
+·     And the system should provide a summary of the order, including the total amount and payment status
+
+#### Scenario: Managing order fulfillment
+
+·     Given that the Administrator is viewing an order in the order list
+
+·     When the Administrator wants to manage order fulfillment, such as assigning it to a delivery person or updating delivery details
+
+·     Then the system should provide options or fields to input and save the relevant information
+
+·     And the system should ensure that the updated fulfillment details are reflected in the order details and any relevant notifications or updates are sent to the customer
+
+#### Scenario: Generating order reports
+
+·     Given that the Administrator wants to generate order reports
+
+·     When the Administrator navigates to the reporting section or selects a specific reporting option
+
+·     Then the system should generate and display relevant order reports, such as sales reports, order volume reports, or revenue reports
+
+·     And the system should provide options to filter the reports based on criteria such as date range, product category, or customer segment
+
+  
+
+### Supplier manages inventory
+
+#### Scenario: Viewing inventory
+
+·     Given that the Supplier is logged into their account
+
+·     When the Supplier navigates to the inventory management section
+
+·     Then the system should display a list of available inventory items
+
+·     And the system should show relevant details for each item, such as product name, SKU, quantity in stock, and location
+
+#### Scenario: Updating inventory quantities
+
+·     Given that the Supplier is viewing the inventory     
+
+·     When the Supplier wants to update the quantity of a specific item
+
+·     Then the system should provide options to adjust the quantity, such as adding or subtracting units
+
+·     And the system should validate and update the inventory quantity accordingly
+
+·     And the system should reflect the updated quantity in the inventory list and any associated reports or notifications
+
+#### Scenario: Adding new inventory items
+
+·     Given that the Supplier is logged into their account
+
+·     When the Supplier wants to add a new item to the inventory
+
+·     Then the system should provide a form or interface to enter the details of the new item, such as product name, SKU, quantity, location, and other relevant attributes
+
+·     And the system should validate the entered information and save the new item in the inventory
+
+#### Scenario: Removing inventory items
+
+·     Given that the Supplier is viewing the inventory
+
+·     When the Supplier wants to remove a specific item from the inventory
+
+·     Then the system should provide options to delete the item
+
+·     And the system should prompt the Supplier for confirmation before permanently removing the item from the inventory
+
+·     And the system should update the inventory list and any associated records or reports to reflect the removal of the item
+
+#### Scenario: Tracking inventory movement
+
+·     Given that the Supplier wants to track the movement of inventory items
+
+·     When the Supplier selects a specific item from the inventory list
+
+·     Then the system should display a history of inventory transactions for that item, including details such as date, quantity, and location changes
+
+·     And the system should provide options to filter and search the inventory movement history based on criteria such as date range or location
+
+#### Scenario: Managing low stock or out-of-stock items
+
+·     Given that the Supplier is viewing the inventory
+
+·     When the Supplier wants to identify low stock or out-of-stock items
+
+·     Then the system should highlight or provide filters to easily identify items with low quantities or no stock
+
+·     And the system should allow the Supplier to set alerts or notifications for low stock levels to proactively manage inventory replenishment
+
+ 
+
+### Supplier manages product catalogue
+
+#### Scenario: Viewing the product catalogue
+
+·     Given that the Supplier is logged into their account
+
+·     When the Supplier navigates to the product catalogue management section
+
+·     Then the system should display a list of products in the catalogue
+
+·     And the system should show relevant details for each product, such as product name, SKU, description, and pricing information
+
+#### Scenario: Adding a new product to the catalogue
+
+·     Given that the Supplier is logged into their account
+
+·     When the Supplier wants to add a new product to the catalogue
+
+·     Then the system should provide a form or interface to enter the details of the new product, such as product name, SKU, description, category, pricing, and any other relevant attributes
+
+·     And the system should validate the entered information and save the new product in the catalogue
+
+#### Scenario: Updating an existing product in the catalogue
+
+·     Given that the Supplier is viewing the product catalogue
+
+·     When the Supplier selects a specific product from the catalogue
+
+·     Then the system should display the product details for editing
+
+·     And the system should allow the Supplier to modify the product information, such as name, description, category, pricing, or any other relevant attributes
+
+·     And the system should save the updated product details and reflect the changes in the product catalogue
+
+#### Scenario: Removing a product from the catalogue
+
+·     Given that the Supplier is viewing the product catalogue
+
+·     When the Supplier wants to remove a specific product from the catalogue
+
+·     Then the system should provide options to delete the product
+
+·     And the system should prompt the Supplier for confirmation before permanently removing the product from the catalogue
+
+·     And the system should update the product catalogue and any associated records or reports to reflect the removal of the product
+
+#### Scenario: Managing product images in the catalogue
+
+·     Given that the Supplier is managing a product in the catalogue
+
+·     When the Supplier wants to upload or modify product images
+
+·     Then the system should accept image files of specified formats and sizes
+
+·     And the system should store and associate the images with the respective product in the catalogue
+
+·     And the system should display the product images appropriately in the catalogue listing and details pages
+
+#### Scenario: Managing product categories
+
+·     Given that the Supplier is managing a product in the catalogue
+
+·     When the Supplier wants to assign or update the product category
+
+·     Then the system should provide options to select the appropriate category from a predefined list
+
+·     And the system should ensure that the product is properly categorized in the catalogue for easy navigation and search
+
