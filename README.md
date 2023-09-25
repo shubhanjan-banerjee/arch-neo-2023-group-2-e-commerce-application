@@ -1347,9 +1347,7 @@ classDiagram
     EcommerceSystem --|> PerformanceAndScalability
     EcommerceSystem --|> SecurityAndPrivacy
     EcommerceSystem --|> Localization
-
 ```
-
 ## Sequence Diagram
 
 ```mermaid
@@ -1387,10 +1385,7 @@ sequenceDiagram
     EcommercePlatform ->> SupplyChainSystem: Track order status
     SupplyChainSystem -->> EcommercePlatform: Order status tracked
     EcommercePlatform ->> User: Display order status
-
-
 ```
-
 
 ### Deployment View (Development)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
