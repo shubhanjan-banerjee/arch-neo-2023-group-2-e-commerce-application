@@ -2079,3 +2079,22 @@ sequenceDiagram
 
 ·     And the system should ensure that the product is properly categorized in the catalogue for easy navigation and search
 
+```mermaid
+graph TD
+  subgraph Supplier Process
+    Start((Start))
+    Supplier[Supplier Manages Product]
+    UpdateCategory[Supplier Wants to Assign/Update Category]
+    SystemOptions[System Provides Category Options]
+    SelectCategory[Supplier Selects Category]
+    EnsureCategorization[System Ensures Proper Categorization]
+    End((End))
+  end
+
+  Start --> Supplier
+  Supplier --> UpdateCategory
+  UpdateCategory --> SystemOptions
+  SystemOptions --> SelectCategory
+  SelectCategory --> EnsureCategorization
+  EnsureCategorization --> End
+```
