@@ -3,7 +3,7 @@
 
 *ARCHITECTURALLY SIGNIFICANT REQUIREMENT DOCUMENT*
 
-[TOC]
+{:toc}
 
 ## Introduction
 
