@@ -39,7 +39,7 @@
   </div>
   <div class="my-4" *ngIf="showCategory">
     <hr />
-    <div *ngIf="categories$ | async as categories" class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div *ngIf="categories$ | async as categories" class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8">
       <ng-container *ngIf="categories.length">
         <div *ngFor="let category of categories"
           class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
