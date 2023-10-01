@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from 'src/app/models/product.interface';
 import { ProductService } from 'src/app/services/product.service';
-import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Observable, map, of } from 'rxjs';
+import { WishService } from 'src/app/services/wish.service';
 
 @Component({
   selector: 'ecommerce-products',
@@ -19,23 +19,16 @@ export class ProductsComponent {
 
   constructor(
     private productSrvc: ProductService,
-    private cartSrvc: CartService,
+    private wishSrvc: WishService,
     private localStorageSrvc: LocalStorageService
   ) { }
 
   ngOnInit(): void {
     this.products$ = this.productSrvc.getProducts().pipe(map(rsp => rsp.content));
   }
+
   getPath(fileName: string) {
     return '/assets/img/' + fileName;
-  }
-
-  addToCart(product: Product): void {
-    this.cartSrvc.addToCart(product);
-  }
-
-  removeFromCart(product: Product): void {
-    this.cartSrvc.removeFromCart(product);
   }
 
   saveToLocalStorage(): void {
@@ -54,6 +47,20 @@ export class ProductsComponent {
 
   clearLocalStorage(): void {
     this.localStorageSrvc.clear();
+  }
+
+  isInWishList(id: number) {
+    return this.wishSrvc.isItemPresentsInWish(id);
+  }
+
+  addToWishList(e: Event, item: Product) {
+    e.stopPropagation();
+    this.wishSrvc.addToWish(item);
+  }
+
+  removeFromWishList(e: Event, item: Product) {
+    e.stopPropagation();
+    this.wishSrvc.removeFromWish(item);
   }
 
 }

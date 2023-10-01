@@ -14,6 +14,7 @@ import { UserService } from './services/user.service';
 import { HeaderNavbarComponent } from './components/header-navbar/header-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoryService } from './services/category.service';
+import { WishService } from './services/wish.service';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { CategoryService } from './services/category.service';
     RestService,
     AuthService,
     CartService,
+    WishService,
     ImageUploadService,
     LocalStorageService,
     LoggerService,

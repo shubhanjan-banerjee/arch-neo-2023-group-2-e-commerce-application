@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product.interface';
+import { WishService } from 'src/app/services/wish.service';
 
 @Component({
   selector: 'ecommerce-product-details',
@@ -23,40 +23,55 @@ export class ProductDetailsComponent implements OnInit {
     private actRouteSrvc: ActivatedRoute,
     private productSrvc: ProductService,
     private cartSrvc: CartService,
-    private localStorageSrvc: LocalStorageService
-  ) {
+    private wishSrvc: WishService
+  ) { }
 
-  }
   ngOnInit(): void {
     const id = this.actRouteSrvc.snapshot.params['id'];
     if (id) {
       this.product$ = this.productSrvc.getProductById(id);
     }
   }
+
   getPath(fileName: string) {
     return '/assets/img/' + fileName;
   }
-  slideImage() { }
-  isWishReq() { }
-  unWishReq() { }
-  increaseQuantity(n: number) {
-    if (this.quantity < n)
+
+  increaseQuantity(item: Product) {
+    if (this.quantity < item.stockQuantity && !this.cartSrvc.isItemPresentsInCart(item.productId))
       this.quantity += 1;
   }
-  decreaseQuantity(n: number) {
-    if (this.quantity > 1)
+
+  decreaseQuantity(item: Product) {
+    if (this.quantity > 1 && !this.cartSrvc.isItemPresentsInCart(item.productId))
       this.quantity -= 1;
   }
-  addToCart(id: number) {
 
+  addToCart(item: Product) {
+    this.cartSrvc.addToCart(item, this.quantity);
   }
-  isOutOfStock(n: number): boolean {
-    return n < this.quantity;
+
+  isOutOfStock(item: Product): boolean {
+    return item.stockQuantity < this.quantity;
   }
-  isStockFull(n: number): boolean {
-    return n <= this.quantity;
+
+  isStockFull(item: Product): boolean {
+    return item.stockQuantity <= this.quantity;
   }
+
   isInCart(id: number): boolean {
-    return false;
+    return this.cartSrvc.isItemPresentsInCart(id);
+  }
+
+  isInWishList(id: number) {
+    return this.wishSrvc.isItemPresentsInWish(id);
+  }
+
+  addToWishList(item: Product) {
+    this.wishSrvc.addToWish(item);
+  }
+
+  removeFromWishList(item: Product) {
+    this.wishSrvc.removeFromWish(item);
   }
 }

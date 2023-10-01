@@ -29,10 +29,10 @@ export const appRoutes: Route[] = [
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'contactus', component: ContactUsComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'wish-list', component: WishListComponent },
-  { path: 'error-page', component: ErrorPageComponent },
+  { path: 'wishlist', component: WishListComponent },
+  { path: 'errorpage', component: ErrorPageComponent },
   {
     path: 'admin',
     component: AdminHomeComponent,
@@ -45,5 +45,5 @@ export const appRoutes: Route[] = [
       { path: '**', redirectTo: 'dashboard' }
     ]
   },
-  { path: '**', redirectTo: 'error-page' }
+  { path: '**', redirectTo: 'errorpage' }
 ];

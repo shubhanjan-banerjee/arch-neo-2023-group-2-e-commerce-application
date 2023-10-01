@@ -24,35 +24,35 @@
           <span class="text-xl tracking-wider text-yellow-700">
             {{product.price|currency}}
           </span>
-          <span>
-            <svg (click)="isWishReq()" class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700" fill="none"
-              stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-            <svg (click)="unWishReq()" class="hidden w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700"
-              fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                clipRule="evenodd" />
-            </svg>
-          </span>
+          <svg *ngIf="!isInWishList(product.productId)" (click)="addToWishList(product)"
+            class="w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+          <svg *ngIf="isInWishList(product.productId)" (click)="removeFromWishList(product)"
+            class="w-5 h-5 md:w-6 md:h-6 cursor-pointer text-yellow-700" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd"
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clipRule="evenodd" />
+          </svg>
         </div>
       </div>
       <div class="my-4 md:my-6 text-gray-600">
         {{product.description}}
       </div>
       <div class="my-4 md:my-6">
-        <span *ngIf="isStockFull(product.stockQuantity)" class="text-xs text-red-500">
+        <span *ngIf="isStockFull(product)" class="text-xs text-red-500">
           Stock limited
         </span>
-        <div [ngClass]="{'border-red-500': isStockFull(product.stockQuantity)}"
+        <div [ngClass]="{'border-red-500': isStockFull(product)}"
           class="flex justify-between items-center px-4 py-2 border ">
-          <div [ngClass]="{'text-red-500': isStockFull(product.stockQuantity)}">
+          <div [ngClass]="{'text-red-500': isStockFull(product)}">
             Quantity
           </div>
           <div class="flex items-center space-x-2">
-            <span (click)="decreaseQuantity(product.stockQuantity)">
+            <span (click)="decreaseQuantity(product)">
               <svg class="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd"
@@ -61,7 +61,7 @@
               </svg>
             </span>
             <span class="font-semibold">{{ quantity }}</span>
-            <span (click)="increaseQuantity(product.stockQuantity)">
+            <span (click)="increaseQuantity(product)">
               <svg class="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd"
@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div (click)="addToCart(product.productId)" style="background: #303031"
+      <div *ngIf="!isInCart(product.productId)" (click)="addToCart(product)" style="background: #303031"
         class="px-4 py-2 text-white text-center cursor-pointer uppercase">
         Add to cart
       </div>
@@ -80,7 +80,7 @@
           uppercase opacity-75">
         In cart
       </div>
-      <div *ngIf="isOutOfStock(product.stockQuantity)" style="background: #303031" disabled="true"
+      <div *ngIf="isOutOfStock(product)" style="background: #303031" disabled="true"
         class="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center uppercase">
         Out of stock
       </div>
