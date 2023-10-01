@@ -10,8 +10,8 @@ export class ProductService {
 
   constructor(private rest: RestService) { }
 
-  getProducts(): Observable<ResponseModel<Product>> {
-    return this.rest.get<ResponseModel<Product>>(this.apiUrl);
+  getProducts(req: any): Observable<ResponseModel<Product>> {
+    return this.rest.get<ResponseModel<Product>>(this.apiUrl, req);
   }
 
   getProductById(productId: string): Observable<Product> {
