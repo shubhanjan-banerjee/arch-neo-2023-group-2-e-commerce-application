@@ -4,11 +4,15 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "PRODUCTS")
 @Schema(description = "All details about the product. ")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
 
     @Id
@@ -36,12 +40,13 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "stock_quantity")
-    private String stockQuantity;
+    private int stockQuantity;
 
     @Column(name = "image_url")
     private String imageUrl;
 
     @Column(name = "sku")
+    @JsonIgnore
     private int sku;
 
     @Column(name = "weight")
@@ -69,9 +74,11 @@ public class Product {
     private String additionalAttributes;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public int getProductId() {
@@ -130,11 +137,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getStockQuantity() {
+	public int getStockQuantity() {
 		return stockQuantity;
 	}
 
-	public void setStockQuantity(String stockQuantity) {
+	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
 

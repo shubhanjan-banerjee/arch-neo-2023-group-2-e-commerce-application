@@ -3,8 +3,12 @@ package com.archneo.ecommerce.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "DELIVERIES")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Delivery {
 
     @Id
@@ -31,9 +35,11 @@ public class Delivery {
     private String deliveryNotes;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private LocalDateTime createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private LocalDateTime modifiedAt;
 
 	public int getDeliveryId() {

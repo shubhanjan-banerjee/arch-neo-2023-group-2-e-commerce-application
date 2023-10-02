@@ -57,7 +57,7 @@ CREATE TABLE `PRODUCTS` (
   `brand` varchar(255),
   `discount` varchar(255),
   `price` decimal,
-  `stock_quantity` varchar(255),
+  `stock_quantity` int,
   `image_url` varchar(255),
   `sku` int COMMENT 'Stock Keeping Unit, A unique identifier used for inventory management.',
   `weight` varchar(255),

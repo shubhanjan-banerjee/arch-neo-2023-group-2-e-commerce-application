@@ -1,41 +1,122 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from 'src/app/models/product.interface';
 import { ProductService } from 'src/app/services/product.service';
-import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Observable, map, of } from 'rxjs';
+import { Observable, Subscription, debounce, debounceTime, interval, map, of, scan, tap } from 'rxjs';
+import { WishService } from 'src/app/services/wish.service';
+import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 
 @Component({
   selector: 'ecommerce-products',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PaginationComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]> = of([]);
 
+  pageSize: number = 12;
+  pageNo: number = 1;
+  totalElements: number = 0;
+  totalPages: number = 0;
+  numberOfElements: number = 10;
+  isEmpty: boolean = false;
+  isFirst: boolean = true;
+  isLast: boolean = false;
+  searchText: string | null = null;
+  priceFilterVal = 0;
+
+  priceFilterSubscription: Subscription | null = null;
+  searchTextSubscription: Subscription | null = null;
+
   constructor(
+    private actRouteSrvc: ActivatedRoute,
     private productSrvc: ProductService,
-    private cartSrvc: CartService,
+    private wishSrvc: WishService,
     private localStorageSrvc: LocalStorageService
   ) { }
 
   ngOnInit(): void {
-    this.products$ = this.productSrvc.getProducts().pipe(map(rsp => rsp.content));
+    const categoryId = this.actRouteSrvc.snapshot.params['id'];
+    if (categoryId) {
+      // TODO
+    }
+    this.loadData();
+    this.priceFilterSubscription = this.productSrvc
+      .getPriceFilterObservable()
+      .pipe(
+        debounceTime(500)
+      ).subscribe(val => {
+        this.priceFilterVal = val;
+        this.loadData();
+      });
+    this.searchTextSubscription = this.productSrvc.getSearchTextObservable().subscribe(val => {
+      this.searchText = val;
+      this.loadData();
+    });
   }
+
+  ngOnDestroy(): void {
+    this.priceFilterSubscription?.unsubscribe();
+    this.searchTextSubscription?.unsubscribe();
+  }
+
+  loadData() {
+    const req = {
+      page: this.pageNo - 1,
+      size: this.pageSize,
+      search: this.searchText,
+      price: this.priceFilterVal
+    };
+    this.products$ = this.productSrvc.getProducts(req).pipe(
+      tap(rsp => {
+        this.totalElements = rsp.totalElements;
+        this.totalPages = rsp.totalPages;
+        this.numberOfElements = rsp.numberOfElements;
+        this.isEmpty = rsp.empty;
+        this.isFirst = rsp.first;
+        this.isLast = rsp.last;
+      }),
+      map(rsp => rsp.content)
+    );
+  }
+
   getPath(fileName: string) {
     return '/assets/img/' + fileName;
   }
 
-  addToCart(product: Product): void {
-    this.cartSrvc.addToCart(product);
-  }
-
-  removeFromCart(product: Product): void {
-    this.cartSrvc.removeFromCart(product);
+  gotoPage(type: string) {
+    switch (type) {
+      case 'FIRST':
+        if (!this.isFirst) {
+          this.pageNo = 1;
+          this.loadData();
+        }
+        break;
+      case 'PREV':
+        if (!this.isFirst) {
+          this.pageNo -= 1;
+          this.loadData();
+        }
+        break;
+      case 'NEXT':
+        if (!this.isLast) {
+          this.pageNo += 1;
+          this.loadData();
+        }
+        break;
+      case 'LAST':
+        if (!this.isLast) {
+          this.pageNo = this.totalPages;
+          this.loadData();
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   saveToLocalStorage(): void {
@@ -54,6 +135,20 @@ export class ProductsComponent {
 
   clearLocalStorage(): void {
     this.localStorageSrvc.clear();
+  }
+
+  isInWishList(id: number) {
+    return this.wishSrvc.isItemPresentsInWish(id);
+  }
+
+  addToWishList(e: Event, item: Product) {
+    e.stopPropagation();
+    this.wishSrvc.addToWish(item);
+  }
+
+  removeFromWishList(e: Event, item: Product) {
+    e.stopPropagation();
+    this.wishSrvc.removeFromWish(item);
   }
 
 }

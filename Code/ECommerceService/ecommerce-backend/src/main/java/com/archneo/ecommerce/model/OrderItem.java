@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "ORDER_ITEMS")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +34,11 @@ public class OrderItem {
     private BigDecimal totalPrice;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private LocalDateTime createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private LocalDateTime modifiedAt;
 
 	public int getOrderItemId() {

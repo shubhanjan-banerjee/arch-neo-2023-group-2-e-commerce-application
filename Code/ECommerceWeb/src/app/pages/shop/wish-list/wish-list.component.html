@@ -1,24 +1,39 @@
-<div class="container mx-auto px-4 py-8">
-  <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-
-  <div class="grid grid-cols-2 gap-4">
-    <div class="bg-white p-4 rounded-lg shadow-md">
-      <img src="product1.jpg" alt="Product 1" class="w-full h-40 object-cover rounded-md mb-2">
-      <h3 class="text-lg font-bold">Product 1</h3>
-      <p class="text-gray-600">$99.99</p>
-      <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 mt-4 rounded-md">Remove</button>
+<section class="mx-5 p-10">
+  <div *ngIf="wishItems.length > 0; else emptyWish">
+    <h2 class="relative text-2xl mb-2">
+      Your Wish List
+      <span
+        class="absolute top-0 ml-2 mt-1 bg-yellow-700 rounded px-1 text-white text-xs hover:text-gray-200 font-semibold">
+        {{ wishItems.length }}
+      </span>
+    </h2>
+    <div class="flex flex-col">
+      <div class="flex flex-row justify-between mt-5" *ngFor="let item of wishItems">
+        <div class="flex flex-row">
+          <img [routerLink]="['/product/'+item.productId]" [src]="getPath(item.imageUrl)" alt="{{ item.productName }}"
+            class="h-20 object-contain mr-4 cursor-pointer" />
+          <div>
+            <h3 class="text-lg font-bold mb-1">{{ item.productName }}</h3>
+            <p class="text-gray-500 mb-1">{{ item.description }}</p>
+            <p class="text-gray-500">Unit Price: {{ item.price | currency }}</p>
+          </div>
+        </div>
+        <div class="flex flex-row">
+          <button (click)="removeFromWish(item)" class="bg-transparent border-transparent">
+            X
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div class="bg-white p-4 rounded-lg shadow-md">
-      <img src="product2.jpg" alt="Product 2" class="w-full h-40 object-cover rounded-md mb-2">
-      <h3 class="text-lg font-bold">Product 2</h3>
-      <p class="text-gray-600">$49.99</p>
-      <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 mt-4 rounded-md">Remove</button>
+    <div class="text-right">
+      <div class="mt-10">
+        <button (click)="clearWish()" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">
+          Clear Wish List
+        </button>
+      </div>
     </div>
   </div>
-
-  <div class="mt-8">
-    <p class="text-gray-600">Total items: 2</p>
-    <p class="text-gray-600">Total price: $149.98</p>
-  </div>
-</div>
+  <ng-template #emptyWish>
+    <p class="text-xl text-center">Your wish list is empty.</p>
+  </ng-template>
+</section>

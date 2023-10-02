@@ -3,8 +3,12 @@ package com.archneo.ecommerce.model;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "SUPPLIERS")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +47,12 @@ public class Supplier {
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonIgnore
     private Date createdAt;
 
     @Column(name = "modified_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonIgnore
     private Date modifiedAt;
 
     @Column(name = "payment_terms")
@@ -65,6 +71,7 @@ public class Supplier {
     private boolean isActive;
 
     @Column(name = "rating")
+    @JsonIgnore
     private float rating;
 
     @Column(name = "supplier_type")
