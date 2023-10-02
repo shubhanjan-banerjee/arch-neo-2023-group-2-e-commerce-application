@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product } from 'src/app/models/product.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, Subscription, debounce, debounceTime, interval, map, of, scan, tap } from 'rxjs';
 import { WishService } from 'src/app/services/wish.service';
 import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 
@@ -15,7 +15,7 @@ import { PaginationComponent } from 'src/app/components/pagination/pagination.co
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]> = of([]);
 
   pageSize: number = 12;
@@ -27,21 +27,49 @@ export class ProductsComponent {
   isFirst: boolean = true;
   isLast: boolean = false;
   searchText: string | null = null;
+  priceFilterVal = 0;
+
+  priceFilterSubscription: Subscription | null = null;
+  searchTextSubscription: Subscription | null = null;
 
   constructor(
+    private actRouteSrvc: ActivatedRoute,
     private productSrvc: ProductService,
     private wishSrvc: WishService,
     private localStorageSrvc: LocalStorageService
   ) { }
 
   ngOnInit(): void {
+    const categoryId = this.actRouteSrvc.snapshot.params['id'];
+    if (categoryId) {
+      // TODO
+    }
     this.loadData();
+    this.priceFilterSubscription = this.productSrvc
+      .getPriceFilterObservable()
+      .pipe(
+        debounceTime(500)
+      ).subscribe(val => {
+        this.priceFilterVal = val;
+        this.loadData();
+      });
+    this.searchTextSubscription = this.productSrvc.getSearchTextObservable().subscribe(val => {
+      this.searchText = val;
+      this.loadData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.priceFilterSubscription?.unsubscribe();
+    this.searchTextSubscription?.unsubscribe();
   }
 
   loadData() {
     const req = {
       page: this.pageNo - 1,
-      size: this.pageSize
+      size: this.pageSize,
+      search: this.searchText,
+      price: this.priceFilterVal
     };
     this.products$ = this.productSrvc.getProducts(req).pipe(
       tap(rsp => {
