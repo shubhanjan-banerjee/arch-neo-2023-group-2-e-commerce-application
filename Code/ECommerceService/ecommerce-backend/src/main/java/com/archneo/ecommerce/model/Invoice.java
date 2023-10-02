@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "INVOICES")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Invoice {
 
     @Id
@@ -33,9 +37,11 @@ public class Invoice {
     private Date paymentDate;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Date createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Date modifiedAt;
 
 	public int getInvoiceId() {

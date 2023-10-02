@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "INVENTORY")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Inventory {
 
     @Id
@@ -61,9 +65,11 @@ public class Inventory {
     private boolean isActive;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public int getInventoryId() {

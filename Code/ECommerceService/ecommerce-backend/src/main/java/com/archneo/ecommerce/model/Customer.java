@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "CUSTOMERS")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Customer {
 
     @Id
@@ -19,6 +21,7 @@ public class Customer {
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name")
@@ -44,9 +47,11 @@ public class Customer {
     private Set<Authority> authorities;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public Integer getCustomerId() {
