@@ -39,7 +39,7 @@
   </div>
   <div class="my-4" *ngIf="showCategory">
     <hr />
-    <div *ngIf="categories$ | async as categories" class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div *ngIf="categories$ | async as categories" class="py-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8">
       <ng-container *ngIf="categories.length">
         <div *ngFor="let category of categories"
           class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
@@ -57,14 +57,15 @@
       <div class="flex justify-between items-center">
         <div class="flex flex-col space-y-2  w-2/3 lg:w-2/4">
           <label htmlFor="points" class="text-sm">
-            Price (between 0 and 10$):
-            <span class="font-semibold text-yellow-700">5.00$</span>
+            Price (between $0 and $500):
+            <span class="font-semibold text-yellow-700">{{priceFilter|currency}}</span>
           </label>
-          <input value="5" class="slider" type="range" id="points" min="0" max="1000" step="10" />
+          <input [(ngModel)]="priceFilter" (ngModelChange)="onPriceChange()" class="slider" type="range" id="points"
+            min="0" max="500" step="10" />
         </div>
         <div class="cursor-pointer">
-          <svg class="w-8 h-8 text-gray-700 hover:bg-gray-200 rounded-full p-1" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg (click)="clearPriceFilter()" class="w-8 h-8 text-gray-700 hover:bg-gray-200 rounded-full p-1" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
@@ -72,10 +73,11 @@
     </div>
   </div>
   <div class=" my-4 flex items-center justify-between" *ngIf="showSearch">
-    <input class="px-4 text-xl py-4 focus:outline-none w-full" type="text" placeholder="Search products..." value="">
+    <input class="px-4 text-xl py-4 focus:outline-none w-full" type="text" placeholder="Search products..."
+      [(ngModel)]="searchValue" (keyup)="onSearchKeyUp($event)">
     <div class="cursor-pointer">
-      <svg class="w-8 h-8 text-gray-700 hover:bg-gray-200 rounded-full p-1" fill="none" stroke="currentColor"
-        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg (click)="toggleSearch()" class="w-8 h-8 text-gray-700 hover:bg-gray-200 rounded-full p-1" fill="none"
+        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </div>

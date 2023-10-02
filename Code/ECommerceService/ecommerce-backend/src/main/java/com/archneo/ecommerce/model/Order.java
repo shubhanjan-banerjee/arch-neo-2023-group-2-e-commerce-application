@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "ORDERS")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order {
 
     @Id
@@ -46,9 +50,11 @@ public class Order {
     private BigDecimal total;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public int getOrderId() {

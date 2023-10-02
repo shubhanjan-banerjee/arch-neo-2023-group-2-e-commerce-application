@@ -3,8 +3,12 @@ package com.archneo.ecommerce.model;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "CATEGORIES")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,27 +32,35 @@ public class Category {
     private boolean isActive;
 
     @Column(name = "display_order")
+    @JsonIgnore
     private int displayOrder;
 
     @Column(name = "slug")
+    @JsonIgnore
     private String slug;
 
     @Column(name = "meta_title")
+    @JsonIgnore
     private String metaTitle;
 
     @Column(name = "meta_description")
+    @JsonIgnore
     private String metaDescription;
 
     @Column(name = "meta_keywords")
+    @JsonIgnore
     private String metaKeywords;
 
     @Column(name = "custom_attributes")
+    @JsonIgnore
     private String customAttributes;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public int getCategoryId() {

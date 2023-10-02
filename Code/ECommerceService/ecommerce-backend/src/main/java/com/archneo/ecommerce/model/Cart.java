@@ -3,10 +3,14 @@ package com.archneo.ecommerce.model;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CARTS")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cart {
 
     @Id
@@ -29,9 +33,11 @@ public class Cart {
     private int quantity;
 
     @Column(name = "created_at")
+    @JsonIgnore
     private Timestamp createdAt;
 
     @Column(name = "modified_at")
+    @JsonIgnore
     private Timestamp modifiedAt;
 
 	public int getCartId() {

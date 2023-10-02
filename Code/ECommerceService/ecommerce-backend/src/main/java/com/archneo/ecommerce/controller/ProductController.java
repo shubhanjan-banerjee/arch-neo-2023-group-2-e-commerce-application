@@ -27,12 +27,13 @@ public class ProductController {
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             @RequestParam(name = "sortField", defaultValue = "productName", required = false) String sortField,
             @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder,
-            @RequestParam(name = "search", required = false) String searchKeyword
+            @RequestParam(name = "search", required = false) String searchKeyword,
+            @RequestParam(name = "price", required = false) Integer priceValue
     ) {
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortField);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Product> products = productService.getAllProducts(searchKeyword, pageable);
+        Page<Product> products = productService.getAllProducts(searchKeyword,priceValue, pageable);
 
         return ResponseEntity.ok(products);
     }

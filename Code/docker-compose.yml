@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  ecommerce-backend:
+    container_name: ecommerce-backend
+    user: root
+    restart: always
+    build:
+      context: ecommerce-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"    

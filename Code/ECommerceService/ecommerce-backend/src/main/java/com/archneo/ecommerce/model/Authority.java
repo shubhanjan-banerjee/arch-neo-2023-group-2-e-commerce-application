@@ -2,9 +2,11 @@ package com.archneo.ecommerce.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "authorities")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Authority {
 
     @Id

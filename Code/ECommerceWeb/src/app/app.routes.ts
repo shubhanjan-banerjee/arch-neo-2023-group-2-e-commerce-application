@@ -16,11 +16,13 @@ import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-c
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/shop/product-details/product-details.component';
+import { ProductsComponent } from './pages/shop/products/products.component';
 
 export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'category/:id', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'orders', component: OrdersComponent },
@@ -28,10 +30,10 @@ export const appRoutes: Route[] = [
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'contactus', component: ContactUsComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'wish-list', component: WishListComponent },
-  { path: 'error-page', component: ErrorPageComponent },
+  { path: 'wishlist', component: WishListComponent },
+  { path: 'errorpage', component: ErrorPageComponent },
   {
     path: 'admin',
     component: AdminHomeComponent,
@@ -44,5 +46,5 @@ export const appRoutes: Route[] = [
       { path: '**', redirectTo: 'dashboard' }
     ]
   },
-  { path: '**', redirectTo: 'error-page' }
+  { path: '**', redirectTo: 'errorpage' }
 ];

@@ -3,8 +3,12 @@ package com.archneo.ecommerce.model;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "TRACKING")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Tracking {
 
     @Id
@@ -17,10 +21,12 @@ public class Tracking {
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonIgnore
     private Date createdAt;
 
     @Column(name = "modified_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonIgnore
     private Date modifiedAt;
 
     
