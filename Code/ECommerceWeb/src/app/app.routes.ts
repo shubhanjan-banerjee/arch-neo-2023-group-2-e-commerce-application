@@ -21,8 +21,8 @@ import { ProductsComponent } from './pages/shop/products/products.component';
 export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'product/category/:id', component: ProductsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
-  { path: 'category/:id', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'orders', component: OrdersComponent },

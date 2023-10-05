@@ -7,6 +7,7 @@ import { ResponseModel } from '../models/response.model';
 @Injectable()
 export class ProductService {
   private apiUrl = 'products'; // Replace with your actual API URL
+  private categoryApiUrl = 'categories';
   private _searchText: Subject<string | null> = new Subject<string | null>();
   private _priceFilter: Subject<number> = new Subject<number>();
 
@@ -29,13 +30,21 @@ export class ProductService {
   }
 
   getProducts(req: any): Observable<ResponseModel<Product>> {
+    let path: string;
     if (req.search === null) {
       delete req['search'];
     }
     if (req.price === 0) {
       delete req['price'];
     }
-    return this.rest.get<ResponseModel<Product>>(this.apiUrl, req);
+    if (req.categoryId === null || req.categoryId === undefined) {
+      delete req['categoryId'];
+      path = this.apiUrl;
+    } else {
+      path = `${this.categoryApiUrl}/${req.categoryId}/${this.apiUrl}`;
+      delete req['categoryId'];
+    }
+    return this.rest.get<ResponseModel<Product>>(path, req);
   }
 
   getProductById(productId: string): Observable<Product> {

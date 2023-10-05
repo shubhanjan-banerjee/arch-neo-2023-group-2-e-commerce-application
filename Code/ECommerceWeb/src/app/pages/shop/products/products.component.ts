@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isLast: boolean = false;
   searchText: string | null = null;
   priceFilterVal = 0;
+  categoryId: number | null = null;
 
   priceFilterSubscription: Subscription | null = null;
   searchTextSubscription: Subscription | null = null;
@@ -40,11 +41,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const categoryId = this.actRouteSrvc.snapshot.params['id'];
-    if (categoryId) {
-      // TODO
+    this.categoryId = this.actRouteSrvc.snapshot.params['id'];
+    if (this.categoryId) {
+      console.log('categoryId', this.categoryId);
     }
-    this.loadData();
+    this.loadData(this.categoryId);
     this.priceFilterSubscription = this.productSrvc
       .getPriceFilterObservable()
       .pipe(
@@ -64,13 +65,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.searchTextSubscription?.unsubscribe();
   }
 
-  loadData() {
-    const req = {
+  loadData(categoryId: number | null = null) {
+    const req: any = {
       page: this.pageNo - 1,
       size: this.pageSize,
       search: this.searchText,
       price: this.priceFilterVal
     };
+    if (categoryId) {
+      req.categoryId = categoryId;
+    }
     this.products$ = this.productSrvc.getProducts(req).pipe(
       tap(rsp => {
         this.totalElements = rsp.totalElements;
