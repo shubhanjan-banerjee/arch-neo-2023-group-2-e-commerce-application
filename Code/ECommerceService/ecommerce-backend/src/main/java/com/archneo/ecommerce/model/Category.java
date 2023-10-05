@@ -2,9 +2,12 @@ package com.archneo.ecommerce.model;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -63,7 +66,11 @@ public class Category {
     @JsonIgnore
     private Timestamp modifiedAt;
 
-	public int getCategoryId() {
+    @OneToMany(mappedBy="category")
+    @JsonManagedReference
+    private List<Product> products;
+    
+    public int getCategoryId() {
 		return categoryId;
 	}
 
@@ -174,14 +181,23 @@ public class Category {
 	public void setModifiedAt(Timestamp modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
+	
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 
 	public Category() {
 		super();
 	}
-
+	
 	public Category(int categoryId, String categoryName, Category parentCategory, String description, String imageUrl,
 			boolean isActive, int displayOrder, String slug, String metaTitle, String metaDescription,
-			String metaKeywords, String customAttributes, Timestamp createdAt, Timestamp modifiedAt) {
+			String metaKeywords, String customAttributes, Timestamp createdAt, Timestamp modifiedAt,
+			Set<Product> products) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -197,6 +213,7 @@ public class Category {
 		this.customAttributes = customAttributes;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
+		this.products = products;
 	}
 
     // Constructors, getters, setters, and other methods...

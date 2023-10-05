@@ -1,6 +1,7 @@
 package com.archneo.ecommerce.service.impl;
 
 import com.archneo.ecommerce.model.Category;
+import com.archneo.ecommerce.model.Product;
 import com.archneo.ecommerce.repository.CategoryRepository;
 import com.archneo.ecommerce.service.CategoryService;
 
@@ -23,6 +24,12 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryRepository.findAll(pageable);
         }
     }
+    
+    @Override
+    public Page<Product> getAllProductsByCategoryId(Integer categoryId, Pageable pageable) {
+    	return categoryRepository.findProductsByCategoryId(categoryId, pageable);
+    }
+
 
     @Override
     public Category getCategoryById(int categoryId) {
