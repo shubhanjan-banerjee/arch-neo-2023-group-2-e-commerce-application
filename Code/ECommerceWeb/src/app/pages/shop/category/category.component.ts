@@ -58,6 +58,12 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  clearSearchFilter() {
+    this.searchValue = null;
+    this.showSearch = false;
+    this.productSrvc.updateSearchText(this.searchValue);
+  }
+
   clearPriceFilter() {
     this.showFilter = false;
     this.priceFilter = 0;
