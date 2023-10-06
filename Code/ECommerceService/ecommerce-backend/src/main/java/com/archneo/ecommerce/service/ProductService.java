@@ -14,4 +14,7 @@ public interface ProductService {
     Product updateProduct(int productId, Product product);
 
     void deleteProduct(int productId);
+
+    Page<Product> getAllProductsByCategoryId(Integer categoryId, Pageable pageable);
+
 }

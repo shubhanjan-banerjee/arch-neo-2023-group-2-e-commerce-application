@@ -2,7 +2,6 @@ package com.archneo.ecommerce.model;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -68,7 +67,7 @@ public class Category {
 
     @OneToMany(mappedBy="category")
     @JsonManagedReference
-    private List<Product> products;
+    private Set<Product> products;
     
     public int getCategoryId() {
 		return categoryId;
