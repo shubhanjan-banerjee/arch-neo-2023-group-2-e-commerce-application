@@ -9,8 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface CategoryService {
     Page<Category> getAllCategories(String searchKeyword, Pageable pageable);
     
-    Page<Product> getAllProductsByCategoryId(Integer categoryId, Pageable pageable);
-
     Category getCategoryById(int categoryId);
 
     Category createCategory(Category category);

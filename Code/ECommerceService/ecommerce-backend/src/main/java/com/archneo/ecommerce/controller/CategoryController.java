@@ -44,17 +44,6 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/{categoryId}/products")
-    public ResponseEntity<Page<Product>> getProductsByCategoryId(
-    		@PathVariable int categoryId,
-    		@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size
-		) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> products = categoryService.getAllProductsByCategoryId(categoryId, pageable);
-        return ResponseEntity.ok(products);       
-    }
-
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         Category createdCategory = categoryService.createCategory(category);

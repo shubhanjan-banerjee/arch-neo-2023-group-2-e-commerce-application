@@ -24,12 +24,6 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryRepository.findAll(pageable);
         }
     }
-    
-    @Override
-    public Page<Product> getAllProductsByCategoryId(Integer categoryId, Pageable pageable) {
-    	return categoryRepository.findProductsByCategoryId(categoryId, pageable);
-    }
-
 
     @Override
     public Category getCategoryById(int categoryId) {
