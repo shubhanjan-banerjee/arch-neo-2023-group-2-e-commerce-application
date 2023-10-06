@@ -1,5 +1,6 @@
 package com.archneo.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class Customer {
     private String username;
 
     @Column(name = "password")
-    @JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "first_name")
