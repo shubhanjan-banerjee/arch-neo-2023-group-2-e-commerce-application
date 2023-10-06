@@ -65,10 +65,7 @@ public class Category {
     @JsonIgnore
     private Timestamp modifiedAt;
 
-    @OneToMany(mappedBy="category")
-    @JsonManagedReference
-    private Set<Product> products;
-    
+
     public int getCategoryId() {
 		return categoryId;
 	}
@@ -180,14 +177,7 @@ public class Category {
 	public void setModifiedAt(Timestamp modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-	
-	public Set<Product> getProducts() {
-		return products;
-	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
 
 	public Category() {
 		super();
@@ -195,8 +185,7 @@ public class Category {
 	
 	public Category(int categoryId, String categoryName, Category parentCategory, String description, String imageUrl,
 			boolean isActive, int displayOrder, String slug, String metaTitle, String metaDescription,
-			String metaKeywords, String customAttributes, Timestamp createdAt, Timestamp modifiedAt,
-			Set<Product> products) {
+			String metaKeywords, String customAttributes, Timestamp createdAt, Timestamp modifiedAt) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -212,7 +201,7 @@ public class Category {
 		this.customAttributes = customAttributes;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
-		this.products = products;
+
 	}
 
     // Constructors, getters, setters, and other methods...
