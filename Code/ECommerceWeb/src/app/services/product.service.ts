@@ -7,7 +7,7 @@ import { ResponseModel } from '../models/response.model';
 @Injectable()
 export class ProductService {
   private apiUrl = 'products'; // Replace with your actual API URL
-  private categoryApiUrl = 'categories';
+  private categoryApiUrl = 'products';
   private _searchText: Subject<string | null> = new Subject<string | null>();
   private _priceFilter: Subject<number> = new Subject<number>();
 

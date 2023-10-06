@@ -1,6 +1,7 @@
 package com.archneo.ecommerce.controller;
 
 import com.archneo.ecommerce.model.Category;
+import com.archneo.ecommerce.model.Product;
 import com.archneo.ecommerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
