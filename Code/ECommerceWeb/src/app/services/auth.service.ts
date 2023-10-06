@@ -16,7 +16,7 @@ export class AuthService {
     return this.http.post<User>(`${this.apiUrl}/register`, user);
   }
 
-  login(credentials: { email: string, password: string }): Observable<User> {
+  login(credentials: User): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(user => this.currentUserSubject.next(user))

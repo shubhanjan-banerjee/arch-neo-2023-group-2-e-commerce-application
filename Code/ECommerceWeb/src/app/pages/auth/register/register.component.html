@@ -1,49 +1,94 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md w-full space-y-8">
-    <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Create an Account
-      </h2>
-    </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="username" class="sr-only">Username</label>
-          <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900
-            rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Username">
-        </div>
-        <div>
-          <label for="email" class="sr-only">Email address</label>
-          <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900
-            rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email address">
-        </div>
-        <div>
-          <label for="password" class="sr-only">Password</label>
-          <input id="password" name="password" type="password" autocomplete="new-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900
-            rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Password">
-        </div>
+<section class="fixed z-40 inset-0 my-8 md:my-20 flex items-start justify-center overflow-auto">
+  <div class="w-11/12 md:w-3/5 lg:w-2/4 relative space-y-4 bg-white p-6 md:px-12 md:py-6">
+    <h1 class="text-center text-2xl mb-6">Register</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off" class="flex flex-col space-y-4">
+      <div class="flex flex-col">
+        <label for="Email" class="form-label">Email<span class="text-sm text-red-600 ml-1">*</span></label>
+        <input type="text" class="form-control" formControlName="email"
+          [ngClass]="{'border-red-500':registerFormControl.email.errors}" class="px-4 py-2 border" />
+        <span class="text-red-600" *ngIf="
+                      (registerFormControl.email.touched || submitted) &&
+                      registerFormControl.email.errors?.['required']">
+          Email is required
+        </span>
+        <span class="text-red-600" *ngIf="
+                      registerFormControl.email.touched &&
+                      registerFormControl.email.errors?.['email']">
+          Enter a valid email address
+        </span>
       </div>
-      <div>
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent
-          text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none
-          focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M3 10a9 9 0 116 8.07V15h2v-2.93A9 9 0 0117.07 10H15V8h2.07A9 9 0 0113 1.93V4h-2V1.93A9 9 0
-                003.93 8H6v2H3.93A9 9 0 003 10z" clip-rule="evenodd" />
-            </svg>
-          </span>
-          Register
-        </button>
+      <div class="flex flex-col">
+        <label for="Name" class="form-label">Full Name<span class="text-sm text-red-600 ml-1">*</span></label>
+        <input type="text" class="form-control" formControlName="fullname"
+          [ngClass]="{'border-red-500':registerFormControl.fullname.errors}" class="px-4 py-2 border" />
+        <span class="text-red-600" *ngIf="
+                            (registerFormControl.fullname.touched || submitted) &&
+                            registerFormControl.fullname.errors?.['required']">
+          Name is required
+        </span>
       </div>
-      <div class="mt-4 text-center">
-        <p>Already registered? <a routerLink="/login" class="text-blue-500">Sign In</a>
-        </p>
+      <div class="flex flex-col">
+        <label for="User Name" class="form-label">User Name<span class="text-sm text-red-600 ml-1">*</span></label>
+        <input type="text" class="form-control" formControlName="username"
+          [ngClass]="{'border-red-500':registerFormControl.username.errors}" class="px-4 py-2 border" />
+        <span class="text-red-600" *ngIf="
+                      (registerFormControl.username.touched || submitted) &&
+                      registerFormControl.username.errors?.['required']">
+          User Name is required
+        </span>
+        <span class="text-red-600" *ngIf="
+                      registerFormControl.username.touched &&
+                      registerFormControl.username.errors?.['userNameNotAvailable']
+                    ">
+          User Name is not available
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <label for="Password" class="form-label">Password<span class="text-sm text-red-600 ml-1">*</span></label>
+        <input type="password" class="form-control" formControlName="password"
+          [ngClass]="{'border-red-500':registerFormControl.password.errors}" class="px-4 py-2 border" />
+        <span class="text-red-600" *ngIf="
+                      (registerFormControl.password.touched || submitted) &&
+                      registerFormControl.password.errors?.['required']">
+          Password is required
+        </span>
+        <span class="text-red-600" *ngIf="
+                      registerFormControl.password.touched &&
+                      registerFormControl.password.errors?.['invalidPassword']">
+          Password should have minimum 8 characters, at least 1 uppercase
+          letter, 1 lowercase letter and 1 number
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <label for="Confirm Password" class="form-label">Confirm Password<span
+            class="text-sm text-red-600 ml-1">*</span></label>
+        <input type="password" class="form-control" formControlName="confirmPassword"
+          [ngClass]="{'border-red-500':registerFormControl.confirmPassword.errors}" class="px-4 py-2 border" />
+        <span class="text-red-600" *ngIf="
+                      (registerFormControl.confirmPassword.touched || submitted) &&
+                      registerFormControl.confirmPassword.errors?.['required']">
+          Confirm Password is required
+        </span>
+        <span class="text-red-600" *ngIf="
+                      registerFormControl.confirmPassword.touched &&
+                      registerFormControl.confirmPassword.errors?.['passwordMismatch']">
+          Passwords doesnot match
+        </span>
+      </div>
+      <button type="submit" style="background: #303031"
+        class="font-medium px-4 py-2 text-white text-center cursor-pointer">Register
+      </button>
+      <button type="reset" (click)="resetForm()" style="color: #303031; border: 1px solid #303031"
+        class="px-4 py-2 font-medium text-center cursor-pointer">
+        Reset
+      </button>
+      <hr />
+      <div routerLink="/login" style="color: #303031; border: 1px solid #303031"
+        class="px-4 py-2 font-medium text-center cursor-pointer">
+        Login
       </div>
     </form>
+
   </div>
-</div>
+</section>

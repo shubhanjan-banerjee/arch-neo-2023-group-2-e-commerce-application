@@ -1,7 +1,8 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  // Add any other properties specific to your user
+export class User {
+  public id!: number;
+  public name!: string;
+  public email!: string;
+  public username!: string;
+  public password!: string;
+  public confirmPassword!: string;
 }
