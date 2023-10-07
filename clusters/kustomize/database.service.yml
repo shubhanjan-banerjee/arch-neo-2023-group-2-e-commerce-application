@@ -11,5 +11,5 @@ spec:
     name: ecommerce-database-pod
     app: ecommerce-app
   ports:
-  - targetPort: 5432
-    port: 5432
+  - targetPort: 3306
+    port: 3306
