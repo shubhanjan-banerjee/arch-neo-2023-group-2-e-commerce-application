@@ -1,0 +1,4 @@
+data/*
+!data/world/
+!data/world_x/
+!data/sakila/
