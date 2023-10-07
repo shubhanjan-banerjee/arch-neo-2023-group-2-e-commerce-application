@@ -15,6 +15,8 @@ import { HeaderNavbarComponent } from './components/header-navbar/header-navbar.
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoryService } from './services/category.service';
 import { WishService } from './services/wish.service';
+import { UserNameValidationService } from './services/user-name-validation.service';
+import { CustomvalidationService } from './services/customvalidation.service';
 
 @Component({
   standalone: true,
@@ -31,7 +33,9 @@ import { WishService } from './services/wish.service';
     OrderService,
     ProductService,
     CategoryService,
-    UserService
+    UserService,
+    UserNameValidationService,
+    CustomvalidationService
   ],
   selector: 'ecommerce-root',
   templateUrl: './app.component.html',
