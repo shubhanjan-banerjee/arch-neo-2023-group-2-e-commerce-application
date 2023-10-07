@@ -12,5 +12,5 @@ COPY --from=BUILD_CONTAINER ${APP_DIR}/target/ecommerce-backend-0.0.1-SNAPSHOT.j
 EXPOSE 8080
 RUN ls
 RUN pwd
-ENTRYPOINT ["java","-jar", "./target/ecommerce-backend-0.0.1-SNAPSHOT.jar"]
+# ENTRYPOINT ["java","-jar", "./target/ecommerce-backend-0.0.1-SNAPSHOT.jar"]
 
