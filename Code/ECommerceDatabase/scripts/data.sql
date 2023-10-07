@@ -1,3 +1,5 @@
+USE ECOMMERCE;
+
 -- Insert Data
 
 INSERT INTO `customers` 
