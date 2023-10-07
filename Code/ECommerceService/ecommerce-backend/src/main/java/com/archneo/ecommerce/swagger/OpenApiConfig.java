@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
 	@Bean
-	OpenAPI awesomeAPI() {
+	OpenAPI ecommerceAPI() {
 		return new OpenAPI()
 				.info(new Info().title("ECommerce API").description("ECommerce API Description").version("1.0")
 						.license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/LICENSE-2.0")))
