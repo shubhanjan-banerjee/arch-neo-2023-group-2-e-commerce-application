@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-service-service
+  namespace: default
+  labels:
+    name: ecommerce-service-service
+    app: ecommerce-app
+spec:
+  selector:
+    name: ecommerce-service-pod
+    app: ecommerce-app
+  ports:
+  - targetPort: 8080
+    port: 8080

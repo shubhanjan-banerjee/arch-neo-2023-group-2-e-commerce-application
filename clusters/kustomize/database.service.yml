@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-database
+  namespace: default
+  labels:
+    name: ecommerce-database-service
+    app: ecommerce-app
+spec:
+  selector:
+    name: ecommerce-database-pod
+    app: ecommerce-app
+  ports:
+  - targetPort: 5432
+    port: 5432
