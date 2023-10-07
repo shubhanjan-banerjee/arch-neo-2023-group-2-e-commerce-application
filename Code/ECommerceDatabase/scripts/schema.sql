@@ -1,3 +1,10 @@
+CREATE DATABASE ECOMMERCE;
+CREATE USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT ALL ON ECOMMERCE.* TO 'admin'@'%';
+/* Make sure the privileges are installed */
+FLUSH PRIVILEGES;
+USE ECOMMERCE;
+
 -- Create Tables
 CREATE TABLE `CUSTOMERS` (
   `customer_id` int PRIMARY KEY AUTO_INCREMENT,

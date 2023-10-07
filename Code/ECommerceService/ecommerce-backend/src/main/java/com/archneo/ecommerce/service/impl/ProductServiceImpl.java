@@ -50,4 +50,9 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int productId) {
         productRepository.deleteById(productId);
     }
+
+    @Override
+    public Page<Product> getAllProductsByCategoryId(Integer categoryId, Pageable pageable) {
+        return productRepository.findByCategoryCategoryId(categoryId, pageable);
+    }
 }

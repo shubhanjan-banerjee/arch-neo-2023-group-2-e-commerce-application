@@ -1,6 +1,7 @@
 package com.archneo.ecommerce.service.impl;
 
 import com.archneo.ecommerce.model.Category;
+import com.archneo.ecommerce.model.Product;
 import com.archneo.ecommerce.repository.CategoryRepository;
 import com.archneo.ecommerce.service.CategoryService;
 

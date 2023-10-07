@@ -2,23 +2,25 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { User } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'ecommerce-login',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email = '';
-  password = '';
+  errorMessage: string | null = null;
+
+  protected userModel = new User();
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  login(): void {
-    const credentials = { email: this.email, password: this.password };
-    this.authService.login(credentials).subscribe(
+  protected onSubmit() {
+    this.authService.login(this.userModel).subscribe(
       () => {
         // this.router.navigateByUrl('/products');
       },
@@ -26,6 +28,11 @@ export class LoginComponent {
         // Handle login error, display error message, etc.
       }
     );
+    console.table(this.userModel);
+  }
+
+  protected resetForm(): void {
+    this.userModel = new User();
   }
 
   logout(): void {
