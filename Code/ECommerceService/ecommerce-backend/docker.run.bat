@@ -1,1 +1,1 @@
-docker run --env spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce?useSSL=false --name ecommerce-service-container -d -p 8080:8080/tcp shubhanjanweb/ecommerce-service-image:latest
+docker run --env spring.datasource.url=jdbc:mysql://ecommerce-database-container:3306/ecommerce?useSSL=false --net ecommerce-network --name ecommerce-service-container -d -p 8080:8080/tcp shubhanjanweb/ecommerce-service-image:latest

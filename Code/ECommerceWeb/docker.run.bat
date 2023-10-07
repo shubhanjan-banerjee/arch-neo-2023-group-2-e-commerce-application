@@ -1,0 +1,1 @@
+docker run --env API_BASE_URL=http://localhost:8080 --net ecommerce-network --name ecommerce-web-container -d -p 4200:80/tcp shubhanjanweb/ecommerce-web-image:latest

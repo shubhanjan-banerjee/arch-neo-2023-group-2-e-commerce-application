@@ -1,6 +1,6 @@
 FROM mysql:8
 ENV MYSQL_ROOT_PASSWORD=root-password
-ENV MYSQL_DATABASE=ECOMMERCE
+ENV MYSQL_DATABASE=ecommerce
 ENV MYSQL_USER=admin
 ENV MYSQL_PASSWORD=password
 COPY docker-healthcheck /usr/local/bin/

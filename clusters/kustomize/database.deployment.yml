@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-database-deployment
+  namespace: default
+  labels:
+    name: ecommerce-database-deployment
+    app: ecommerce-app
+spec:
+  selector:
+    matchLabels:
+      name: ecommerce-database-pod
+  replicas: 1
+  template:
+    metadata:
+      name: ecommerce-database-pod
+      labels:
+        name: ecommerce-database-pod
+        app: ecommerce-app
+    spec:
+      containers:
+      - name: ecommerce-database-container
+        image: shubhanjanweb/ecommerce-database-image:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root

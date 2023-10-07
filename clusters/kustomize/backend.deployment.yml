@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-service-deployment
+  namespace: default
+  labels:
+    name: ecommerce-service-deployment
+    app: ecommerce-app
+spec:
+  selector:
+    matchLabels:
+      name: ecommerce-service-pod
+  replicas: 1
+  template:
+    metadata:
+      name: ecommerce-service-pod
+      labels:
+        name: ecommerce-service-pod
+        app: ecommerce-app
+    spec:
+      containers:
+      - name: ecommerce-service-container
+        image: shubhanjanweb/ecommerce-service-image:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.datasource.url
+          value: jdbc:mysql://ecommerce-database:3306/ecommerce?useSSL=false

@@ -1,1 +1,1 @@
-docker run --env MYSQL_ROOT_PASSWORD=root-password --name ecommerce-database-container -d -p 3306:3306/tcp shubhanjanweb/ecommerce-database-image:latest
+docker run --env MYSQL_ROOT_PASSWORD=root-password --net ecommerce-network --name ecommerce-database-container -d -p 3306:3306/tcp shubhanjanweb/ecommerce-database-image:latest
