@@ -7,14 +7,18 @@
 # More details at https://github.com/eslint/eslint
 # and https://eslint.org
 
-name: ESLint
-
+name: ESLint for Web
+     
 on:
   push:
     branches: [ "main", "develop", "release-*" ]
+    paths:
+      - "Code/ECommerceWeb/**"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
+    paths:
+      - "Code/ECommerceWeb/**"
   schedule:
     - cron: '37 18 * * 3'
 
