@@ -2,19 +2,19 @@ name: Database Build CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - "Code/ECommerceDatabase/**"
+      - "Code/ECommerceService/ecommerce-database/**"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - "Code/ECommerceDatabase/**"
+      - "Code/ECommerceService/ecommerce-database/**"
 
 jobs:
   docker-build:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./Code/ECommerceDatabase
+      working-directory: ./Code/ECommerceService/ecommerce-database
       image-name: ecommerce-database-image
     defaults:
       run:
