@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./Code/ECommerceService/ecommerce-backend
-      image-name: ecommerce-service-image
+      image-name: ecommerce-backend-image
     defaults:
       run:
         working-directory: ${{ env.working-directory }}
