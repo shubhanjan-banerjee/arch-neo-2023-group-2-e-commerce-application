@@ -7,10 +7,12 @@ import com.archneo.ecommerce.service.WishListService;
 
 import java.util.List;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class WishListServiceImpl implements WishListService {
 
 	
