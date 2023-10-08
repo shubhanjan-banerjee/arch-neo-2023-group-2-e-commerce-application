@@ -1400,29 +1400,6 @@ sequenceDiagram
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/51ace646-8c87-44e8-9950-c7190c2a2eaf)
 
 
-## Use Case
-
- 
-
-### User Registration
-
- 
-
-#### Scenario of Registration Process
-
-·     User can enter FirstName, Middle Name, Last Name, Email Id, Phone Number, Password.
-
-·     User can click on registration Button.
-
-·     Validation can be done at front end and backend code.
-
-·     If validation successfully done, then user can see registration success and login page link/button.
-
-·     If validation failed, then user can see validation error message on registration page.
-
-![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b5c720b7-f82a-4a9f-9dde-939abd447ae0)
-      
-
 ## Deployment Process
 
 ### Docker Container
@@ -1621,10 +1598,29 @@ sequenceDiagram
 > `sudo service docker stop`
 
 
-
-### User Login
+## Use Case
 
  
+
+### User Registration
+
+ 
+
+#### Scenario of Registration Process
+
+·     User can enter FirstName, Middle Name, Last Name, Email Id, Phone Number, Password.
+
+·     User can click on registration Button.
+
+·     Validation can be done at front end and backend code.
+
+·     If validation successfully done, then user can see registration success and login page link/button.
+
+·     If validation failed, then user can see validation error message on registration page.
+
+![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b5c720b7-f82a-4a9f-9dde-939abd447ae0)
+      
+### User Login
 
 #### Scenario of Login Process
 
