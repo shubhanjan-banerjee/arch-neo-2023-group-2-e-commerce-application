@@ -1,6 +1,7 @@
 package com.archneo.ecommerce.service.impl;
 
 import com.archneo.ecommerce.model.WishList;
+import com.archneo.ecommerce.model.WishListId;
 import com.archneo.ecommerce.repository.WishListRepository;
 import com.archneo.ecommerce.service.WishListService;
 
@@ -48,13 +49,14 @@ public class WishListServiceImpl implements WishListService {
 
 	@Override
 	public void deleteWishList(int customerId, int productId) {
-		//wishListRepository.deleteByCustomerId(int customerId, int productId);
+		wishListRepository.deleteById(new WishListId(customerId, productId));
 	}
 
 	
 	@Override
 	public void deleteAllWishList(int customerId) {
 		// TODO Auto-generated method stub
+        wishListRepository.deleteAllByCustomerId(customerId);
 		
 	}
 }
