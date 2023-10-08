@@ -29,7 +29,7 @@ services:
 
   ecommerce_web:
     build: ./ECommerceWeb
-    container_name: app-web
+    container_name: ecommerce-web-container
     restart: unless-stopped
     ports:
       - 4200:80
