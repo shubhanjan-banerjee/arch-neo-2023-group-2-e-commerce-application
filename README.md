@@ -1801,6 +1801,8 @@ sequenceDiagram
 <!-- TOC --><a name="watching-all-the-cd"></a>
 #### Watching all the CD
 - `flux get kustomizations --watch`
+#### Create a minikube tunnel to access the application through NodePort
+- `minikube service ecommerce-web-service --url`
 
 <!-- TOC --><a name="shutdown-server"></a>
 ### Shutdown Server
