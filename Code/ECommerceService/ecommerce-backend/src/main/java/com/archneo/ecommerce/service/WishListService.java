@@ -2,12 +2,12 @@ package com.archneo.ecommerce.service;
 
 import com.archneo.ecommerce.model.WishList;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.MultiValueMap;
+
+import java.util.List;
 
 public interface WishListService {
-    Page<WishList> getAllWishList(MultiValueMap<String, String> params, Pageable pageable);
+    List<WishList> getAllWishList(Integer customerId, Pageable pageable);
     WishList createWishList(WishList wishList);
     void deleteWishList(int customerId, int productId);
     void deleteAllWishList(int customerId);

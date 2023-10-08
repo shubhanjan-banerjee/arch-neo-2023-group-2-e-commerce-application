@@ -1,5 +1,7 @@
 package com.archneo.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -10,10 +12,13 @@ import java.util.Date;
 public class WishList {
 	@Id
 	@Column(name = "customer_id")
+	@JsonInclude
+	@JsonProperty("customerId")
 	private Integer customerId;
 
 	@Id
 	@Column(name = "product_id")
+	@JsonProperty("productId")
 	private Integer productId;
 
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
