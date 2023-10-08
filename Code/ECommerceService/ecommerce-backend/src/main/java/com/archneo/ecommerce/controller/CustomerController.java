@@ -59,35 +59,6 @@ public class CustomerController {
     public Customer updateCustomer(@PathVariable int customerId, @RequestBody Customer customer) {
         return customerService.updateCustomer(customerId, customer);
     }
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Customer customer) {
-        Customer savedCustomer = null;
-        ResponseEntity response = null;
-        try {
-            String hashPwd = passwordEncoder.encode(customer.getPassword());
-            customer.setPassword(hashPwd);
-            customer.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            //customer.setAuthorities();
-            savedCustomer = customerRepository.save(customer);
-            if (savedCustomer.getCustomerId() > 0) {
-                response = ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body("Given user details are successfully registered");
-            }
-        } catch (Exception ex) {
-            response = ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An exception occured due to " + ex.getMessage());
-        }
-        return response;
-    }
-
-    @RequestMapping("/user")
-    public Customer getUserDetailsAfterLogin(Authentication authentication) {
-        Customer customer = customerRepository.findByEmailId(authentication.getName());
-        return customer;
-
-    }
 
     @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable int customerId) {
