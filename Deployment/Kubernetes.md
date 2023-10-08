@@ -1,4 +1,4 @@
-# Kubernetes in Windows
+## Kubernetes in Windows
 
 ### Installation
 > `brew install kubectl`
@@ -59,14 +59,29 @@
 > `kubectl delete pod ecommerce-backend-pod`
 #### Delete All PODs
 > `kubectl delete pod --all`
-#### Create PODs from YML files
-> `kubectl create -f ./kubernetes-practice/voting-app/voting-app/voting-app.pod.yml`
-> `kubectl create -f ./kubernetes-practice/voting-app/voting-app/voting-app.service.yml`
+### Deployment using YML files
+> `kubectl create -f ./clusters/kustomize/database.deployment.yml`
+> `kubectl create -f ./clusters/kustomize/backend.deployment.yml`
+> `kubectl create -f ./clusters/kustomize/web.deployment.yml`
+> `kubectl create -f ./clusters/kustomize/database.service.yml`
+> `kubectl create -f ./clusters/kustomize/backend.service.yml`
+> `kubectl create -f ./clusters/kustomize/web.service.yml`
+
+#### Get All PODs
 > `kubectl get pods`
 > `kubectl get svc`
-
 > `minikube ip`
+
+
+
+
+
+
+
+
+
 > `ping 192.168.49.2`
+
 > `kubectl describe pod voting-app-pod`
 > `ping 10.244.0.12`
 > `minikube service voting-app-service --url`
