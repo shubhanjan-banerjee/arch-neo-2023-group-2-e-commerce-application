@@ -1555,7 +1555,10 @@ sequenceDiagram
 ### Deployment View (Development)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/061c0e76-64df-44ef-885d-c406e6c0015a)
-![Untitled Diagram drawio](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/9a0ba3c2-fbc5-4eb0-b042-953439e365b8)
+
+### Deploying in minikube
+![Untitled Diagram drawio (1)](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/dbc93921-eec8-4cc3-b470-731a1b34ea3a)
+
 
 <!-- TOC --><a name="deployment-view-production"></a>
 ### Deployment View (Production)
