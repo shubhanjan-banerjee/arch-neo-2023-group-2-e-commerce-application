@@ -24,7 +24,7 @@
 
   <ng-container *ngIf="products$ | async as products">
     <ng-container *ngIf="products.length">
-      <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-10">
+      <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-10">
         <div *ngFor="let product of products" [routerLink]="['/product/'+product.productId]"
           class="relative col-span-1 m-2">
           <img class="w-full object-cover object-center cursor-pointer" [src]="getPath(product.imageUrl)" alt="" />
