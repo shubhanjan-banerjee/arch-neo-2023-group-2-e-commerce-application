@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WishListRepository extends JpaRepository<WishList, WishListId> {
-	Page<WishList> findAll(Specification<WishList> specification, Pageable pageable);
+	List<WishList> findByCustomerId(Integer customerId,Pageable pageable);
 
 	void deleteAllByCustomerId(int customerId);
 
