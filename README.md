@@ -1555,12 +1555,13 @@ sequenceDiagram
 ### Deployment View (Development)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/061c0e76-64df-44ef-885d-c406e6c0015a)
+![Untitled Diagram drawio](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/9a0ba3c2-fbc5-4eb0-b042-953439e365b8)
 
 <!-- TOC --><a name="deployment-view-production"></a>
 ### Deployment View (Production)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/5ecaa56d-b721-469c-bad2-f5d3233e36c0)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/6a7ace29-80be-41df-ab4d-7bb6c2c7d15f)
-![Untitled Diagram drawio](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/9a0ba3c2-fbc5-4eb0-b042-953439e365b8)
+
 
 
 <!-- TOC --><a name="er-diagram"></a>
