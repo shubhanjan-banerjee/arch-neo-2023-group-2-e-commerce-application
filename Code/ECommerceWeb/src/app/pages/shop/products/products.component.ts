@@ -7,6 +7,8 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Observable, Subscription, debounce, debounceTime, interval, map, of, scan, tap } from 'rxjs';
 import { WishService } from 'src/app/services/wish.service';
 import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category.interface';
 
 @Component({
   selector: 'ecommerce-products',
@@ -29,6 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   searchText: string | null = null;
   priceFilterVal = 0;
   categoryId: number | null = null;
+  category: Category | null = null;
 
   priceFilterSubscription: Subscription | null = null;
   searchTextSubscription: Subscription | null = null;
@@ -36,6 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(
     private actRouteSrvc: ActivatedRoute,
     private productSrvc: ProductService,
+    private categorySrvc: CategoryService,
     private wishSrvc: WishService,
     private localStorageSrvc: LocalStorageService
   ) { }
@@ -74,7 +78,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     };
     if (categoryId) {
       req.categoryId = categoryId;
+      this.categorySrvc.getCategoryById(categoryId).subscribe(rsp => {
+        this.category = rsp;
+      });
     }
+
     this.products$ = this.productSrvc.getProducts(req).pipe(
       tap(rsp => {
         this.totalElements = rsp.totalElements;

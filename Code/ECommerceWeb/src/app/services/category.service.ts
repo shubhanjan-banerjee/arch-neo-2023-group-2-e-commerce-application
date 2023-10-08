@@ -14,7 +14,7 @@ export class CategoryService {
     return this.rest.get<ResponseModel<Category>>(this.apiUrl);
   }
 
-  getCategoryById(categoryId: string): Observable<Category> {
+  getCategoryById(categoryId: number): Observable<Category> {
     const url = `${this.apiUrl}/${categoryId}`;
     return this.rest.get<Category>(url);
   }

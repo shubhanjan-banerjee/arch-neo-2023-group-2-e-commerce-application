@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, of, map } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category.interface';
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'ecommerce-category',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
 })
