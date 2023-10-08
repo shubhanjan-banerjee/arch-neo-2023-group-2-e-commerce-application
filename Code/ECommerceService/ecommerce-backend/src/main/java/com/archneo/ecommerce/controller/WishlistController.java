@@ -2,6 +2,7 @@ package com.archneo.ecommerce.controller;
 
 import com.archneo.ecommerce.model.WishList;
 import com.archneo.ecommerce.service.impl.WishListServiceImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 @RestController
+@Transactional
 @RequestMapping("/wishlists")
 public class WishlistController {
 
@@ -45,6 +47,14 @@ public class WishlistController {
     public ResponseEntity<String> deleteWishlist(@RequestParam int customerId, @RequestParam int productId){
         // delete wishlist from DB
         wishlistService.deleteWishList(customerId, productId);
+        return new ResponseEntity<String>("Wishlist deleted successfully!", HttpStatus.OK);
+    }
+
+    // delete all wishlist REST API
+    @DeleteMapping("/deleteAllWishlist")
+    public ResponseEntity<String> deleteAllWishlist(@RequestParam int customerId){
+        // delete wishlist from DB
+        wishlistService.deleteAllWishList(customerId);
         return new ResponseEntity<String>("Wishlist deleted successfully!", HttpStatus.OK);
     }
 }
