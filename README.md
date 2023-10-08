@@ -1496,67 +1496,67 @@ sequenceDiagram
 
 ### Installation on Linux (Ubuntu)
 
-> `sudo apt-get update`
-> `For pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done`
-> `sudo apt-get install ca-certificates curl gnupg`
-> `sudo install -m 0755 -d /etc/apt/keyrings`
-> `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
-> `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
+- `sudo apt-get update`
+- `For pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done`
+- `sudo apt-get install ca-certificates curl gnupg`
+- `sudo install -m 0755 -d /etc/apt/keyrings`
+- `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
+- `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
 
 #### gh installation in linux
 
-> `type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)`
-> `curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \`
-> `&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable`
-> `main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \`
-> `&& sudo apt update \`
-> `&& sudo apt install gh -y`
+- `type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)`
+- `curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \`
+- `&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable`
+- `main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \`
+- `&& sudo apt update \`
+- `&& sudo apt install gh -y`
 
 #### Git Setup
 
-> `git config --global user.name "shubhanjan-banerjee"`
-> `git config --global user.email "shubhanjan.banerjee@cognizant.com"`
-> `ssh-keygen -t rsa -b 4096 -C "shubhanjan.banerjee@cognizant.com"`
-> `ssh git@github.com`
+- `git config --global user.name "shubhanjan-banerjee"`
+- `git config --global user.email "shubhanjan.banerjee@cognizant.com"`
+- `ssh-keygen -t rsa -b 4096 -C "shubhanjan.banerjee@cognizant.com"`
+- `ssh git@github.com`
 
 #### Docker installation
 
-> `echo \`
-> `"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \`
-> `"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \`
-> `sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
-> `sudo apt-get update`
-> `sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
-> `docker login`
+- `echo \`
+- `"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \`
+- `"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \`
+- `sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
+- `sudo apt-get update`
+- `sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
+- `docker login`
 
 #### Install FluxCD
 
-> `curl -s https://fluxcd.io/install.sh | sudo bash`
+- `curl -s https://fluxcd.io/install.sh | sudo bash`
 
 ##### LINUX:
-> `export GITHUB_TOKEN=ghpXXXXXXXXXXXXXXXXXXXXXXXX`
-> `export GITHUB_USER=shubhanjan-banerjee`
+- `export GITHUB_TOKEN=ghpXXXXXXXXXXXXXXXXXXXXXXXX`
+- `export GITHUB_USER=shubhanjan-banerjee`
 
 ##### WINDOWS:
-> `set GITHUB_TOKEN ghpXXXXXXXXXXXXXXXXXXXXXXXX`
-> `set GITHUB_USER shubhanjan-banerjee`
-> `echo $GITHUB_USER`
+- `set GITHUB_TOKEN ghpXXXXXXXXXXXXXXXXXXXXXXXX`
+- `set GITHUB_USER shubhanjan-banerjee`
+- `echo $GITHUB_USER`
 
 ### Run FluxCD
 
-> `sudo service docker start`
-> `sudo minikube start --force`
-> `flux check --pre`
+- `sudo service docker start`
+- `sudo minikube start --force`
+- `flux check --pre`
 
 #### Bootstraping FluxCD
-> `flux bootstrap github \`
-> `--owner=$GITHUB_USER \`
-> `--repository=arch-neo-2023-group-2-e-commerce-application-env \`
-> `--branch=main \`
-> `--read-write-key \`
-> `--personal \`
-> `--path=./clusters/my-cluster \`
-> `--token-auth=true`
+- `flux bootstrap github \`
+- `--owner=$GITHUB_USER \`
+- `--repository=arch-neo-2023-group-2-e-commerce-application-env \`
+- `--branch=main \`
+- `--read-write-key \`
+- `--personal \`
+- `--path=./clusters/my-cluster \`
+- `--token-auth=true`
 
 #### Checkout the Repo
 > `git clone git@github.com:shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application-env.git`
@@ -1565,49 +1565,78 @@ sequenceDiagram
 > `cd arch-neo-2023-group-2-e-commerce-application-env`
 
 #### Link up with the Git Code Repo
-> `flux create source git ecommerce-app \`
-> `--url=https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application \`
-> `--branch=main  \`
-> `--interval=1m \`
-> `--export > ./clusters/my-cluster/ecommerce-app-source.yaml`
+- `flux create source git ecommerce-app \`
+- `--url=https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application \`
+- `--branch=main  \`
+- `--interval=1m \`
+- `--export > ./clusters/my-cluster/ecommerce-app-source.yaml`
 
 #### Setting sheduler to observe the code
-> `flux create kustomization ecommerce-app \`
-> `--target-namespace=default \`
-> `--source=ecommerce-app \`
-> `--path="./clusters/kustomize/" \`
-> `--prune=true \`
-> `--wait=true \`
-> `--interval=30m \`
-> `--retry-interval=2m \`
-> `--health-check-timeout=3m \`
-> `--export > ./clusters/my-cluster/ecommerce-app-kustomization.yaml`
+- `flux create kustomization ecommerce-app \`
+- `--target-namespace=default \`
+- `--source=ecommerce-app \`
+- `--path="./clusters/kustomize/" \`
+- `--prune=true \`
+- `--wait=true \`
+- `--interval=30m \`
+- `--retry-interval=2m \`
+- `--health-check-timeout=3m \`
+- `--export > ./clusters/my-cluster/ecommerce-app-kustomization.yaml`
 
 #### Commit the changes
-> `git add -A && git commit -m "Add podinfo Kustomization"`
-> `git push`
+- `git add -A && git commit -m "Add podinfo Kustomization"`
+- `git push`
 
 #### Reconcile the changes
-> `flux reconcile kustomization ecommerce-app --with-source`
+- `flux reconcile kustomization ecommerce-app --with-source`
 
 #### Watching all the CD
-> `flux get kustomizations --watch`
+- `flux get kustomizations --watch`
 
 ### Shutdown Server
-> `sudo minikube stop`
-> `sudo service docker stop`
- 
+- `sudo minikube stop`
+- `sudo service docker stop`
 
+## Deployment Screenshots
+![01](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/0387f852-878f-46c3-8d50-96c332456920)
+![02](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/4c38b739-2c2a-4802-88c9-d96e02cf868c)
+![03](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/6497c099-6e62-4996-b7d4-0fc8106cef2d)
+![04](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/83a46563-5773-4eaa-b461-d559f3a8e938)
+![05](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/2cf59d27-9080-4bf7-8b62-bac6c99a65d1)
+![06](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/fe6ffa01-4c06-450c-9fe9-a2cfb365d284)
+![07](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cb2cba6e-247b-4c8d-a63d-ec8d310fc604)
+![08](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/477bc31e-91ff-48f0-b042-b722cbeedd8b)
+![09](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/c94901e7-87a1-4a36-b6d8-fb0a49233fca)
+ 
+## UI Application Screenshots
+
+![01](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b6770577-3fbe-43c2-b0f9-d9da7067eeb5)
+![02](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/4a5f9f2b-98f2-4190-9a90-272acaa29336)
+![03](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d8c58fe6-2015-4054-a2ad-d9f2cfd651f1)
+![04](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/97690c4d-a74e-4f93-be27-88a1656cbd59)
+![05](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/0bbc28ae-81de-4045-a707-2eabb1313694)
+![06](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/214a190b-2b24-4639-ab34-3efcdf69fa9d)
+![07](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d43de159-0d9e-4593-bc5a-7ae85d4a43e7)
+![08](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/2afe4253-6f50-4a60-aff8-a8efd0a0ca85)
+![09](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cde5506f-22b9-49ca-a9e9-b2192b68bb28)
+![10](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d2975c69-cea6-45ca-bdd5-ea2432c020e9)
+![11](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/0006c838-bc7e-46e3-9620-9608c321d115)
+![12](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/e4c205f2-4e4d-4d98-bc92-1fc5ff2a9481)
+![13](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/663771f0-8c53-4dde-a077-3a04f9ace527)
+![14](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/76b5c805-5ce2-4bba-92b3-6613a6af29c0)
+![15](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/bb8224e6-29af-4f99-a4e9-1a2aee607954)
+![16](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/be6fcd6d-39a8-46e2-932a-f6a8abeb856c)
+![17](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/c90bad7f-9ea3-4930-92be-b1d32dbd1de3)
+![18](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/631d13d9-1d27-4b8f-900b-fac17f90cac9)
+
+## API Swagger Details
+https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
+
+![A1](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/89416d9a-4d75-4380-9c0b-ecc484bb827e)
 
 
 ## Use Case
-
- 
-
 ### User Registration
-
- 
-
 #### Scenario of Registration Process
 
 ·     User can enter FirstName, Middle Name, Last Name, Email Id, Phone Number, Password.
