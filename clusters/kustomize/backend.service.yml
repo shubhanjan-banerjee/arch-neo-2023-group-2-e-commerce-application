@@ -7,9 +7,11 @@ metadata:
     name: ecommerce-backend-service
     app: ecommerce-app
 spec:
+  type: NodePort
   selector:
     name: ecommerce-backend-pod
     app: ecommerce-app
   ports:
   - targetPort: 8080
     port: 8080
+    nodePort: 30009
