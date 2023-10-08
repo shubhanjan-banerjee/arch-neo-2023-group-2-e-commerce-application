@@ -1818,7 +1818,10 @@ sequenceDiagram
 ![07](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cb2cba6e-247b-4c8d-a63d-ec8d310fc604)
 ![08](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/477bc31e-91ff-48f0-b042-b722cbeedd8b)
 ![09](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/c94901e7-87a1-4a36-b6d8-fb0a49233fca)
- 
+![10](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d0b67a52-256c-4464-982a-9d7f1170c2e0)
+![11](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/50855f63-f681-43f6-bcbe-f82b626b533f)
+![12](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/f25a72c0-f05d-442b-8d40-5809c9b76a7c)
+
 <!-- TOC --><a name="ui-application-screenshots"></a>
 ## UI Application Screenshots
 
