@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ecommerce-service-service
+  name: ecommerce-backend-service
   namespace: default
   labels:
-    name: ecommerce-service-service
+    name: ecommerce-backend-service
     app: ecommerce-app
 spec:
   selector:
-    name: ecommerce-service-pod
+    name: ecommerce-backend-pod
     app: ecommerce-app
   ports:
   - targetPort: 8080

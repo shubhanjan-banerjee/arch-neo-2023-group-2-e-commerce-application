@@ -190,6 +190,14 @@ CREATE TABLE `tracking` (
   `modified_at` timestamp
 );
 
+CREATE TABLE `wish_list` (
+  `customer_id` int NOT NULL,
+  `product_id` int UNIQUE NOT NULL,
+  `created_at` timestamp DEFAULT (now()),
+  `modified_at` timestamp,
+  PRIMARY KEY (`customer_id`, `product_id`)
+);
+
 CREATE TABLE `carts` (
   `cart_id` int PRIMARY KEY AUTO_INCREMENT,
   `customer_id` int NOT NULL,
@@ -245,6 +253,8 @@ ALTER TABLE `carts` add foreign key (`product_id`) references `products` (`produ
 ALTER TABLE `payments` add foreign key (`payment_type_id`) references `payment_types` (`payment_type_id`);
 ALTER TABLE `payments` add foreign key (`customer_id`) references `customers` (`customer_id`);
 ALTER TABLE `payments` add foreign key (`cart_id`) references `carts` (`cart_id`);
+ALTER TABLE `wish_list` ADD FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`);
+ALTER TABLE `wish_list` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 INSERT INTO `customers` 
 (`username`,`password`,`first_name`,`last_name`,`email_id`,`contact_number`,`role`,

@@ -1,1 +1,1 @@
-docker build -t shubhanjanweb/ecommerce-service-image .
+docker build -t shubhanjanweb/ecommerce-backend-image .

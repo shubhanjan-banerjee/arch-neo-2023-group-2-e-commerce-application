@@ -12,9 +12,9 @@ services:
     networks:
       - ecommerce-network
 
-  ecommerce_service:
-    build: ./ECommerceService/ecommerce-backend
-    container_name: ecommerce-service-container
+  ecommerce_backend:
+    build: ./ECommercebackend/ecommerce-backend
+    container_name: ecommerce-backend-container
     restart: unless-stopped
     ports:
       - 8080:8080
@@ -29,16 +29,16 @@ services:
 
   ecommerce_web:
     build: ./ECommerceWeb
-    container_name: app-web
+    container_name: ecommerce-web-container
     restart: unless-stopped
     ports:
       - 4200:80
     environment:
       API_BASE_URL: http://localhost:8080
     depends_on:
-      - ecommerce_service
+      - ecommerce_backend
     links:
-      - ecommerce_service
+      - ecommerce_backend
     networks:
       - ecommerce-network
 
