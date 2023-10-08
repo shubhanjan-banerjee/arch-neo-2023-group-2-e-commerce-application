@@ -1405,24 +1405,24 @@ sequenceDiagram
 ### Docker Container
 
 #### ECommerce Database
-> `docker build -t shubhanjanweb/ecommerce-database-image .`
-> `docker run --env MYSQL_ROOT_PASSWORD=root-password --net ecommerce-network --name ecommerce-database-container -d -p 3306:3306/tcp shubhanjanweb/ecommerce-database-image:latest`
+- `docker build -t shubhanjanweb/ecommerce-database-image .`
+- `docker run --env MYSQL_ROOT_PASSWORD=root-password --net ecommerce-network --name ecommerce-database-container -d -p 3306:3306/tcp shubhanjanweb/ecommerce-database-image:latest`
 #### ECommerce Baskend REST API Service
-> `docker build -t shubhanjanweb/ecommerce-backend-image .`
-> `docker run --env spring.datasource.url=jdbc:mysql://ecommerce-database-container:3306/ecommerce?useSSL=false --net ecommerce-network --name ecommerce-backend-container -d -p 8080:8080/tcp shubhanjanweb/ecommerce-backend-image:latest`
+- `docker build -t shubhanjanweb/ecommerce-backend-image .`
+- `docker run --env spring.datasource.url=jdbc:mysql://ecommerce-database-container:3306/ecommerce?useSSL=false --net ecommerce-network --name ecommerce-backend-container -d -p 8080:8080/tcp shubhanjanweb/ecommerce-backend-image:latest`
 #### ECommerce Web UI in Angular
-> `docker build -t shubhanjanweb/ecommerce-web-image .`
-> `docker run --env API_BASE_URL=http://localhost:8080 --net ecommerce-network --name ecommerce-web-container -d -p 4200:80/tcp shubhanjanweb/ecommerce-web-image:latest`
+- `docker build -t shubhanjanweb/ecommerce-web-image .`
+- `docker run --env API_BASE_URL=http://localhost:8080 --net ecommerce-network --name ecommerce-web-container -d -p 4200:80/tcp shubhanjanweb/ecommerce-web-image:latest`
 
 ### Docker compose
 
-> `docker compose up`
+- `docker compose up`
 
 ## Kubernetes in Windows
 
 ### Installation
-> `brew install kubectl`
-> `brew install minikube`
+- `brew install kubectl`
+- `brew install minikube`
 
 ### Start the minikube
 
@@ -1459,38 +1459,38 @@ sequenceDiagram
 ## Setup ECommerce App
 
 ### Create Containers
-> `kubectl run ecommerce-backend-pod --image shubhanjanweb/ecommerce-backend-image:latest`
-> `kubectl run ecommerce-database-pod --image shubhanjanweb/ecommerce-database-image:latest`
-> `kubectl run ecommerce-web-pod --image shubhanjanweb/ecommerce-web-image:latest`
-> `kubectl get pods`
+- `kubectl run ecommerce-backend-pod --image shubhanjanweb/ecommerce-backend-image:latest`
+- `kubectl run ecommerce-database-pod --image shubhanjanweb/ecommerce-database-image:latest`
+- `kubectl run ecommerce-web-pod --image shubhanjanweb/ecommerce-web-image:latest`
+- `kubectl get pods`
 
 #### Check the Container details
-> `minikube ssh`
-> `docker ps`
-> `exit`
+- `minikube ssh`
+- `docker ps`
+- `exit`
 
 #### Get All PODs
-> `kubectl get pods`
+- `kubectl get pods`
 #### Show POD details
-> `kubectl describe pod ecommerce-backend-pod`
-> `kubectl describe pod ecommerce-database-pod`
-> `kubectl describe pod ecommerce-web-pod`
+- `kubectl describe pod ecommerce-backend-pod`
+- `kubectl describe pod ecommerce-database-pod`
+- `kubectl describe pod ecommerce-web-pod`
 #### Delete POD
-> `kubectl delete pod ecommerce-backend-pod`
+- `kubectl delete pod ecommerce-backend-pod`
 #### Delete All PODs
-> `kubectl delete pod --all`
+- `kubectl delete pod --all`
 ### Deployment using YML files
-> `kubectl create -f ./clusters/kustomize/database.deployment.yml`
-> `kubectl create -f ./clusters/kustomize/backend.deployment.yml`
-> `kubectl create -f ./clusters/kustomize/web.deployment.yml`
-> `kubectl create -f ./clusters/kustomize/database.service.yml`
-> `kubectl create -f ./clusters/kustomize/backend.service.yml`
-> `kubectl create -f ./clusters/kustomize/web.service.yml`
+- `kubectl create -f ./clusters/kustomize/database.deployment.yml`
+- `kubectl create -f ./clusters/kustomize/backend.deployment.yml`
+- `kubectl create -f ./clusters/kustomize/web.deployment.yml`
+- `kubectl create -f ./clusters/kustomize/database.service.yml`
+- `kubectl create -f ./clusters/kustomize/backend.service.yml`
+- `kubectl create -f ./clusters/kustomize/web.service.yml`
 
 #### Get All PODs
-> `kubectl get pods`
-> `kubectl get svc`
-> `minikube ip`
+- `kubectl get pods`
+- `kubectl get svc`
+- `minikube ip`
 
 ## FluxCD Deployment
 
@@ -1596,6 +1596,8 @@ sequenceDiagram
 ### Shutdown Server
 > `sudo minikube stop`
 > `sudo service docker stop`
+ 
+
 
 
 ## Use Case
