@@ -22,6 +22,14 @@ import java.util.Collections;
 @Configuration
 public class ProjectSecurityConfig {
 
+	private static final String[] WHITE_LIST_URL = {
+			"/swagger-resources",
+			"/swagger-resources/**",
+			"/swagger-ui/**",
+			"/swagger-ui.html",
+			"/customers/register"
+	};
+
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
@@ -40,27 +48,19 @@ public class ProjectSecurityConfig {
 						return config;
 					}
 				}))
-				.csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler)
-						.ignoringRequestMatchers("/**")
-//						.ignoringRequestMatchers("/contact", "/register","/swagger-ui/**")
-//						.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-				)
-//				.addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-//				.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-//				.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
-//				.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-//				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-//				.addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
-//				.authorizeHttpRequests((requests) -> requests
-//					.requestMatchers("/**").permitAll()
-//					.requestMatchers("/notices","/register","/swagger-ui/**").permitAll()
-//                  .requestMatchers("/products").hasRole("USER")
-//                  .requestMatchers("/categories").hasAnyRole("USER","ADMIN")
-//                  .requestMatchers("/cart").authenticated()
-//                  .requestMatchers("/payment").hasRole("USER")
-//                  .requestMatchers("/user").authenticated()
-//				)
-//				.formLogin(Customizer.withDefaults())
+				.csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/customers/register")
+						.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+				.addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+				.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+				.addFilterAt(new AuthoritiesLoggingAtFilter(),BasicAuthenticationFilter.class)
+				.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+				.addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+				.authorizeHttpRequests((requests)->requests
+						.requestMatchers(WHITE_LIST_URL).permitAll()
+						.anyRequest()
+						.authenticated())
+				.formLogin(Customizer.withDefaults())
 				.httpBasic(Customizer.withDefaults());
 		return http.build();
 	}
@@ -69,5 +69,4 @@ public class ProjectSecurityConfig {
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }
