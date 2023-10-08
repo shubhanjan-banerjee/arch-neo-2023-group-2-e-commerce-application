@@ -3,12 +3,156 @@
 
 *ARCHITECTURALLY SIGNIFICANT REQUIREMENT DOCUMENT*
 
-{:toc}
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
+- [Introduction](#introduction)
+   * [Documentation Purpose and Scope](#documentation-purpose-and-scope)
+   * [Product Perspective:](#product-perspective)
+- [Product Scope:](#product-scope)
+- [Intended Audience](#intended-audience)
+- [Business Context](#business-context)
+- [Stakeholders](#stakeholders)
+- [Technical Constraints](#technical-constraints)
+- [Business Constraints](#business-constraints)
+- [Quality attribute requirements](#quality-attribute-requirements)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Repository branching strategy:](#repository-branching-strategy)
+   * [Gitflow Branching Strategy:](#gitflow-branching-strategy)
+- [DevOps Deployment strategy](#devops-deployment-strategy)
+   * [Ramped Deployment](#ramped-deployment)
+- [C4 View:](#c4-view)
+   * [System Landscape View:](#system-landscape-view)
+   * [Context View](#context-view)
+   * [Container View](#container-view)
+   * [Component View](#component-view)
+   * [Code View](#code-view)
+- [Sequence Diagram](#sequence-diagram)
+   * [Deployment View (Development)](#deployment-view-development)
+   * [Deployment View (Production)](#deployment-view-production)
+- [ER Diagram:](#er-diagram)
+- [Deployment Process](#deployment-process)
+   * [Docker Container](#docker-container)
+      + [ECommerce Database](#ecommerce-database)
+      + [ECommerce Baskend REST API Service](#ecommerce-baskend-rest-api-service)
+      + [ECommerce Web UI in Angular](#ecommerce-web-ui-in-angular)
+   * [Docker compose](#docker-compose)
+- [Kubernetes in Windows](#kubernetes-in-windows)
+   * [Installation](#installation)
+   * [Start the minikube](#start-the-minikube)
+   * [See the current cluster information](#see-the-current-cluster-information)
+   * [Open minikube Dashboard](#open-minikube-dashboard)
+   * [Get POD Details](#get-pod-details)
+   * [Get Service Details](#get-service-details)
+   * [Get Replica Set Details](#get-replica-set-details)
+   * [Get Deployment Details](#get-deployment-details)
+   * [Get All (POD, Service, Replica Set, Deployment) Details](#get-all-pod-service-replica-set-deployment-details)
+- [Setup ECommerce App](#setup-ecommerce-app)
+   * [Create Containers](#create-containers)
+      + [Check the Container details](#check-the-container-details)
+      + [Get All PODs](#get-all-pods)
+      + [Show POD details](#show-pod-details)
+      + [Delete POD](#delete-pod)
+      + [Delete All PODs](#delete-all-pods)
+   * [Deployment using YML files](#deployment-using-yml-files)
+      + [Get All PODs](#get-all-pods-1)
+- [FluxCD Deployment](#fluxcd-deployment)
+   * [Installation on Linux (Ubuntu)](#installation-on-linux-ubuntu)
+      + [gh installation in linux](#gh-installation-in-linux)
+      + [Git Setup](#git-setup)
+      + [Docker installation](#docker-installation)
+      + [Install FluxCD](#install-fluxcd)
+         - [LINUX:](#linux)
+         - [WINDOWS:](#windows)
+   * [Run FluxCD](#run-fluxcd)
+      + [Bootstraping FluxCD](#bootstraping-fluxcd)
+      + [Checkout the Repo](#checkout-the-repo)
+      + [Navigate to the folder](#navigate-to-the-folder)
+      + [Link up with the Git Code Repo](#link-up-with-the-git-code-repo)
+      + [Setting sheduler to observe the code](#setting-sheduler-to-observe-the-code)
+      + [Commit the changes](#commit-the-changes)
+      + [Reconcile the changes](#reconcile-the-changes)
+      + [Watching all the CD](#watching-all-the-cd)
+   * [Shutdown Server](#shutdown-server)
+- [Deployment Screenshots](#deployment-screenshots)
+- [UI Application Screenshots](#ui-application-screenshots)
+- [API Swagger Details](#api-swagger-details)
+- [Use Case](#use-case)
+   * [User Registration](#user-registration)
+      + [Scenario of Registration Process](#scenario-of-registration-process)
+   * [User Login](#user-login)
+      + [Scenario of Login Process](#scenario-of-login-process)
+   * [User searches for products](#user-searches-for-products)
+      + [Scenario: Successful product search](#scenario-successful-product-search)
+      + [Scenario: No matching results for the search query](#scenario-no-matching-results-for-the-search-query)
+      + [Scenario: Handling empty search query](#scenario-handling-empty-search-query)
+      + [Scenario: Search results pagination](#scenario-search-results-pagination)
+      + [Scenario: Search performance and response time](#scenario-search-performance-and-response-time)
+   * [User adds products to the cart](#user-adds-products-to-the-cart)
+      + [Scenario: Successful addition of a product to the cart](#scenario-successful-addition-of-a-product-to-the-cart)
+      + [Scenario: Incrementing the quantity of an existing product in the cart](#scenario-incrementing-the-quantity-of-an-existing-product-in-the-cart)
+      + [Scenario: Displaying the updated cart summary](#scenario-displaying-the-updated-cart-summary)
+      + [Scenario: Handling out-of-stock products](#scenario-handling-out-of-stock-products)
+      + [Scenario: Persisting the cart across sessions](#scenario-persisting-the-cart-across-sessions)
+   * [User checks out and places an order](#user-checks-out-and-places-an-order)
+      + [Scenario: Successful checkout and order placement](#scenario-successful-checkout-and-order-placement)
+      + [Scenario: Handling empty cart during checkout](#scenario-handling-empty-cart-during-checkout)
+      + [Scenario: Required delivery address validation](#scenario-required-delivery-address-validation)
+      + [Scenario: Payment processing and confirmation](#scenario-payment-processing-and-confirmation)
+      + [Scenario: Order confirmation and tracking](#scenario-order-confirmation-and-tracking)
+   * [User tracks an order](#user-tracks-an-order)
+      + [Scenario: Successful order tracking](#scenario-successful-order-tracking)
+      + [Scenario: Invalid or non-existent order tracking](#scenario-invalid-or-non-existent-order-tracking)
+      + [Scenario: Tracking information availability](#scenario-tracking-information-availability)
+      + [Scenario: Detailed order status and history](#scenario-detailed-order-status-and-history)
+      + [Scenario: Multiple order tracking](#scenario-multiple-order-tracking)
+   * [User views order history](#user-views-order-history)
+      + [Scenario: Successful access to order history](#scenario-successful-access-to-order-history)
+      + [Scenario: Filtering or sorting order history](#scenario-filtering-or-sorting-order-history)
+      + [Scenario: Order details and receipts](#scenario-order-details-and-receipts)
+      + [Scenario: Order status and tracking from history](#scenario-order-status-and-tracking-from-history)
+      + [Scenario: Pagination and navigation of order history](#scenario-pagination-and-navigation-of-order-history)
+   * [User views invoice](#user-views-invoice)
+      + [Scenario: Successful access to invoice](#scenario-successful-access-to-invoice)
+      + [Scenario: Printable and downloadable invoice](#scenario-printable-and-downloadable-invoice)
+      + [Scenario: Invoice layout and formatting](#scenario-invoice-layout-and-formatting)
+      + [Scenario: Handling invoice errors or discrepancies](#scenario-handling-invoice-errors-or-discrepancies)
+      + [Scenario: Accessing historical invoices](#scenario-accessing-historical-invoices)
+   * [Administrator manages products](#administrator-manages-products)
+      + [Scenario: Adding a new product](#scenario-adding-a-new-product)
+      + [Scenario: Updating an existing product](#scenario-updating-an-existing-product)
+      + [Scenario: Removing a product](#scenario-removing-a-product)
+      + [Scenario: Managing product categories](#scenario-managing-product-categories)
+      + [Scenario: Handling product images](#scenario-handling-product-images)
+   * [Administrator manages orders](#administrator-manages-orders)
+      + [Scenario: Viewing order list](#scenario-viewing-order-list)
+      + [Scenario: Filtering and sorting orders](#scenario-filtering-and-sorting-orders)
+      + [Scenario: Updating order status](#scenario-updating-order-status)
+      + [Scenario: Viewing order details](#scenario-viewing-order-details)
+      + [Scenario: Managing order fulfillment](#scenario-managing-order-fulfillment)
+      + [Scenario: Generating order reports](#scenario-generating-order-reports)
+   * [Supplier manages inventory](#supplier-manages-inventory)
+      + [Scenario: Viewing inventory](#scenario-viewing-inventory)
+      + [Scenario: Updating inventory quantities](#scenario-updating-inventory-quantities)
+      + [Scenario: Adding new inventory items](#scenario-adding-new-inventory-items)
+      + [Scenario: Removing inventory items](#scenario-removing-inventory-items)
+      + [Scenario: Tracking inventory movement](#scenario-tracking-inventory-movement)
+      + [Scenario: Managing low stock or out-of-stock items](#scenario-managing-low-stock-or-out-of-stock-items)
+   * [Supplier manages product catalogue](#supplier-manages-product-catalogue)
+      + [Scenario: Viewing the product catalogue](#scenario-viewing-the-product-catalogue)
+      + [Scenario: Adding a new product to the catalogue](#scenario-adding-a-new-product-to-the-catalogue)
+      + [Scenario: Updating an existing product in the catalogue](#scenario-updating-an-existing-product-in-the-catalogue)
+      + [Scenario: Removing a product from the catalogue](#scenario-removing-a-product-from-the-catalogue)
+      + [Scenario: Managing product images in the catalogue](#scenario-managing-product-images-in-the-catalogue)
+      + [Scenario: Managing product categories](#scenario-managing-product-categories-1)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="introduction"></a>
 ## Introduction
 
   
 
+<!-- TOC --><a name="documentation-purpose-and-scope"></a>
 ### Documentation Purpose and Scope
 
   
@@ -21,6 +165,7 @@ The vision of the ecommerce system is to be able to provide a smooth and user-fr
 
   
 
+<!-- TOC --><a name="product-perspective"></a>
 ### Product Perspective:
 
   
@@ -29,6 +174,7 @@ The system includes the user subsystem as well the inventory subsystem. The ecom
 
   
 
+<!-- TOC --><a name="product-scope"></a>
 ## Product Scope:
 
   
@@ -129,6 +275,7 @@ Support multiple languages and regional preferences to cater to users from diffe
 
   
 
+<!-- TOC --><a name="intended-audience"></a>
 ## Intended Audience
 
   
@@ -183,6 +330,7 @@ Designers responsible for creating an intuitive and user-friendly interface. The
 
   
 
+<!-- TOC --><a name="business-context"></a>
 ## Business Context
 
   
@@ -243,6 +391,7 @@ Overall, the business context highlights the company's desire to establish an in
 
   
 
+<!-- TOC --><a name="stakeholders"></a>
 ## Stakeholders
 
   
@@ -327,6 +476,7 @@ It is important to identify and engage these stakeholders throughout the project
 
   
 
+<!-- TOC --><a name="technical-constraints"></a>
 ## Technical Constraints
 
   
@@ -415,6 +565,7 @@ The project may have limitations on development time, available resources, or bu
 
   
 
+<!-- TOC --><a name="business-constraints"></a>
 ## Business Constraints
 
   
@@ -507,6 +658,7 @@ Understanding and addressing these business constraints is crucial for successfu
 
   
 
+<!-- TOC --><a name="quality-attribute-requirements"></a>
 ## Quality attribute requirements
 
   
@@ -625,6 +777,7 @@ Each of these quality attribute requirements plays a critical role in shaping th
 
   
 
+<!-- TOC --><a name="non-functional-requirements"></a>
 ## Non-Functional Requirements
 
   
@@ -1135,8 +1288,10 @@ To ensure that all payments and user data are securely stored and accessed, you 
 
 By incorporating these security measures, you can establish a robust security posture for your web application, safeguarding user data and ensuring secure payment processing for your customers. It's crucial to continually review and update your security practices to stay ahead of emerging threats and maintain a secure environment for your users.
 
+<!-- TOC --><a name="repository-branching-strategy"></a>
 ## Repository branching strategy:
 
+<!-- TOC --><a name="gitflow-branching-strategy"></a>
 ### Gitflow Branching Strategy:
 
 Gitflow is a branching model that provides a structured approach to managing branches and releases.
@@ -1175,10 +1330,12 @@ The typical flow of work in the Gitflow branching strategy is as follows:
 
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/314db286-aac7-4932-ab9a-f7bdfddeb297)
 
+<!-- TOC --><a name="devops-deployment-strategy"></a>
 ## DevOps Deployment strategy
 
 We will be following the Ramped deployment strategy while deploying our code in production release.
 
+<!-- TOC --><a name="ramped-deployment"></a>
 ### Ramped Deployment
 
 Ramped deployment is a deployment strategy that focuses on gradually rolling out new releases or updates to a software system, rather than deploying them to all users at once. This strategy is also known as a phased or incremental deployment. The goal of ramped deployment is to minimize risks and disruptions associated with large-scale deployments by incrementally introducing changes and monitoring their impact on the system and users.
@@ -1246,23 +1403,29 @@ Ramped deployment is particularly useful for large, complex systems with a signi
 
 This strategy gives zero downtime and also enables performance monitoring. Nevertheless, the rollback duration is long in case there is an unexpected event. This is because the downgrading process to the initial version follows the same cycle, one instance at a time.
 
+<!-- TOC --><a name="c4-view"></a>
 ## C4 View:
+<!-- TOC --><a name="system-landscape-view"></a>
 ### System Landscape View:
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/edf245a5-d37f-45f2-8b76-bc570b6c31dc)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/9ea2e85c-f076-482e-b5d1-06cb7fe72a63)
 
+<!-- TOC --><a name="context-view"></a>
 ### Context View
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/af4e4428-0fac-4ff5-9a0c-4dfca62c4246)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/f51c51be-ba83-4528-8d5d-984f2aa93b3f)
 
+<!-- TOC --><a name="container-view"></a>
 ### Container View
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/d6a63cfe-f49c-4914-bdb5-6cab475f3741)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/42b79d63-a956-4755-9211-280a40d34d60)
 
+<!-- TOC --><a name="component-view"></a>
 ### Component View
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/aafe073d-ea51-4d7c-8197-875c60bbe855)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cd34e0c0-e924-431b-b253-d194fc7e6887)
 
+<!-- TOC --><a name="code-view"></a>
 ### Code View
 **Class Diagram**
 
@@ -1348,6 +1511,7 @@ classDiagram
     EcommerceSystem --|> SecurityAndPrivacy
     EcommerceSystem --|> Localization
 ```
+<!-- TOC --><a name="sequence-diagram"></a>
 ## Sequence Diagram
 
 ```mermaid
@@ -1387,98 +1551,125 @@ sequenceDiagram
     EcommercePlatform ->> User: Display order status
 ```
 
+<!-- TOC --><a name="deployment-view-development"></a>
 ### Deployment View (Development)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/cc4f26f2-3aaa-4f2f-ba4e-81affdb970c2)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/061c0e76-64df-44ef-885d-c406e6c0015a)
 
+<!-- TOC --><a name="deployment-view-production"></a>
 ### Deployment View (Production)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/5ecaa56d-b721-469c-bad2-f5d3233e36c0)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/6a7ace29-80be-41df-ab4d-7bb6c2c7d15f)
 
+<!-- TOC --><a name="er-diagram"></a>
 ## ER Diagram:
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/07308b66-5744-4cc2-9e69-b1d055bab089)
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/51ace646-8c87-44e8-9950-c7190c2a2eaf)
 
 
+<!-- TOC --><a name="deployment-process"></a>
 ## Deployment Process
 
+<!-- TOC --><a name="docker-container"></a>
 ### Docker Container
 
+<!-- TOC --><a name="ecommerce-database"></a>
 #### ECommerce Database
 - `docker build -t shubhanjanweb/ecommerce-database-image .`
 - `docker run --env MYSQL_ROOT_PASSWORD=root-password --net ecommerce-network --name ecommerce-database-container -d -p 3306:3306/tcp shubhanjanweb/ecommerce-database-image:latest`
+<!-- TOC --><a name="ecommerce-baskend-rest-api-service"></a>
 #### ECommerce Baskend REST API Service
 - `docker build -t shubhanjanweb/ecommerce-backend-image .`
 - `docker run --env spring.datasource.url=jdbc:mysql://ecommerce-database-container:3306/ecommerce?useSSL=false --net ecommerce-network --name ecommerce-backend-container -d -p 8080:8080/tcp shubhanjanweb/ecommerce-backend-image:latest`
+<!-- TOC --><a name="ecommerce-web-ui-in-angular"></a>
 #### ECommerce Web UI in Angular
 - `docker build -t shubhanjanweb/ecommerce-web-image .`
 - `docker run --env API_BASE_URL=http://localhost:8080 --net ecommerce-network --name ecommerce-web-container -d -p 4200:80/tcp shubhanjanweb/ecommerce-web-image:latest`
 
+<!-- TOC --><a name="docker-compose"></a>
 ### Docker compose
 
 - `docker compose up`
 
+<!-- TOC --><a name="kubernetes-in-windows"></a>
 ## Kubernetes in Windows
 
+<!-- TOC --><a name="installation"></a>
 ### Installation
 - `brew install kubectl`
 - `brew install minikube`
 
+<!-- TOC --><a name="start-the-minikube"></a>
 ### Start the minikube
 
 > `minikube start`
 
+<!-- TOC --><a name="see-the-current-cluster-information"></a>
 ### See the current cluster information
 
 > `kubectl cluster-info`
 
+<!-- TOC --><a name="open-minikube-dashboard"></a>
 ### Open minikube Dashboard
 
 > `minikube dashboard`
 
+<!-- TOC --><a name="get-pod-details"></a>
 ### Get POD Details
 
 > `kubectl get pods`
 
+<!-- TOC --><a name="get-service-details"></a>
 ###  Get Service Details
 
 > `kubectl get services`
 
+<!-- TOC --><a name="get-replica-set-details"></a>
 ###  Get Replica Set Details
 
 > `kubectl get replicasets`
 
+<!-- TOC --><a name="get-deployment-details"></a>
 ###  Get Deployment Details
 
 > `kubectl get deployments`
 
+<!-- TOC --><a name="get-all-pod-service-replica-set-deployment-details"></a>
 ###  Get All (POD, Service, Replica Set, Deployment) Details
 
 > `kubectl get all`
 
+<!-- TOC --><a name="setup-ecommerce-app"></a>
 ## Setup ECommerce App
 
+<!-- TOC --><a name="create-containers"></a>
 ### Create Containers
 - `kubectl run ecommerce-backend-pod --image shubhanjanweb/ecommerce-backend-image:latest`
 - `kubectl run ecommerce-database-pod --image shubhanjanweb/ecommerce-database-image:latest`
 - `kubectl run ecommerce-web-pod --image shubhanjanweb/ecommerce-web-image:latest`
 - `kubectl get pods`
 
+<!-- TOC --><a name="check-the-container-details"></a>
 #### Check the Container details
 - `minikube ssh`
 - `docker ps`
 - `exit`
 
+<!-- TOC --><a name="get-all-pods"></a>
 #### Get All PODs
 - `kubectl get pods`
+<!-- TOC --><a name="show-pod-details"></a>
 #### Show POD details
 - `kubectl describe pod ecommerce-backend-pod`
 - `kubectl describe pod ecommerce-database-pod`
 - `kubectl describe pod ecommerce-web-pod`
+<!-- TOC --><a name="delete-pod"></a>
 #### Delete POD
 - `kubectl delete pod ecommerce-backend-pod`
+<!-- TOC --><a name="delete-all-pods"></a>
 #### Delete All PODs
 - `kubectl delete pod --all`
+<!-- TOC --><a name="deployment-using-yml-files"></a>
 ### Deployment using YML files
 - `kubectl create -f ./clusters/kustomize/database.deployment.yml`
 - `kubectl create -f ./clusters/kustomize/backend.deployment.yml`
@@ -1487,13 +1678,16 @@ sequenceDiagram
 - `kubectl create -f ./clusters/kustomize/backend.service.yml`
 - `kubectl create -f ./clusters/kustomize/web.service.yml`
 
+<!-- TOC --><a name="get-all-pods-1"></a>
 #### Get All PODs
 - `kubectl get pods`
 - `kubectl get svc`
 - `minikube ip`
 
+<!-- TOC --><a name="fluxcd-deployment"></a>
 ## FluxCD Deployment
 
+<!-- TOC --><a name="installation-on-linux-ubuntu"></a>
 ### Installation on Linux (Ubuntu)
 
 - `sudo apt-get update`
@@ -1503,6 +1697,7 @@ sequenceDiagram
 - `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
 - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
 
+<!-- TOC --><a name="gh-installation-in-linux"></a>
 #### gh installation in linux
 
 - `type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)`
@@ -1512,6 +1707,7 @@ sequenceDiagram
 - `&& sudo apt update \`
 - `&& sudo apt install gh -y`
 
+<!-- TOC --><a name="git-setup"></a>
 #### Git Setup
 
 - `git config --global user.name "shubhanjan-banerjee"`
@@ -1519,6 +1715,7 @@ sequenceDiagram
 - `ssh-keygen -t rsa -b 4096 -C "shubhanjan.banerjee@cognizant.com"`
 - `ssh git@github.com`
 
+<!-- TOC --><a name="docker-installation"></a>
 #### Docker installation
 
 - `echo \`
@@ -1529,25 +1726,30 @@ sequenceDiagram
 - `sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
 - `docker login`
 
+<!-- TOC --><a name="install-fluxcd"></a>
 #### Install FluxCD
 
 - `curl -s https://fluxcd.io/install.sh | sudo bash`
 
+<!-- TOC --><a name="linux"></a>
 ##### LINUX:
 - `export GITHUB_TOKEN=ghpXXXXXXXXXXXXXXXXXXXXXXXX`
 - `export GITHUB_USER=shubhanjan-banerjee`
 
+<!-- TOC --><a name="windows"></a>
 ##### WINDOWS:
 - `set GITHUB_TOKEN ghpXXXXXXXXXXXXXXXXXXXXXXXX`
 - `set GITHUB_USER shubhanjan-banerjee`
 - `echo $GITHUB_USER`
 
+<!-- TOC --><a name="run-fluxcd"></a>
 ### Run FluxCD
 
 - `sudo service docker start`
 - `sudo minikube start --force`
 - `flux check --pre`
 
+<!-- TOC --><a name="bootstraping-fluxcd"></a>
 #### Bootstraping FluxCD
 - `flux bootstrap github \`
 - `--owner=$GITHUB_USER \`
@@ -1558,12 +1760,15 @@ sequenceDiagram
 - `--path=./clusters/my-cluster \`
 - `--token-auth=true`
 
+<!-- TOC --><a name="checkout-the-repo"></a>
 #### Checkout the Repo
 > `git clone git@github.com:shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application-env.git`
 
+<!-- TOC --><a name="navigate-to-the-folder"></a>
 #### Navigate to the folder
 > `cd arch-neo-2023-group-2-e-commerce-application-env`
 
+<!-- TOC --><a name="link-up-with-the-git-code-repo"></a>
 #### Link up with the Git Code Repo
 - `flux create source git ecommerce-app \`
 - `--url=https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application \`
@@ -1571,6 +1776,7 @@ sequenceDiagram
 - `--interval=1m \`
 - `--export > ./clusters/my-cluster/ecommerce-app-source.yaml`
 
+<!-- TOC --><a name="setting-sheduler-to-observe-the-code"></a>
 #### Setting sheduler to observe the code
 - `flux create kustomization ecommerce-app \`
 - `--target-namespace=default \`
@@ -1583,20 +1789,25 @@ sequenceDiagram
 - `--health-check-timeout=3m \`
 - `--export > ./clusters/my-cluster/ecommerce-app-kustomization.yaml`
 
+<!-- TOC --><a name="commit-the-changes"></a>
 #### Commit the changes
 - `git add -A && git commit -m "Add podinfo Kustomization"`
 - `git push`
 
+<!-- TOC --><a name="reconcile-the-changes"></a>
 #### Reconcile the changes
 - `flux reconcile kustomization ecommerce-app --with-source`
 
+<!-- TOC --><a name="watching-all-the-cd"></a>
 #### Watching all the CD
 - `flux get kustomizations --watch`
 
+<!-- TOC --><a name="shutdown-server"></a>
 ### Shutdown Server
 - `sudo minikube stop`
 - `sudo service docker stop`
 
+<!-- TOC --><a name="deployment-screenshots"></a>
 ## Deployment Screenshots
 ![01](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/0387f852-878f-46c3-8d50-96c332456920)
 ![02](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/4c38b739-2c2a-4802-88c9-d96e02cf868c)
@@ -1608,6 +1819,7 @@ sequenceDiagram
 ![08](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/477bc31e-91ff-48f0-b042-b722cbeedd8b)
 ![09](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/c94901e7-87a1-4a36-b6d8-fb0a49233fca)
  
+<!-- TOC --><a name="ui-application-screenshots"></a>
 ## UI Application Screenshots
 
 ![01](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b6770577-3fbe-43c2-b0f9-d9da7067eeb5)
@@ -1629,14 +1841,18 @@ sequenceDiagram
 ![17](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/c90bad7f-9ea3-4930-92be-b1d32dbd1de3)
 ![18](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/631d13d9-1d27-4b8f-900b-fac17f90cac9)
 
+<!-- TOC --><a name="api-swagger-details"></a>
 ## API Swagger Details
 https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ![A1](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/89416d9a-4d75-4380-9c0b-ecc484bb827e)
 
 
+<!-- TOC --><a name="use-case"></a>
 ## Use Case
+<!-- TOC --><a name="user-registration"></a>
 ### User Registration
+<!-- TOC --><a name="scenario-of-registration-process"></a>
 #### Scenario of Registration Process
 
 ·     User can enter FirstName, Middle Name, Last Name, Email Id, Phone Number, Password.
@@ -1651,8 +1867,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/b5c720b7-f82a-4a9f-9dde-939abd447ae0)
       
+<!-- TOC --><a name="user-login"></a>
 ### User Login
 
+<!-- TOC --><a name="scenario-of-login-process"></a>
 #### Scenario of Login Process
 
 ·     User can enter Username and password, username can be email Id or Phone Number.
@@ -1666,10 +1884,12 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 
 
+<!-- TOC --><a name="user-searches-for-products"></a>
 ### User searches for products
 
  
 
+<!-- TOC --><a name="scenario-successful-product-search"></a>
 #### Scenario: Successful product search
 
 ·     Given that the customer is on the home page
@@ -1687,6 +1907,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 
 
+<!-- TOC --><a name="scenario-no-matching-results-for-the-search-query"></a>
 #### Scenario: No matching results for the search query
 
 ·     Given that the customer is on the home page
@@ -1700,6 +1921,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/1b48c069-7770-4a24-bf77-3f4effb0ab9b)
 
 
+<!-- TOC --><a name="scenario-handling-empty-search-query"></a>
 #### Scenario: Handling empty search query
 
 ·     Given that the customer is on the home page
@@ -1713,6 +1935,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 ![image](https://github.com/shubhanjan-banerjee/arch-neo-2023-group-2-e-commerce-application/assets/116087109/611e10f8-b89a-4c52-bf79-4179c884f0b8)
 
 
+<!-- TOC --><a name="scenario-search-results-pagination"></a>
 ####  Scenario: Search results pagination
 
 ·     Given that the customer is on the home page
@@ -1725,6 +1948,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="scenario-search-performance-and-response-time"></a>
 #### Scenario: Search performance and response time
 
 ·     Given that the customer is on the home page
@@ -1737,10 +1961,12 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="user-adds-products-to-the-cart"></a>
 ### User adds products to the cart
 
  
 
+<!-- TOC --><a name="scenario-successful-addition-of-a-product-to-the-cart"></a>
 #### Scenario: Successful addition of a product to the cart
 
 ·     Given that the customer is viewing a product
@@ -1751,6 +1977,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should display a confirmation message indicating that the product has been successfully added to the cart
 
+<!-- TOC --><a name="scenario-incrementing-the-quantity-of-an-existing-product-in-the-cart"></a>
 #### Scenario: Incrementing the quantity of an existing product in the cart
 
 ·     Given that the customer has already added a product to the cart
@@ -1761,6 +1988,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the total price in the cart to reflect the increased quantity
 
+<!-- TOC --><a name="scenario-displaying-the-updated-cart-summary"></a>
 #### Scenario: Displaying the updated cart summary
 
 ·     Given that the customer has added one or more products to the cart
@@ -1773,6 +2001,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide options for the customer to modify or remove items from the cart
 
+<!-- TOC --><a name="scenario-handling-out-of-stock-products"></a>
 #### Scenario: Handling out-of-stock products
 
 ·     Given that the customer tries to add a product that is currently out of stock
@@ -1783,6 +2012,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should not add the out-of-stock product to the cart
 
+<!-- TOC --><a name="scenario-persisting-the-cart-across-sessions"></a>
 #### Scenario: Persisting the cart across sessions
 
 ·     Given that the customer has added products to the cart
@@ -1797,8 +2027,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     
 
+<!-- TOC --><a name="user-checks-out-and-places-an-order"></a>
 ### User checks out and places an order
 
+<!-- TOC --><a name="scenario-successful-checkout-and-order-placement"></a>
 #### Scenario: Successful checkout and order placement
 
 ·     Given that the customer has products in the cart
@@ -1815,6 +2047,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should display a confirmation message indicating that the order has been successfully placed
 
+<!-- TOC --><a name="scenario-handling-empty-cart-during-checkout"></a>
 #### Scenario: Handling empty cart during checkout
 
 ·     Given that the customer has not added any products to the cart
@@ -1825,6 +2058,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should not allow the customer to proceed with the checkout process
 
+<!-- TOC --><a name="scenario-required-delivery-address-validation"></a>
 #### Scenario: Required delivery address validation
 
 ·     Given that the customer is on the checkout page
@@ -1837,6 +2071,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should not allow the customer to proceed with the checkout process until a valid address is provided
 
+<!-- TOC --><a name="scenario-payment-processing-and-confirmation"></a>
 #### Scenario: Payment processing and confirmation
 
 ·     Given that the customer has provided the required delivery address
@@ -1849,6 +2084,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should send a notification to the customer regarding the payment status
 
+<!-- TOC --><a name="scenario-order-confirmation-and-tracking"></a>
 #### Scenario: Order confirmation and tracking
 
 ·     Given that the customer has successfully placed an order
@@ -1865,8 +2101,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="user-tracks-an-order"></a>
 ### User tracks an order
 
+<!-- TOC --><a name="scenario-successful-order-tracking"></a>
 #### Scenario: Successful order tracking
 
 ·     Given that the customer has placed an order and received an order ID or tracking number
@@ -1881,6 +2119,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the tracking information in real-time or with a reasonable delay
 
+<!-- TOC --><a name="scenario-invalid-or-non-existent-order-tracking"></a>
 #### Scenario: Invalid or non-existent order tracking
 
 ·     Given that the customer enters an invalid or non-existent order ID or tracking number
@@ -1891,6 +2130,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should not display any tracking information for the invalid order
 
+<!-- TOC --><a name="scenario-tracking-information-availability"></a>
 #### Scenario: Tracking information availability
 
 ·     Given that the customer has placed an order recently
@@ -1901,6 +2141,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide an estimated timeframe or expected time for the tracking information to become available
 
+<!-- TOC --><a name="scenario-detailed-order-status-and-history"></a>
 #### Scenario: Detailed order status and history
 
 ·     Given that the customer is tracking an order
@@ -1911,6 +2152,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide any relevant updates or notifications regarding the order, such as delays or changes in the delivery schedule
 
+<!-- TOC --><a name="scenario-multiple-order-tracking"></a>
 #### Scenario: Multiple order tracking
 
 ·     Given that the customer has placed multiple orders
@@ -1925,8 +2167,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 
 
+<!-- TOC --><a name="user-views-order-history"></a>
 ### User views order history
 
+<!-- TOC --><a name="scenario-successful-access-to-order-history"></a>
 #### Scenario: Successful access to order history
 
 ·     Given that the customer is logged into their account
@@ -1939,6 +2183,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should display the orders in reverse chronological order, with the most recent order appearing at the top
 
+<!-- TOC --><a name="scenario-filtering-or-sorting-order-history"></a>
 #### Scenario: Filtering or sorting order history
 
 ·     Given that the customer is viewing the order history page
@@ -1949,6 +2194,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the order history view accordingly, displaying only the orders that match the selected filter or sorting criteria
 
+<!-- TOC --><a name="scenario-order-details-and-receipts"></a>
 #### Scenario: Order details and receipts
 
 ·     Given that the customer is viewing the order history
@@ -1959,6 +2205,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide the option to view or download an order receipt or invoice in a printable format
 
+<!-- TOC --><a name="scenario-order-status-and-tracking-from-history"></a>
 #### Scenario: Order status and tracking from history
 
 ·     Given that the customer is viewing the order history
@@ -1969,6 +2216,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide a link or button for the customer to track the order or access the order tracking details directly from the order history page
 
+<!-- TOC --><a name="scenario-pagination-and-navigation-of-order-history"></a>
 #### Scenario: Pagination and navigation of order history
 
 ·     Given that the customer has a large number of orders in their order history
@@ -1981,8 +2229,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="user-views-invoice"></a>
 ### User views invoice
 
+<!-- TOC --><a name="scenario-successful-access-to-invoice"></a>
 #### Scenario: Successful access to invoice
 
 ·     Given that the customer is logged into their account
@@ -1995,6 +2245,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should include relevant information such as customer details, billing address, payment method, and any applicable taxes or discounts
 
+<!-- TOC --><a name="scenario-printable-and-downloadable-invoice"></a>
 #### Scenario: Printable and downloadable invoice
 
 ·     Given that the customer is viewing the invoice
@@ -2005,6 +2256,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should ensure that the printable or downloadable invoice accurately represents the information displayed on the screen
 
+<!-- TOC --><a name="scenario-invoice-layout-and-formatting"></a>
 #### Scenario: Invoice layout and formatting
 
 ·     Given that the customer is viewing the invoice
@@ -2015,6 +2267,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should use appropriate formatting, such as headings, subtotals, and a total amount, to facilitate easy comprehension of the invoice details
 
+<!-- TOC --><a name="scenario-handling-invoice-errors-or-discrepancies"></a>
 #### Scenario: Handling invoice errors or discrepancies
 
 ·     Given that the customer notices errors or discrepancies in the displayed invoice
@@ -2025,6 +2278,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide clear communication to the customer regarding the resolution and any necessary adjustments to the invoice
 
+<!-- TOC --><a name="scenario-accessing-historical-invoices"></a>
 #### Scenario: Accessing historical invoices
 
 ·     Given that the customer wants to view previous invoices
@@ -2039,8 +2293,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="administrator-manages-products"></a>
 ### Administrator manages products
 
+<!-- TOC --><a name="scenario-adding-a-new-product"></a>
 #### Scenario: Adding a new product
 
 ·     Given that the Administrator is logged into their account
@@ -2053,6 +2309,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should save the product details and assign a unique identifier or SKU
 
+<!-- TOC --><a name="scenario-updating-an-existing-product"></a>
 #### Scenario: Updating an existing product
 
 ·     Given that the Administrator is logged into their account
@@ -2065,6 +2322,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should save the updated product details and reflect the changes in the product list
 
+<!-- TOC --><a name="scenario-removing-a-product"></a>
 #### Scenario: Removing a product
 
 ·     Given that the Administrator is logged into their account
@@ -2077,6 +2335,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should remove the product from the product list and any associated data or references
 
+<!-- TOC --><a name="scenario-managing-product-categories"></a>
 #### Scenario: Managing product categories
 
 ·     Given that the Administrator is logged into their account
@@ -2089,6 +2348,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should ensure that categories are properly organized and associated with the relevant products
 
+<!-- TOC --><a name="scenario-handling-product-images"></a>
 #### Scenario: Handling product images
 
 ·     Given that the Administrator is managing a product
@@ -2103,8 +2363,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 
 
+<!-- TOC --><a name="administrator-manages-orders"></a>
 ### Administrator manages orders
 
+<!-- TOC --><a name="scenario-viewing-order-list"></a>
 #### Scenario: Viewing order list
 
 ·     Given that the Administrator is logged into their account
@@ -2115,6 +2377,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide pagination or scrolling functionality if the order list is extensive
 
+<!-- TOC --><a name="scenario-filtering-and-sorting-orders"></a>
 #### Scenario: Filtering and sorting orders
 
 ·     Given that the Administrator is viewing the order list
@@ -2125,6 +2388,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the order list according to the selected filter or sorting criteria
 
+<!-- TOC --><a name="scenario-updating-order-status"></a>
 #### Scenario: Updating order status
 
 ·     Given that the Administrator is viewing an order in the order list
@@ -2135,6 +2399,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should save and reflect the updated order status in the order list and order details
 
+<!-- TOC --><a name="scenario-viewing-order-details"></a>
 #### Scenario: Viewing order details
 
 ·     Given that the Administrator is viewing an order in the order list
@@ -2145,6 +2410,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide a summary of the order, including the total amount and payment status
 
+<!-- TOC --><a name="scenario-managing-order-fulfillment"></a>
 #### Scenario: Managing order fulfillment
 
 ·     Given that the Administrator is viewing an order in the order list
@@ -2155,6 +2421,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should ensure that the updated fulfillment details are reflected in the order details and any relevant notifications or updates are sent to the customer
 
+<!-- TOC --><a name="scenario-generating-order-reports"></a>
 #### Scenario: Generating order reports
 
 ·     Given that the Administrator wants to generate order reports
@@ -2167,8 +2434,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
   
 
+<!-- TOC --><a name="supplier-manages-inventory"></a>
 ### Supplier manages inventory
 
+<!-- TOC --><a name="scenario-viewing-inventory"></a>
 #### Scenario: Viewing inventory
 
 ·     Given that the Supplier is logged into their account
@@ -2179,6 +2448,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should show relevant details for each item, such as product name, SKU, quantity in stock, and location
 
+<!-- TOC --><a name="scenario-updating-inventory-quantities"></a>
 #### Scenario: Updating inventory quantities
 
 ·     Given that the Supplier is viewing the inventory     
@@ -2191,6 +2461,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should reflect the updated quantity in the inventory list and any associated reports or notifications
 
+<!-- TOC --><a name="scenario-adding-new-inventory-items"></a>
 #### Scenario: Adding new inventory items
 
 ·     Given that the Supplier is logged into their account
@@ -2201,6 +2472,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should validate the entered information and save the new item in the inventory
 
+<!-- TOC --><a name="scenario-removing-inventory-items"></a>
 #### Scenario: Removing inventory items
 
 ·     Given that the Supplier is viewing the inventory
@@ -2213,6 +2485,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the inventory list and any associated records or reports to reflect the removal of the item
 
+<!-- TOC --><a name="scenario-tracking-inventory-movement"></a>
 #### Scenario: Tracking inventory movement
 
 ·     Given that the Supplier wants to track the movement of inventory items
@@ -2223,6 +2496,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should provide options to filter and search the inventory movement history based on criteria such as date range or location
 
+<!-- TOC --><a name="scenario-managing-low-stock-or-out-of-stock-items"></a>
 #### Scenario: Managing low stock or out-of-stock items
 
 ·     Given that the Supplier is viewing the inventory
@@ -2235,8 +2509,10 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
  
 
+<!-- TOC --><a name="supplier-manages-product-catalogue"></a>
 ### Supplier manages product catalogue
 
+<!-- TOC --><a name="scenario-viewing-the-product-catalogue"></a>
 #### Scenario: Viewing the product catalogue
 
 ·     Given that the Supplier is logged into their account
@@ -2247,6 +2523,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should show relevant details for each product, such as product name, SKU, description, and pricing information
 
+<!-- TOC --><a name="scenario-adding-a-new-product-to-the-catalogue"></a>
 #### Scenario: Adding a new product to the catalogue
 
 ·     Given that the Supplier is logged into their account
@@ -2257,6 +2534,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should validate the entered information and save the new product in the catalogue
 
+<!-- TOC --><a name="scenario-updating-an-existing-product-in-the-catalogue"></a>
 #### Scenario: Updating an existing product in the catalogue
 
 ·     Given that the Supplier is viewing the product catalogue
@@ -2269,6 +2547,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should save the updated product details and reflect the changes in the product catalogue
 
+<!-- TOC --><a name="scenario-removing-a-product-from-the-catalogue"></a>
 #### Scenario: Removing a product from the catalogue
 
 ·     Given that the Supplier is viewing the product catalogue
@@ -2281,6 +2560,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should update the product catalogue and any associated records or reports to reflect the removal of the product
 
+<!-- TOC --><a name="scenario-managing-product-images-in-the-catalogue"></a>
 #### Scenario: Managing product images in the catalogue
 
 ·     Given that the Supplier is managing a product in the catalogue
@@ -2293,6 +2573,7 @@ https://app.swaggerhub.com/apis/SHUBHANJANBANERJEE/e-commerce_api/1.0
 
 ·     And the system should display the product images appropriately in the catalogue listing and details pages
 
+<!-- TOC --><a name="scenario-managing-product-categories-1"></a>
 #### Scenario: Managing product categories
 
 ·     Given that the Supplier is managing a product in the catalogue
