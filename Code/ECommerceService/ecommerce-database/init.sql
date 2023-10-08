@@ -264,15 +264,14 @@ INSERT INTO `categories`
 (`category_name`,`parent_category_id`,`description`,`image_url`,`is_active`,`display_order`,`slug`,`meta_title`,
 `meta_description`,`meta_keywords`,`custom_attributes`,`created_at`,`modified_at`)
 VALUES
-('Lorem',null,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.','cat (1).jpg',true,1,null,null,null,null,null,now(),now()),
-('Phasellus',null,'Phasellus in massa sit amet arcu venenatis commodo.','cat (2).jpg',true,1,null,null,null,null,null,now(),now()),
-('Donec',null,'Donec in quam eget sapien consequat dapibus.','cat (3).jpg',true,1,null,null,null,null,null,now(),now()),
-('Proin',null,'Proin iaculis turpis eget magna vestibulum pulvinar.','cat (4).jpg',true,1,null,null,null,null,null,now(),now()),
-('Suspendisse',null,'Suspendisse non nunc at lectus facilisis dapibus.','cat (5).jpg',true,1,null,null,null,null,null,now(),now()),
-('Vestibulum',null,'Vestibulum hendrerit nibh efficitur tellus semper placerat.','cat (6).jpg',true,1,null,null,null,null,null,now(),now()),
-('Vivamus',null,'Vivamus non arcu et risus commodo ornare.','cat (7).jpg',true,1,null,null,null,null,null,now(),now()),
-('Nulla',null,'Nulla sed odio at magna gravida rutrum at sed quam.','cat (8).jpg',true,1,null,null,null,null,null,now(),now());
-
+('Sofas',null,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.','ca1.PNG',true,1,null,null,null,null,null,now(),now()),
+('Beds',null,'Phasellus in massa sit amet arcu venenatis commodo.','ca2.PNG',true,1,null,null,null,null,null,now(),now()),
+('Dining Sets',null,'Donec in quam eget sapien consequat dapibus.','ca3.PNG',true,1,null,null,null,null,null,now(),now()),
+('Study Tables',null,'Proin iaculis turpis eget magna vestibulum pulvinar.','ca4.PNG',true,1,null,null,null,null,null,now(),now()),
+('Centre Tables',null,'Suspendisse non nunc at lectus facilisis dapibus.','ca5.PNG',true,1,null,null,null,null,null,now(),now()),
+('Recliners',null,'Vestibulum hendrerit nibh efficitur tellus semper placerat.','ca6.PNG',true,1,null,null,null,null,null,now(),now()),
+('Wardrobes',null,'Vivamus non arcu et risus commodo ornare.','ca7.PNG',true,1,null,null,null,null,null,now(),now()),
+('Chairs',null,'Nulla sed odio at magna gravida rutrum at sed quam.','ca8.PNG',true,1,null,null,null,null,null,now(),now());
 
 INSERT INTO `products`
 (`product_name`,`description`,`category_id`,`brand`,`discount`,`price`,`stock_quantity`,

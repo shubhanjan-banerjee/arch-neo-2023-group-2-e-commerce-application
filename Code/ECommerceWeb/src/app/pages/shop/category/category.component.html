@@ -43,7 +43,7 @@
       <ng-container *ngIf="categories.length">
         <div *ngFor="let category of categories"
           class="col-span-1 m-2 flex flex-col items-center justify-center space-y-2 cursor-pointer">
-          <img [src]="getPath(category.imageUrl)" alt="pic" />
+          <img [routerLink]="['/product/category/'+category.categoryId]" [src]="getPath(category.imageUrl)" alt="pic" />
           <div class="font-medium">{{category.categoryName}}</div>
         </div>
       </ng-container>
